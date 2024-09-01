@@ -1,6 +1,8 @@
-const choice = ['rock', 'paper', 'scissors']
+const choice = ['rock', 'paper', 'scissors'];
+
 let humanScore = 0;
 let computerScore = 0;
+
 const matchups = {
     rock: {weakTo: 'paper', strongTo: 'scissors'},
     paper: {weakTo: 'scissors', strongTo: 'rock'},
@@ -16,11 +18,13 @@ function getHumanChoice(){
     return prompt("Enter either rock, paper, or scissors").toLowerCase();
 }
 
-function playRound(humanSelection, computerSelection){
-    if(humanSelection === computerSelection){
+function playRound(){
+    const computerSelection = getComputerChoice();
+    const humanSelection = getHumanChoice();
+
+    if(humanSelection == computerSelection){
         console.log('It was a tie...');
-    }
-    if(matchups[humanSelection].strongTo === computerSelection){
+    } else if(matchups[humanSelection].strongTo == computerSelection){
         console.log(`You win! ${humanSelection} beats ${computerSelection}`);
         humanScore++;
     } else{
@@ -29,5 +33,18 @@ function playRound(humanSelection, computerSelection){
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+function playGame(){
+    for(let i=0; i < 5; i++){
+        playRound();
+    }
+    
+    let element = document.getElementById('result');
+    if(humanScore > computerScore){
+        element.innerHTML = `You won the game! Score = ${humanScore}:${computerScore}`;
+    } else{
+        element.innerHTML = `You lost the game! Score = ${humanScore}:${computerScore}`;
+    }   
+}
+
+playGame();
+
