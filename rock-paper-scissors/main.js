@@ -1,4 +1,6 @@
 let choice = ['rock', 'paper', 'scissors']
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice(){
     let arg = parseInt(Math.random() * 3);
@@ -6,4 +8,8 @@ function getComputerChoice(){
     return choice[arg];
 }
 
-console.log(getComputerChoice());
+function getHumanChoice(){
+    return prompt("Enter either rock, paper, or scissors");
+}
+
+
