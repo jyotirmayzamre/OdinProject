@@ -1,11 +1,21 @@
+.main-heading{
+    text-align: center;
+}
+
 #main-section{
     display: flex;
     justify-content: center;
-    gap: 100px;
-    
+    gap: 40%;
 }
+
 #result{
     text-align: center;
     margin-top: 100px;
 }
+
+.btn{
+    color: black;
+    background-color: white;
+}
+
 
