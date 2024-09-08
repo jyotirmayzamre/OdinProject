@@ -14,33 +14,34 @@ function getComputerChoice(){
     return choice[arg];
 }
 
-function getHumanChoice(){
-    return prompt("Enter either rock, paper, or scissors").toLowerCase();
-}
 
-function playRound(){
+//contains logic for rock paper scissors game
+function playRound(event){
     const computerSelection = getComputerChoice();
-    const humanSelection = getHumanChoice();
-
+    const humanSelection = event.target.textContent.toLowerCase();
+    const result = document.getElementById('result');
+    let scoreDiv;
+    
     if(humanSelection == computerSelection){
-        console.log('It was a tie...');
+        result.textContent = 'It was a tie...'
     } else if(matchups[humanSelection].strongTo == computerSelection){
-        console.log(`You win! ${humanSelection} beats ${computerSelection}`);
+        result.textContent = `You win! ${humanSelection} beats ${computerSelection}`;
         humanScore++;
+        scoreDiv = document.getElementById('myScore');
+        scoreDiv.textContent = `You: ${humanScore}`;
     } else{
-        console.log(`You lose! ${computerSelection} beats ${humanSelection}`);
+        result.textContent = `You lose! ${computerSelection} beats ${humanSelection}`;
         computerScore++;
+        scoreDiv = document.getElementById('computerScore');
+        scoreDiv.textContent = `Computer: ${computerScore}`;
     }
+    
 }
 
-function playGame(){
-    let element = document.getElementById('result');
-    if(humanScore > computerScore){
-        element.innerHTML = `You won the game! Score = ${humanScore}:${computerScore}`;
-    } else{
-        element.innerHTML = `You lost the game! Score = ${humanScore}:${computerScore}`;
-    }   
-}
 
-playGame();
+//event delegation for buttons
+const btnParent = document.getElementById('btn-container');
+btnParent.addEventListener('click', (e) => playRound(e));
+
+
 
