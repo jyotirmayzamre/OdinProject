@@ -13,6 +13,11 @@ container.addEventListener('mouseover', (e) => {
     e.target.classList.add('change')
 })
 
+resetBtn.addEventListener('click', () => {
+    container.childNodes.forEach((square) => {
+        square.classList.remove('change');
+    })
+})
 
 
 createGrid();
