@@ -23,7 +23,7 @@ container.addEventListener('mouseover', (e) => {
 
 resetBtn.addEventListener('click', () => {
     container.childNodes.forEach((square) => {
-        square.classList.remove('change');
+        square.style.backgroundColor = 'white';
     })
 })
 
