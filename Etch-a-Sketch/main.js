@@ -1,6 +1,8 @@
 const container = document.getElementById('gridContainer');
 const resetBtn = document.getElementById('reset');
-const resizeBtn = document.getElementById('resize')
+const resizeBtn = document.getElementById('resize');
+const modeBtn = document.getElementById('mode');
+let mode = 'normal';
 
 function createGrid(size){
     for(let i=0; i < size * size; i++){
@@ -13,7 +15,10 @@ function createGrid(size){
 }
 
 container.addEventListener('mouseover', (e) => {
-    e.target.classList.add('change')
+    const first = Math.floor(Math.random() * 256);
+    const second = Math.floor(Math.random() * 256);
+    const third = Math.floor(Math.random() * 256);
+    e.target.style.backgroundColor = `rgb(${first}, ${second}, ${third})`;
 })
 
 resetBtn.addEventListener('click', () => {
@@ -29,7 +34,6 @@ resizeBtn.addEventListener('click', () => {
     let size = prompt('Given an NxN grid, give your preferred value of N (max grid size is 100x100)')
     createGrid(size);
 })
-
 
 
 createGrid(16);
