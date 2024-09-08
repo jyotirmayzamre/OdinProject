@@ -34,10 +34,6 @@ function playRound(){
 }
 
 function playGame(){
-    for(let i=0; i < 5; i++){
-        playRound();
-    }
-    
     let element = document.getElementById('result');
     if(humanScore > computerScore){
         element.innerHTML = `You won the game! Score = ${humanScore}:${computerScore}`;
