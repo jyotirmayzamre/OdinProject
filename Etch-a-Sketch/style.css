@@ -1,0 +1,33 @@
+#gridContainer{
+    margin: auto;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.gridSquare{
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: calc(100% / 16);
+    height: calc(100% / 16);
+}
+
+.change{
+    background-color: black;
+}
+
+.btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
