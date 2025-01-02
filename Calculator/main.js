@@ -1,21 +1,27 @@
-let dig1;
-let dig2;
-let oper;
-
-
-function add(dig1, dig2){
-    return dig1 + dig2;
+function evalPost(exp){
+    let stack = [];
+    for(let i=0; i < exp.length(); i++){
+        let char = parseInt(exp[i]);
+        if(isNaN(char)){
+            let dig1 = stack.pop();
+            let dig2 = stack.pop();
+            switch(char){
+                case '+':
+                    stack.push(dig2+dig1);
+                    break;
+                case '-':
+                    stack.push(dig2 - dig1);
+                    break;
+                case '*':
+                    stack.push(dig2 * dig1);
+                    break;
+                case '/':
+                    stack.push(dig2 / dig1);
+                    break;
+            }
+        } else{
+            stack.push(char);
+        }
+    }
+    return stack.pop();
 }
-
-function subtract(dig1, dig2){
-    return dig1 - dig2;
-}
-
-function mult(dig1, dig2){
-    return dig1 * dig2;
-}
-
-function div(dig1, dig2){
-    return dig1 / dig2;
-}
-
