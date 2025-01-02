@@ -1,27 +1,34 @@
-function evalPost(exp){
-    let stack = [];
-    for(let i=0; i < exp.length(); i++){
-        let char = parseInt(exp[i]);
-        if(isNaN(char)){
-            let dig1 = stack.pop();
-            let dig2 = stack.pop();
-            switch(char){
-                case '+':
-                    stack.push(dig2+dig1);
-                    break;
-                case '-':
-                    stack.push(dig2 - dig1);
-                    break;
-                case '*':
-                    stack.push(dig2 * dig1);
-                    break;
-                case '/':
-                    stack.push(dig2 / dig1);
-                    break;
-            }
-        } else{
-            stack.push(char);
-        }
-    }
-    return stack.pop();
+let disp = document.getElementById('display');
+let clearButton = document.getElementById('clear');
+let delButton = document.getElementById('del');
+
+//event listener for clear button
+clearButton.addEventListener('click', function(){
+    disp.textContent = '';
+})
+
+//event listener for delete button
+delButton.addEventListener('click', function(){
+    disp.textContent = disp.textContent.slice(0, -1);
+})
+
+
+let dispButtons = document.querySelectorAll('button.disp');
+
+//event listeners for num and oper buttons
+dispButtons.forEach((item) => {
+    item.addEventListener('click', function() {
+        disp.textContent += item.textContent;
+    })
+})
+
+
+
+const add = (a, b) => a + b;
+const sub = (a, b) => a - b;
+const mult = (a, b) => a * b;
+const div = (a, b) => a / b;
+
+function operate(a, b, oper){
+    
 }
