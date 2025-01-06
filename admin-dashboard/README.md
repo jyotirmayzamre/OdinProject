@@ -1,2 +1,2 @@
 # admin-dashboard
-This is the 6th project in the Odin Project
+This is the 7th project in the Odin Project
