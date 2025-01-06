@@ -75,9 +75,23 @@ body{
     max-height: 100%;
 }
 
+.message{
+    text-align: left;
+}
+
 .message > p {
     font-weight: bold;
+    font-size: 1.5em;
+    width: 65%;
+    margin-left: 30px;
 }
+
+.message > p:first-child{
+    margin-bottom: none;
+}
+
+
+
 
 fieldset {
     border: none;
@@ -108,10 +122,8 @@ input:invalid {
 
 input:focus {
     border-color: blue;
+    box-shadow: #ECEFEF 0px 4px 2px -2px;
 }
-
-
-
 
 
 button {
