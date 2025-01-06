@@ -81,6 +81,7 @@ main {
     grid-template-columns: 3fr 1fr;
     grid-template-rows: repeat(2, 1fr);
     border: 1px solid black;
+    background-color: #E2E8F0;
 }
 
 .projects {
@@ -121,3 +122,25 @@ main {
 .side-icon.large {
     width: 2.5em;
 }
+
+.announcements {
+    margin: 1em;
+}
+
+.ann-section{
+    font-size: 0.6em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    background-color: white;
+    padding: 3em 2em;
+    border-radius: 5%;
+    width: 80%;
+    height: 90%;
+}
+
+.ann-section > div {
+    border-bottom: 0.5px solid black;
+    padding-bottom: 10px;
+}
+
