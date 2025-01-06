@@ -74,6 +74,8 @@ aside > div {
 header {
     grid-area: 1 / 2 / 2 / 3;
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
@@ -135,7 +137,7 @@ main {
     gap: 2em;
     background-color: white;
     padding: 3em 2em;
-    border-radius: 5%;
+    border-radius: 7px;
     width: 80%;
     height: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -154,7 +156,7 @@ main {
     gap: 2em;
     background-color: white;
     padding: 2em 2em;
-    border-radius: 5%;
+    border-radius: 7px;
     width: 70%;
     height: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -180,7 +182,7 @@ main {
 
 .project {
     background: linear-gradient(to right, #F1B428 0%, #F1B428 2%, white 2%, white 100%);
-    border-radius: 2%;
+    border-radius: 5px;
     padding: 2em 2em;
     font-size: 0.75em;
     width: 90%;
@@ -199,4 +201,63 @@ main {
 
 .proj-icons > img {
     width: 2em;
+}
+
+
+.top-head {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    padding: 1em 2em;
+
+}
+
+.top-head > img {
+    width: 1.5em;
+}
+
+.search-bar {
+    width: 50%;
+    border-radius: 15px;
+    background-color: #E2E8F0;
+    margin-right: 150px;
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    padding: 0.5em 3em;
+}
+
+.user > img {
+    width: 3em;
+}
+
+.bottom-head {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20em;
+}
+
+.welcome-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.options-btn {
+    color: white;
+    background-color: #1993DF;
+    border: none;
+    border-radius: 20px;
+    height: 2em;
+    width: 5em;
+    margin: auto
 }
