@@ -53,8 +53,9 @@
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 1fr 3fr;
-    height: 100vh;
+    max-height: 100vh;
 }
+
 
 aside {
     grid-area: 1 / 1 / 3 / 2;
@@ -123,12 +124,12 @@ main {
     width: 2.5em;
 }
 
-.announcements {
+.announcements, .trending, .projects {
     margin: 1em;
 }
 
 .ann-section{
-    font-size: 0.6em;
+    font-size: 0.5em;
     display: flex;
     flex-direction: column;
     gap: 2em;
@@ -136,11 +137,66 @@ main {
     padding: 3em 2em;
     border-radius: 5%;
     width: 80%;
-    height: 90%;
-}
+    height: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   }
 
 .ann-section > div {
     border-bottom: 0.5px solid black;
     padding-bottom: 10px;
 }
 
+
+.trend-section {
+    font-size: 0.55em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    background-color: white;
+    padding: 2em 2em;
+    border-radius: 5%;
+    width: 70%;
+    height: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.user-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.acc-img {
+    width: 3em;
+}
+
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2em;
+    height: 90%;
+}
+
+.project {
+    background: linear-gradient(to right, #F1B428 0%, #F1B428 2%, white 2%, white 100%);
+    border-radius: 2%;
+    padding: 2em 2em;
+    font-size: 0.75em;
+    width: 90%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.proj-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.proj-icons > img {
+    width: 2em;
+}
