@@ -10,28 +10,31 @@
     <header>
         <div class="container">
             <h1>Library Project</h1>
-            <button type="button">Log in</button>
+            <button type="button" class="btn">Log in</button>
         </div>
     </header>
     <main>
         <div class="content">
-            <button type="button" class="new-book" id="new-book">+ Add book</button>
-            <div class="card-container">
+            <button type="button" class="btn new-book" id="new-book"><strong>+ Add book</strong></button>
+            <div class="card-container" id="card-container">
 
             </div>
         </div>
     </main>
 
-    <dialog class="form-container">
+    <dialog class="form-container" id="dialog">
         <form action="" method="post">
             <h3>Add new book</h3>
-            <input type="text" name="title" id="title" placeholder="Title" required>
-            <input type="text" name="author" id="autor" placeholder="Author" required>
-            <input type="number" name="pages" id="pages" placeholder="Pages" required>
+            <div class="input-container">
+                <input type="text" name="title" id="title" placeholder="Title" required>
+                <input type="text" name="author" id="autor" placeholder="Author" required>
+                <input type="number" name="pages" id="pages" placeholder="Pages" required>
+            </div>
             <div class="read-check">
                 <h3>Have you read it?</h3>
                 <input type="checkbox" name="read" id="read" required>
             </div>
+            <button type="submit" class="btn submit" id="submit">Submit</button>
         </form>
     </dialog>
    <script src="./main.js"></script> 

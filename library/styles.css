@@ -50,16 +50,21 @@ body {
     display: grid;
     grid-template-rows: 1fr 7fr;
     height: 100vh;
+    font-family: sans-serif;
 }
 
 header {
     background-color: rgb(255, 251, 251);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px;
-    font-family: sans-serif;
     font-size: 18px;
     display: flex;
     justify-content: center;
     color: black;
+}
+
+.btn {
+    border: none;
+    border-radius: 10px;
 }
 
 .container {
@@ -74,8 +79,6 @@ header {
 .container > button{
     margin: none;
     width: 100px;
-    border: none;
-    border-radius: 10px;
 }
 
 .container > button:hover{
@@ -96,16 +99,111 @@ main {
 }
 
 .new-book {
-    border: none;
     font-size: 1.5em;
     margin: 1.2em auto;
     width: 15%;
     height: 60px;
-    border-radius: 10px;
 }
 
 .new-book:hover{
     background-color: lightgray;
     cursor: pointer;
+}
+
+dialog {
+    width: 25%;
+    height: 55%;
+    margin: auto;
+    border-radius: 10px;
+    font-size: 1.3em;
+}
+
+dialog::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+form {
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin: 10px;
+    border-radius: 5px;
+    height: 2em;
+}
+
+.read-check {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.read-check > h3 {
+    margin: auto;
+}
+
+
+.submit {
+    width: 80%;
+    background-color: lightgreen;
+    color: black;
+    margin-top: 20px;
+    height: 2em;
+}
+
+.submit:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+#read {
+    width: 30px;
+    height: 30px
+}
+
+.card-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    margin: 1em;
+}
+
+.card{
+    font-size: 1.5em;
+    background-color: white; 
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    height: 10em;
+    width: 85%;
+    margin: auto;
+    
+}
+
+.card > button {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.card > button:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.read {
+    background: lightgreen;
+}
+
+.nread {
+    background-color: rgb(255, 156, 156);
 }
 
