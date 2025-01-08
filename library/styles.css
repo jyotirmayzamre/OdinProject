@@ -59,31 +59,14 @@ header {
     font-size: 18px;
     display: flex;
     justify-content: center;
+    padding: 20px;
+    margin: none;
     color: black;
 }
 
 .btn {
     border: none;
     border-radius: 10px;
-}
-
-.container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 20px;
-    margin: none;
-    width: 85%;
-}
-
-.container > button{
-    margin: none;
-    width: 100px;
-}
-
-.container > button:hover{
-    background-color: lightgray;
-    cursor: pointer;
 }
 
 
