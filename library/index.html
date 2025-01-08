@@ -7,6 +7,33 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+    <header>
+        <div class="container">
+            <h1>Library Project</h1>
+            <button type="button">Log in</button>
+        </div>
+    </header>
+    <main>
+        <div class="content">
+            <button type="button" class="new-book" id="new-book">+ Add book</button>
+            <div class="card-container">
+
+            </div>
+        </div>
+    </main>
+
+    <dialog class="form-container">
+        <form action="" method="post">
+            <h3>Add new book</h3>
+            <input type="text" name="title" id="title" placeholder="Title" required>
+            <input type="text" name="author" id="autor" placeholder="Author" required>
+            <input type="number" name="pages" id="pages" placeholder="Pages" required>
+            <div class="read-check">
+                <h3>Have you read it?</h3>
+                <input type="checkbox" name="read" id="read" required>
+            </div>
+        </form>
+    </dialog>
    <script src="./main.js"></script> 
 </body>
 </html>
