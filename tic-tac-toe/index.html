@@ -10,22 +10,28 @@
     <header>
         <h1>Tic-Tac-Toe</h1>
     </header>
+
     <main>
         <h3 id="results"></h3>
         <div class="tile-container" id="tile-container">
-            <button class="btn" data-row="0" data-col="0"></button>
-            <button class="btn" data-row="0" data-col="1"></button>
-            <button class="btn" data-row="0" data-col="2"></button>
-            <button class="btn" data-row="1" data-col="0"></button>
-            <button class="btn" data-row="1" data-col="1"></button>
-            <button class="btn" data-row="1" data-col="2"></button>
-            <button class="btn" data-row="2" data-col="0"></button>
-            <button class="btn" data-row="2" data-col="1"></button>
-            <button class="btn" data-row="2" data-col="2"></button>
+            <div class="tile" data-row="0" data-col="0"></div>
+            <div class="tile" data-row="0" data-col="1"></div>
+            <div class="tile" data-row="0" data-col="2"></div>
+            <div class="tile" data-row="1" data-col="0"></div>
+            <div class="tile" data-row="1" data-col="1"></div>
+            <div class="tile" data-row="1" data-col="2"></div>
+            <div class="tile" data-row="2" data-col="0"></div>
+            <div class="tile" data-row="2" data-col="1"></div>
+            <div class="tile" data-row="2" data-col="2"></div>
         </div>
+
+        <button class='btn' id="reset">Reset</button>
     </main>
-    <dialog open>
+
+
+    <dialog>
         <form action="" method="post">
+            <p>Enter the player names</p>
             <input type="text" name="player1" id="player1" placeholder="Player 1" required>
             <input type="text" name="player2" id="player2" placeholder="Player 2" required>
             <button type="submit" class="btn" id="submit-form">Start Game</button>

@@ -67,17 +67,25 @@ header > h1{
 
 main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-
+    text-align: center;
     background-color: #F1EFF1;
 }
+
+main > h3 {
+    margin-top: 1.5em;
+}
+
+
 
 .tile-container {
     margin: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    height: 50%;
-    width: 40%;
+    grid-template-rows: repeat(3, 1fr);
+    height: 55%;
+    width: 25%;
     gap: 10px;
 }
 
@@ -85,17 +93,27 @@ main {
     border-radius: 10px;
 }
 
-.tile-container > button {
-    padding: none;
+.tile {
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
 }
+
+.tile:hover{
+    cursor: pointer;
+}
+
 
 dialog{
     width: 25%;
-    height: 25%;
-    
+    height: 35%;
+    margin: auto;
     border-radius: 10px;
     font-size: 1.3em;
-    margin: auto;
+    text-align: center;
 }
 
 
@@ -117,4 +135,20 @@ form{
 
 input{
     border-radius: 10px;
+}
+
+#reset{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: auto;
+    background-color: lightgreen;
+    color: black;
+    font-family: sans-serif;
+    width: 7em;
+    height: 2em;
+}
+
+#reset:hover{
+    opacity: 0.5;
+    cursor: pointer;
 }

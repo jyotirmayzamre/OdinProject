@@ -1,6 +1,7 @@
 const startGame = document.getElementById('submit-form');
 const playerForm = document.querySelector('form');
 const dialog = document.querySelector('dialog');
+dialog.showModal();
 
 startGame.addEventListener('click', (e) => {
     e.preventDefault();
@@ -25,13 +26,17 @@ function GameBoard(){
     let spotsLeft = 9;
 
     //create game board
-    for (let i = 0; i < rows; i++){
-        board[i] = [];
-        for (let j = 0; j < columns; j++){
-            board[i].push(Cell());
-        }
+    const createBoard = () => {
+        for (let i = 0; i < rows; i++){
+            board[i] = [];
+            for (let j = 0; j < columns; j++){
+                board[i].push(Cell());
+         }
 
+        }
     }
+
+    createBoard();
 
     //method of getting the board
     const getBoard = () => board;
@@ -87,8 +92,18 @@ function GameBoard(){
 
     }
 
+    //reset the value of the cells to 0
+    const reset = () => {
+        for(let i = 0; i < rows; i++){
+            for(let j = 0; j < columns; j++){
+                board[i][j].resetValue();
+            }
+        }
+        spotsLeft = 9;
+    }
+
     
-    return { getBoard, getSpotsLeft, placeMove, checkWin };
+    return { getBoard, getSpotsLeft, placeMove, checkWin, reset };
 }
 
 //Cell object for representing a spot
@@ -98,6 +113,10 @@ function Cell() {
     let value = 0;
 
     const getValue = () => value;
+
+    const resetValue = () => {
+        value = 0;
+    }
 
     //method to add a move on the board
     //returns false if the move wasn't successful (placing in a filled square)
@@ -110,7 +129,7 @@ function Cell() {
         }
     }
 
-    return { getValue, addMove };
+    return { getValue, addMove, resetValue };
 }
 
 
@@ -153,7 +172,7 @@ function Controller(p1Name, p2Name){
                     return 'It is a draw!'
                 } else{
                     switchTurn();
-                    return `It is now ${getActivePlayer().name}'s turn.`
+                    return `It is ${getActivePlayer().name}'s turn.`
                 }
             }
         } else{
@@ -161,23 +180,45 @@ function Controller(p1Name, p2Name){
         }
     }
 
-    return { getActivePlayer, playRound, switchTurn };
+    const resetController = () => {
+        activePLayer = players[0];
+        board.reset();
+    }
+
+    return { getActivePlayer, playRound, switchTurn, resetController };
 }
 
+//object for controlling the DOM
 function DOMController(p1, p2){
     const gameController = Controller(p1, p2);
-
+    const resetBtn = document.getElementById('reset');
     const tileContainer = document.getElementById('tile-container');
     const result = document.getElementById('results');
+    result.textContent = `It is ${gameController.getActivePlayer().name}'s turn.`
 
+    //reset function which calles the game controller's reset function
+    const reset = () => {
+        tileContainer.childNodes.forEach((item) => {
+            item.textContent = '';
+        })
+        gameController.resetController();
+        result.textContent = `It is ${gameController.getActivePlayer().name}'s turn.`
+    }
+
+    resetBtn.addEventListener('click', (e) => {
+        reset();
+
+    })
+
+    //event listener for clicking on one of the 'tiles'
     tileContainer.addEventListener('click', (e) => {
-        if(e.target.tagName === 'BUTTON'){
+        if(e.target.tagName === 'DIV' &&  e.target.id != 'tile-container'){
             e.target.textContent = gameController.getActivePlayer().icon;
             let res = gameController.playRound(parseInt(e.target.dataset.row), parseInt(e.target.dataset.col));
             result.textContent = res;
-            
         }
-    })    
+    })
+    
 
 
 }
