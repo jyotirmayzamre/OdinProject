@@ -5,18 +5,22 @@ const bookForm = document.querySelector('form');
 const submitButton = document.getElementById('submit');
 const cardContainer = document.getElementById('card-container');
 
-//Book constructor
-function Book(title, author, pages, isRead){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
+//Book class
+
+class Book {
+    constructor(title, author, pages, isRead){
+        
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+    
+    changeStatus(){
+        this.isRead = !this.isRead;
+    }
 }
 
-
-Book.prototype.changeStatus = function(){
-    this.isRead = !this.isRead;
-}
 
 //function for creating + adding books
 function addBookToLibrary(formData){
