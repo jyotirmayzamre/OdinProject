@@ -46,3 +46,75 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+body {
+    display: grid;
+    grid-template-rows: 1fr 6fr;
+    height: 100vh;
+    font-family: sans-serif;
+}
+
+
+header{
+    background-color: rgb(255, 251, 251);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+header > h1{
+    margin: auto;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+
+    background-color: #F1EFF1;
+}
+
+.tile-container {
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 50%;
+    width: 40%;
+    gap: 10px;
+}
+
+.btn {
+    border-radius: 10px;
+}
+
+.tile-container > button {
+    padding: none;
+}
+
+dialog{
+    width: 25%;
+    height: 25%;
+    
+    border-radius: 10px;
+    font-size: 1.3em;
+    margin: auto;
+}
+
+
+dialog::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+#submit-form {
+    width: 40%;
+    margin: auto;
+}
+
+input{
+    border-radius: 10px;
+}

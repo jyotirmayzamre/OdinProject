@@ -7,7 +7,30 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    
+    <header>
+        <h1>Tic-Tac-Toe</h1>
+    </header>
+    <main>
+        <h3 id="results"></h3>
+        <div class="tile-container" id="tile-container">
+            <button class="btn" data-row="0" data-col="0"></button>
+            <button class="btn" data-row="0" data-col="1"></button>
+            <button class="btn" data-row="0" data-col="2"></button>
+            <button class="btn" data-row="1" data-col="0"></button>
+            <button class="btn" data-row="1" data-col="1"></button>
+            <button class="btn" data-row="1" data-col="2"></button>
+            <button class="btn" data-row="2" data-col="0"></button>
+            <button class="btn" data-row="2" data-col="1"></button>
+            <button class="btn" data-row="2" data-col="2"></button>
+        </div>
+    </main>
+    <dialog open>
+        <form action="" method="post">
+            <input type="text" name="player1" id="player1" placeholder="Player 1" required>
+            <input type="text" name="player2" id="player2" placeholder="Player 2" required>
+            <button type="submit" class="btn" id="submit-form">Start Game</button>
+        </form>
+    </dialog>
    <script src="./main.js"></script> 
 </body>
 </html>

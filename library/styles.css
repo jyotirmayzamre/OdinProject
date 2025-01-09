@@ -54,9 +54,9 @@ body {
 }
 
 header {
+    font-size: 18px;
     background-color: rgb(255, 251, 251);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px;
-    font-size: 18px;
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -101,10 +101,10 @@ dialog {
     font-size: 1.3em;
 }
 
+
 dialog::backdrop{
     background-color: rgba(0, 0, 0, 0.5);
 }
-
 form {
     text-align: center;
 }
