@@ -28,9 +28,9 @@ export const homePage = (container) => {
     //random image card
     const imageCard = document.createElement('div');
     imageCard.classList.add('card');
-    const chefImage = document.createElement('img');
-    chefImage.src = '../images/chef.jpg';
-    imageCard.appendChild(chefImage);
+    imageCard.innerHTML = `
+        <img src="../../images/chef.jpg">
+    `
     mainContainer.appendChild(imageCard);
 
 
