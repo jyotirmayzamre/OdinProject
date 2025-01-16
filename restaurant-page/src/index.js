@@ -4,4 +4,8 @@ const contentContainer = document.getElementById('content');
 
 const buttons = document.getElementsByClassName('.btn');
 
-//event listener for buttons
+const resetPage = () => {
+    contentContainer.replaceChildren();
+}
+
+homePage(contentContainer);

@@ -53,6 +53,11 @@ body {
 
 }
 
+#bg-image {
+  width: 100%;
+  height: auto;
+}
+
 header {
     flex-grow: 1;
     display: flex;
@@ -74,6 +79,8 @@ header > h1 {
 
 #content {
     flex-grow: 10;
+    position: absolute;
+    top: 275px;
 }
 
 nav{
@@ -101,4 +108,20 @@ nav{
 
 .current {
     border-bottom: 1px solid white;
+}
+
+.container {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
+  font-size: 1.5em;
+  width: 50%;
+  padding: 1.5em;
+  margin: 2em;
 }
