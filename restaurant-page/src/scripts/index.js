@@ -5,9 +5,7 @@ import { menuPage } from "./menu.js";
 
 const contentContainer = document.getElementById('content');
 const navBar = document.querySelector('nav');
-const homeButton = document.getElementById('home');
-
-let currPage = homeButton;
+let currPage = document.getElementById('home');
 
 
 const resetPage = () => {

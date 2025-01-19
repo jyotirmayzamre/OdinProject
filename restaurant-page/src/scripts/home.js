@@ -29,7 +29,9 @@ export const homePage = (container) => {
     const imageCard = document.createElement('div');
     imageCard.classList.add('card');
     imageCard.innerHTML = `
+        <p>Best food in the nation!</p>
         <img src="../../images/chef.jpg">
+        <p>Serving with love since 2008</p>
     `
     mainContainer.appendChild(imageCard);
 
