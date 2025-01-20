@@ -7,7 +7,7 @@ module.exports = {
     output: {
         filename: "main.js",
         path: path.resolve(__dirname, "dist"),
-        cleanr: true,
+        clean: true,
     },
     devtool: "eval-source-map",
     devServer: {
