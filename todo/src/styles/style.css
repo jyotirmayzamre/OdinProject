@@ -166,3 +166,15 @@ dialog {
 dialog::backdrop {
   backdrop-filter: blur(10px);
 }
+
+.editContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.editContainer > textarea{
+  border: none;
+  outline: none;
+  background: transparent;
+}

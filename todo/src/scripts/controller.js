@@ -8,10 +8,9 @@ import checkedImage from '../../images/checked.svg';
 
 /*
 Things to finish today
-- make the edit dialog in a better way
-- make the edit dialog functional
+- add to do form
+- create project
 */
-
 
 
 /*
@@ -63,6 +62,7 @@ export const domManager = (function() {
         emptyBox.dataset.curr = 'empty';
         emptyBox.className = 'icon';
 
+        //event listener for checkbox icon
         emptyBox.addEventListener('click', (e) => {
             if(e.target.dataset.curr == 'empty'){
                 e.target.src = checkedImage;
@@ -83,7 +83,7 @@ export const domManager = (function() {
 
         container.style.borderLeft = '5px solid';
 
-        //change identifier acc to priority
+        //change identifier colour acc to priority
         switch(toDo.priority){
             case 'Low':
                 container.style.borderLeftColor = 'lightgreen';
@@ -101,7 +101,8 @@ export const domManager = (function() {
         title.textContent = toDo.title;
         leftSide.appendChild(title);
 
-        //dialog tag for details
+
+        //Dialog for viewing todo details
         const detailModal = document.createElement('dialog');
         detailModal.innerHTML = `
             <h1>${toDo.title}</h1>
@@ -115,62 +116,92 @@ export const domManager = (function() {
         closeIcon.src = closeImage;
         closeIcon.height = 25;
         closeIcon.alt = "close";
-        closeIcon.addEventListener('click', () => {
+        closeIcon.addEventListener('click', (e) => {
             detailModal.close();
-        })
+        });
         detailModal.appendChild(closeIcon);
 
         
         rightSide.appendChild(detailModal);
 
-        //dialog tag for editing the todo
+
+        /*
+        Dialog for editing the todo
+        */
         const editModal = document.createElement('dialog');
+
+        const closeIcon2 = document.createElement('img');
+        closeIcon2.className = 'icon';
+        closeIcon2.src = closeImage;
+        closeIcon2.height = 25;
+        closeIcon2.alt = "close";
+        closeIcon2.addEventListener('click', (e) => {
+            editModal.close();
+        });
+
+        closeIcon2.style.float = 'right';
 
         const editForm = document.createElement('form');
         editForm.setAttribute("method", "post");
         editForm.setAttribute('action', 'whatever');
 
-        const editTitle = document.createElement('textarea');
-        editTitle.textContent = toDo.title;
+        
 
-        const editDescription = document.createElement('textarea');
-        editDescription.textContent = toDo.description;
+        editForm.style.display = 'flex';
+        editForm.style.flexDirection = 'column';
+        editForm.style.gap = '1em';
+
+        const titleContainer = document.createElement('div');
+        titleContainer.className = 'editContainer';
+        titleContainer.innerHTML = `
+            <h3>Title:</h3>
+            <textarea>${toDo.title}</textarea>
+        `
+        
+
+       const descContainer = document.createElement('div');
+       descContainer.className = 'editContainer';
+       descContainer.innerHTML = `
+            <h3>Description</h3>
+            <textarea>${toDo.description}</textarea>
+       `;
+
+
 
         const dateContainer = document.createElement('div');
+        dateContainer.className = 'editContainer';
         dateContainer.innerHTML = `
-            <h2>Due Date:</h2>
-            <input type="date" id="date" name="date">
-        `
+            <h3>Due Date:</h2>
+            <input type="date" id="date" name="date" value=${toDo.dueDate}>
+        `;
+
 
         const priorityContainer = document.createElement('div');
-        const priorityHeading = document.createElement('h2');
-        priorityHeading.textContent = 'Priority'
+        priorityContainer.className = 'editContainer';
 
-        const lowButton = document.createElement('input');
-        lowButton.setAttribute("type", "radio");
-        lowButton.setAttribute("name", "priority");
-        lowButton.setAttribute("value", "Low");
-        const medButton = document.createElement('input');
-        medButton.setAttribute("type", "radio");
-        medButton.setAttribute("name", "priority");
-        medButton.setAttribute("value", "Medium");
-        const highButton = document.createElement("input");
-        highButton.setAttribute("type", "radio");
-        highButton.setAttribute("name", "priority");
-        highButton.setAttribute("value", "High");
+        priorityContainer.innerHTML = `
+            <h3>Priority</h3>
+            <div style='display: flex; gap: 0.5em'>
+                <label>
+                    <input type='radio' name='priority' value='Low'>
+                    Low
+                </label>
+                <label>
+                    <input type='radio' name='priority' value='Medium'>
+                    Medium
+                </label>
+                <label>
+                    <input type='radio' name='priority' value='High'>
+                    High
+                </label>
 
-        switch(toDo.priority){
-            case 'Low':
-                lowButton.checked = true;
-            case 'Medium':
-                medButton.checked = true;
-            case 'High':
-                highButton.checked = true;
-        }
-        priorityContainer.appendChild(priorityHeading);
-        priorityContainer.appendChild(lowButton);
-        priorityContainer.appendChild(medButton);
-        priorityContainer.appendChild(highButton);
+            </div>
+        `
+
+        priorityContainer.querySelectorAll('input[type="radio"]').forEach((item)=>{
+            item.checked = (item.value == toDo.priority);
+        });
+        
 
         const submitButton = document.createElement('button');
         submitButton.textContent = 'Confirm Changes';
@@ -180,13 +211,14 @@ export const domManager = (function() {
             editModal.close();
         })
 
-
-        editForm.appendChild(editTitle);
-        editForm.appendChild(editDescription);
+    
+        editForm.appendChild(titleContainer);
+        editForm.appendChild(descContainer);
         editForm.appendChild(dateContainer);
         editForm.appendChild(priorityContainer);
         editForm.appendChild(submitButton);
 
+        editModal.appendChild(closeIcon2);
         editModal.appendChild(editForm);
 
 
