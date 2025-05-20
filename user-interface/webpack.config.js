@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     mode: "development",
-    entry: "./src/scripts/index.js",
+    entry: "./src/index.js",
     output: {
         filename: "main.js",
         path: path.resolve(__dirname, "dist"),
@@ -11,11 +11,11 @@ module.exports = {
     },
     devtool: "eval-source-map",
     devServer: {
-        watchFiles: ["./src/templates/template.html"],
+        watchFiles: ["./src/template.html"],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./src/templates/template.html",
+            template: "./src/template.html",
         }),
     ],
     module: {
