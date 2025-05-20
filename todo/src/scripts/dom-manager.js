@@ -105,7 +105,7 @@ export const domManager = (function() {
         rightSide.appendChild(editModal);
 
         //set up icons + event listeners
-        const { detailButton, editIcon, binIcon } = icons(detailModal, editModal, todoContainer);
+        const { detailButton, editIcon, binIcon } = icons(detailModal, editModal, todoContainer, toDo.id);
 
         rightSide.appendChild(detailButton);
         rightSide.appendChild(editIcon);
@@ -129,9 +129,11 @@ export const domManager = (function() {
         const desc = document.getElementById(id + '-desc');
         desc.textContent = data.desc;
 
+        const project = document.getElementById(id + '-project');
+        project.textContent = data.project;
+
         const dateElem = document.getElementById(id + '-dueDate');
-        
-        dateElem.textContent = data.dueDate;
+        dateElem.textContent = data.date;
 
         const priority = document.getElementById(id + '-priority');
         priority.textContent = data.priority;
@@ -154,7 +156,7 @@ export const domManager = (function() {
 
     }
 
-    const icons = (detailModal, editModal, todoContainer) => {
+    const icons = (detailModal, editModal, todoContainer, id) => {
         //details button
         const detailButton = document.createElement('button');
         detailButton.classList.add('detail-btn')
@@ -180,6 +182,7 @@ export const domManager = (function() {
 
         binIcon.addEventListener('click', (e) => {
             todoContainer.removeChild(e.target.parentNode.parentNode);
+            todoManager.deleteToDo(id);
         })
 
         return { detailButton, editIcon, binIcon };
@@ -228,13 +231,19 @@ export const domManager = (function() {
             <input type="text" name="desc" id="desc" value=${toDo.description} required>
        `;
 
+       const projectContainer = document.createElement('div');
+       projectContainer.className = 'editContainer';
+       projectContainer.innerHTML = `
+            <h3>Project</h3>
+            <input type="text" name="project" id="project" value=${toDo.project}>
+       `
 
 
         const dateContainer = document.createElement('div');
         dateContainer.className = 'editContainer';
         dateContainer.innerHTML = `
             <h3>Due Date:</h2>
-            <input type="date" id="date" name="date" value=${toDo.dueDate}>
+            <input type="date" id="date" name="date">
         `;
 
 
@@ -277,6 +286,7 @@ export const domManager = (function() {
             e.preventDefault();
             const formData = new FormData(editForm);
             const data = Object.fromEntries(formData.entries());
+            todoManager.updateToDo(toDo.id, data);
             updateToDo(toDo.id, data);
             editModal.close();
         })
@@ -286,6 +296,7 @@ export const domManager = (function() {
     
         editForm.appendChild(titleContainer);
         editForm.appendChild(descContainer);
+        editForm.appendChild(projectContainer);
         editForm.appendChild(dateContainer);
         editForm.appendChild(priorityContainer);
         editForm.appendChild(buttonContainer);
@@ -296,6 +307,104 @@ export const domManager = (function() {
     }
 
     const setup = () => {
+
+        //adding event listeners for project related pages
+
+        const projList = document.querySelector('.projects-list');
+
+        const todoContainer = document.getElementById('todo-container');
+        
+        projList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('project')){
+                todoContainer.replaceChildren();
+                for (let i=0; i < localStorage.length; i++){
+                    const key = localStorage.key(i);
+                    const val = JSON.parse(localStorage.getItem(key));
+                    if (val.project == e.target.dataset.name)
+                        addToDo(val);
+                }
+            }
+        });
+
+        //event listener for home
+        const homePage = document.querySelector('.section');
+
+        homePage.addEventListener('click', (e)=>{
+            todoContainer.replaceChildren();
+            for (let i=0; i < localStorage.length; i++){
+                const key = localStorage.key(i);
+                const val = JSON.parse(localStorage.getItem(key));
+                addToDo(val);
+            }
+        });
+
+        //event listener for new project
+        const projectContainer = document.getElementById("proj-container");
+        const projPlus = document.getElementById('new-proj');
+        const projModal = document.createElement('dialog');
+
+        //form to put in modal
+        const addForm = document.createElement('form');
+        addForm.setAttribute("method", "post");
+        addForm.setAttribute('action', 'whatever');
+
+        addForm.style.display = 'flex';
+
+        const headingContainer = document.createElement('div');
+        headingContainer.className = 'editContainer';
+        headingContainer.innerHTML = `
+            <h3>Title:</h3>
+            <input type='text' name='title' id='title'>
+        `
+
+
+        const submitbtnContainer = document.createElement('div');
+        submitbtnContainer.className = 'editContainer button';
+
+        const submitProj = document.createElement('button');
+        submitProj.textContent = 'Create Project';
+        submitProj.style.width = '30%';
+        submitProj.setAttribute("type", "submit");
+
+        submitProj.addEventListener("click", (e) => {
+            e.preventDefault();
+            const formData = new FormData(addForm);
+            const data = Object.fromEntries(formData.entries());
+            const lItem = document.createElement('li');
+            lItem.textContent = data.title;
+            projList.appendChild(lItem);
+        })
+
+        const closeIcon3 = document.createElement('img');
+        closeIcon3.className = 'icon';
+        closeIcon3.src = closeImage;
+        closeIcon3.height = 25;
+        closeIcon3.alt = "close";
+        closeIcon3.addEventListener('click', (e) => {
+            projModal.close();
+        });
+        
+        closeIcon2.style.float = 'right';
+
+        addForm.appendChild(headingContainer);
+        addForm.appendChild(submitbtnContainer);
+        projModal.appendChild(closeIcon3);
+        projModal.appendChild(addForm);
+
+        projectContainer.appendChild(projModal);
+
+
+        //event listener for adding new project
+        projPlus.addEventListener('click', (e)=>{
+            projModal.showModal();
+        })
+
+       
+
+
+
+        
+
         //dialog for adding new todos
         const addModal = document.createElement('dialog');
         addModal.id = 'add-dialog';
@@ -407,6 +516,14 @@ export const domManager = (function() {
 
         const aside = document.getElementById('sidebar');
         aside.appendChild(addModal);
+
+
+        //render local storage items
+        for (let i=0; i < localStorage.length; i++){
+            const key = localStorage.key(i);
+            const val = localStorage.getItem(key);
+            addToDo(JSON.parse(val));
+        }
     }
 
 

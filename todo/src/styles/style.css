@@ -87,6 +87,21 @@ aside > img:hover {
   font-weight: 100;
 }
 
+.projects-list {
+  list-style-type: none;
+  font-size: 0.75em;
+  font-weight: 100;
+}
+
+#new-proj{
+  width: 30px;
+}
+
+#proj-container {
+  display: flex;
+  gap: 2em;
+}
+
 .section {
   margin: 1em;
 }
@@ -95,7 +110,12 @@ aside > img:hover {
   -webkit-transform: translateX(3px);
   transform: translateX(3px);
   cursor: pointer;
-  font-weight:500;
+}
+
+.project:hover {
+  -webkit-transform: translateX(3px);
+  transform: translateX(3px);
+  cursor: pointer;
 }
 
 header {

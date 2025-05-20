@@ -3,9 +3,7 @@ let num = 1;
 
 /*
 Things to finish today
-- store todos in internal storage
-- make edit todo functional
-- create project
+- create event listener to add new project
 */
 
 
@@ -21,27 +19,33 @@ export const todoManager = (function () {
     const createToDo = (title, description, dueDate, priority, project=currProject, checked=false) => {
         const id = 'todo' + num;
         const newItem = { title, description, dueDate, priority, project, id, checked };
-        localStorage.setItem(id, newItem);
+        localStorage.setItem(id, JSON.stringify(newItem));
         num += 1;
 
         return newItem;
     }
 
-    const updateToDo = (toDo, data) => {
+    const updateToDo = (id, data) => {
+        let toDo = JSON.parse(localStorage.getItem(id));
         toDo.title = data.title;
         toDo.description = data.desc;
         toDo.dueDate = data.dueDate;
         toDo.priority = data.priority;
-        localStorage.setItem(toDo.id, toDo);
+        toDo.project = data.project;
+        localStorage.setItem(id, JSON.stringify(toDo));
         return toDo;
     }
 
     const changeChecked = (toDo) => {
         toDo.checked = !toDo.checked;
-        localStorage.setItem(toDo.id, toDo);
+        localStorage.setItem(toDo.id, JSON.stringify(toDo));
     }
 
-    return { createToDo, updateToDo, changeChecked }
+    const deleteToDo = (id) => {
+        localStorage.removeItem(id);
+    }
+
+    return { createToDo, updateToDo, changeChecked , deleteToDo }
 })();
 
 
