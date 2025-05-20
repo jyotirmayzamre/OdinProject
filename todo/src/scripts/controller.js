@@ -1,3 +1,25 @@
+import editImage from '../../images/edit.png';
+import binImage from '../../images/bin.png';
+import closeImage from '../../images/close.svg';
+import emptyBoxImage from '../../images/empty-box.png';
+import plusImage from '../../images/plus.svg';
+import checkedImage from '../../images/checked.svg';
+
+
+/*
+Things to finish today
+- make the edit dialog in a better way
+- make the edit dialog functional
+*/
+
+
+
+/*
+Todo manager factory function
+- createToDo: creates a todo item
+- updateToDo: updates a todo item via form
+- changeChecked: changes whether a todo item is complete or not
+*/
 export const todoManager = (function () {
     const currProject = 'Home';
 
@@ -19,6 +41,11 @@ export const todoManager = (function () {
 })();
 
 
+/*
+Dom manager factory function
+- addToDo: used to add a todo item to home page
+*/
+
 export const domManager = (function() {
     const todoContainer = document.getElementById('todo-container');
 
@@ -33,12 +60,41 @@ export const domManager = (function() {
 
         //checkbox icon
         const emptyBox = document.createElement('img');
-        emptyBox.src = '../../images/empty-box.png';
+        emptyBox.dataset.curr = 'empty';
+        emptyBox.className = 'icon';
+
+        emptyBox.addEventListener('click', (e) => {
+            if(e.target.dataset.curr == 'empty'){
+                e.target.src = checkedImage;
+                e.target.dataset.curr = 'checked';
+                e.target.parentNode.style.textDecoration = 'line-through';
+                e.target.parentNode.parentNode.style.opacity = 0.5;
+            } else{
+                e.target.src = emptyBoxImage;
+                e.target.dataset.curr = 'empty';
+                e.target.parentNode.style.textDecoration = 'none';
+                e.target.parentNode.parentNode.style.opacity = 1;
+            }
+        })
+
+        emptyBox.src = emptyBoxImage;
         emptyBox.alt = 'Check'
         leftSide.appendChild(emptyBox);
 
-        //change background acc to priority
-        renderPriority(toDo.priority);
+        container.style.borderLeft = '5px solid';
+
+        //change identifier acc to priority
+        switch(toDo.priority){
+            case 'Low':
+                container.style.borderLeftColor = 'lightgreen';
+                break;
+            case 'Medium':
+                container.style.borderLeftColor = 'orange';
+                break;
+            case 'High':
+                container.style.borderLeftColor = 'red';
+                break;
+        }
 
         //title of the todo
         const title = document.createElement('p');
@@ -55,7 +111,9 @@ export const domManager = (function() {
             <p><b>Details:</b> ${toDo.description}</p>
         `
         const closeIcon = document.createElement('img');
-        closeIcon.src = "../../images/close.svg";
+        closeIcon.className = 'icon';
+        closeIcon.src = closeImage;
+        closeIcon.height = 25;
         closeIcon.alt = "close";
         closeIcon.addEventListener('click', () => {
             detailModal.close();
@@ -149,7 +207,8 @@ export const domManager = (function() {
 
         //edit icon
         const editIcon = document.createElement('img');
-        editIcon.src = '../../images/edit.png';
+        editIcon.className = 'icon';
+        editIcon.src = editImage;
         editIcon.alt = 'Edit';
         editIcon.addEventListener('click', () => {
             editModal.showModal();
@@ -158,8 +217,14 @@ export const domManager = (function() {
 
         //bin icon
         const binIcon = document.createElement('img');
-        binIcon.src = "../../images/bin.png";
+        binIcon.className = 'icon';
+        binIcon.src = binImage;
         binIcon.alt = "Delete";
+
+        binIcon.addEventListener('click', (e) => {
+            todoContainer.removeChild(e.target.parentNode.parentNode);
+        })
+
         rightSide.appendChild(binIcon);
 
 
@@ -167,23 +232,6 @@ export const domManager = (function() {
         container.appendChild(rightSide);
 
         todoContainer.appendChild(container);
-    }
-
-    const renderPriority = (val) => {
-        let color;
-        switch(val){
-            case 'Low':
-                color = 'lightgreen';
-                break;
-            case 'Medium':
-                color = 'orange';
-                break;
-            case 'High':
-                color = 'red';
-                break;
-                
-        }
-        document.documentElement.style.setProperty('--priority-color', color);
     }
 
 
