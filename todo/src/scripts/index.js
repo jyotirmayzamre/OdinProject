@@ -1,9 +1,9 @@
 import "../styles/style.css";
 
-import { setup } from "./newDialog";
+import { domManager } from "./dom-manager"; 
 
 
-setup();
+domManager.setup();
 
 //event listener for the plus button
 const addNew = document.getElementById('add-new');
