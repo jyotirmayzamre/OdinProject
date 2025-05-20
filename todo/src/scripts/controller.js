@@ -142,6 +142,7 @@ export const domManager = (function() {
         closeIcon2.style.float = 'right';
 
         const editForm = document.createElement('form');
+        editForm.className = 'form edit'
         editForm.setAttribute("method", "post");
         editForm.setAttribute('action', 'whatever');
 
@@ -202,21 +203,26 @@ export const domManager = (function() {
             item.checked = (item.value == toDo.priority);
         });
         
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'editContainer button';
 
         const submitButton = document.createElement('button');
         submitButton.textContent = 'Confirm Changes';
         submitButton.setAttribute("type", "submit");
+        submitButton.style.width = '40%';
         submitButton.addEventListener('click', (e) => {
             e.preventDefault();
             editModal.close();
         })
+
+        buttonContainer.appendChild(submitButton);
 
     
         editForm.appendChild(titleContainer);
         editForm.appendChild(descContainer);
         editForm.appendChild(dateContainer);
         editForm.appendChild(priorityContainer);
-        editForm.appendChild(submitButton);
+        editForm.appendChild(buttonContainer);
 
         editModal.appendChild(closeIcon2);
         editModal.appendChild(editForm);

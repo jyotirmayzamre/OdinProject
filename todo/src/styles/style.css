@@ -171,6 +171,11 @@ dialog::backdrop {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+}
+
+.editContainer.button {
+  justify-content: center;
 }
 
 .editContainer > textarea{

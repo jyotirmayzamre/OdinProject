@@ -1,8 +1,11 @@
 import closeImage from '../../images/close.svg';
 
+import { todoManager, domManager } from "./controller";
+
 export const setup = () => {
     //dialog for adding new todos
-    const addModal = document.getElementById('add-dialog');
+    const addModal = document.createElement('dialog');
+    addModal.id = 'add-dialog';
     
     const closeIcon2 = document.createElement('img');
     closeIcon2.className = 'icon';
@@ -29,7 +32,7 @@ export const setup = () => {
     titleContainer.className = 'editContainer';
     titleContainer.innerHTML = `
         <h3>Title:</h3>
-        <textarea></textarea>
+        <input type='text' name='title' id='title'>
     `
     
     
@@ -37,7 +40,7 @@ export const setup = () => {
     descContainer.className = 'editContainer';
     descContainer.innerHTML = `
         <h3>Description</h3>
-        <textarea></textarea>
+        <input type='text' name='desc' id='desc'>
     `;
     
     
@@ -71,21 +74,44 @@ export const setup = () => {
     
         </div>
     `
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'editContainer button';
+
     const submitButton = document.createElement('button');
     submitButton.textContent = 'Create ToDo';
+    submitButton.style.width = '30%';
     submitButton.setAttribute("type", "submit");
+
+    //form submission which uses todo and dom managers to update page
     submitButton.addEventListener('click', (e) => {
         e.preventDefault();
+        const formData = new FormData(editForm);
+        const data = Object.fromEntries(formData.entries());
+
+        const todo = todoManager.createToDo(
+            data.title,
+            data.desc,
+            data.date,
+            data.priority
+        )
+
+        domManager.addToDo(todo);
+
+
         addModal.close();
     })
     
+    buttonContainer.appendChild(submitButton);
     
     editForm.appendChild(titleContainer);
     editForm.appendChild(descContainer);
     editForm.appendChild(dateContainer);
     editForm.appendChild(priorityContainer);
-    editForm.appendChild(submitButton);
+    editForm.appendChild(buttonContainer);
     
     addModal.appendChild(closeIcon2);
     addModal.appendChild(editForm);
+
+    const aside = document.getElementById('sidebar');
+    aside.appendChild(addModal);
 }
