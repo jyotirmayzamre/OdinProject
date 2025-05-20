@@ -147,3 +147,7 @@ dialog {
   margin: auto;
   text-align: center;
 }
+
+dialog::backdrop {
+  backdrop-filter: blur(10px);
+}

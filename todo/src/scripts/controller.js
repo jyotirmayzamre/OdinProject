@@ -67,7 +67,73 @@ export const domManager = (function() {
 
         //dialog tag for editing the todo
         const editModal = document.createElement('dialog');
-        
+
+        const editForm = document.createElement('form');
+        editForm.setAttribute("method", "post");
+        editForm.setAttribute('action', 'whatever');
+
+        const editTitle = document.createElement('textarea');
+        editTitle.textContent = toDo.title;
+
+        const editDescription = document.createElement('textarea');
+        editDescription.textContent = toDo.description;
+
+        const dateContainer = document.createElement('div');
+        dateContainer.innerHTML = `
+            <h2>Due Date:</h2>
+            <input type="date" id="date" name="date">
+        `
+
+        const priorityContainer = document.createElement('div');
+        const priorityHeading = document.createElement('h2');
+        priorityHeading.textContent = 'Priority'
+
+        const lowButton = document.createElement('input');
+        lowButton.setAttribute("type", "radio");
+        lowButton.setAttribute("name", "priority");
+        lowButton.setAttribute("value", "Low");
+        const medButton = document.createElement('input');
+        medButton.setAttribute("type", "radio");
+        medButton.setAttribute("name", "priority");
+        medButton.setAttribute("value", "Medium");
+        const highButton = document.createElement("input");
+        highButton.setAttribute("type", "radio");
+        highButton.setAttribute("name", "priority");
+        highButton.setAttribute("value", "High");
+
+        switch(toDo.priority){
+            case 'Low':
+                lowButton.checked = true;
+            case 'Medium':
+                medButton.checked = true;
+            case 'High':
+                highButton.checked = true;
+        }
+        priorityContainer.appendChild(priorityHeading);
+        priorityContainer.appendChild(lowButton);
+        priorityContainer.appendChild(medButton);
+        priorityContainer.appendChild(highButton);
+
+        const submitButton = document.createElement('button');
+        submitButton.textContent = 'Confirm Changes';
+        submitButton.setAttribute("type", "submit");
+        submitButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            editModal.close();
+        })
+
+
+        editForm.appendChild(editTitle);
+        editForm.appendChild(editDescription);
+        editForm.appendChild(dateContainer);
+        editForm.appendChild(priorityContainer);
+        editForm.appendChild(submitButton);
+
+        editModal.appendChild(editForm);
+
+
+        rightSide.appendChild(editModal);
+
 
 
 
@@ -85,6 +151,9 @@ export const domManager = (function() {
         const editIcon = document.createElement('img');
         editIcon.src = '../../images/edit.png';
         editIcon.alt = 'Edit';
+        editIcon.addEventListener('click', () => {
+            editModal.showModal();
+        })
         rightSide.appendChild(editIcon);
 
         //bin icon
