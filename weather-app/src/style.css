@@ -45,3 +45,113 @@ h1, h2, h3, h4, h5, h6 {
 #root, #__next {
   isolation: isolate;
 }
+
+button:hover {
+  cursor: pointer;
+}
+
+body {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 1fr 6fr;
+  font-family: sans-serif;
+}
+
+header {
+  background-color: #212529;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  gap: 25em;
+}
+
+header > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+#icon {
+  width: 10%;
+}
+
+form{
+  width: 50%;
+}
+
+form > input{
+  width: 70%;
+  border-radius: 1px;
+  outline: none;
+  border: none;
+  margin: none;
+  padding: 7px;
+}
+
+form > button {
+  margin: none;
+  background-color: rgb(235, 111, 76);
+  color: white;
+  border: none;
+  border-radius: 1px;
+  padding: 7px
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  justify-content: center;
+  align-items: center;
+}
+
+#progress {
+  display: none;
+}
+
+#container {
+  display: none;
+  width: 40%;
+}
+
+
+.general-info {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+
+.detailed-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4em;
+}
+
+.temp{
+  font-size: 5em;
+}
+
+.temp::after {
+  content: 'F';
+  vertical-align: super;
+  font-size: 0.4em;
+}
+
+.feels-like::after {
+  content: 'F';
+  vertical-align: super;
+  font-size: 0.4em;
+}
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:flex-start;
+}
+

@@ -4,16 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="./style.css">
 </head>
 <body>
-    <h1>Weather App</h1>
-    <form method="post" action="">
-        <input type="text" name="region" id="region" placeholder="Enter Location...">
-        <button type="submit" id="submit">Submit</button>
-    </form>
+    <header>
+        <div>
+            <img id="icon">
+            <h1>Weather App</h1>
+        </div>
+        <form method="post" action="">
+            <input type="text" name="region" id="region" placeholder="Enter a city">
+            <button type="submit" id="submit">Search</button>
+        </form>  
+    </header>
+    <main>
+        <progress id="progress" value="0" max="100"></progress>
+        <div id="container">
+            <div class="general-info">
+                <p class="desc"></p>
+                <h1 class="address"></h1>
+                <div class="detailed-info">
+                    <span class="temp"></span>
+                    <div style="width: 2px; height: 60%; background-color: black; margin: 0 10px;"></div>
+                    <div class="weather">
+                        <p class="feels-like"></p>
+                        <p class="wind"></p>
+                        <p class="humidity"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
 
-    <script src="./main.js"></script>
-    
+    </main>
+      
 </body>
 </html>
