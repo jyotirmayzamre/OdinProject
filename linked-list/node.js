@@ -1,7 +1,7 @@
 export default class Node
 {
-    contructor(value){
-        this.value = value || null;
+    constructor(input){
+        this.value = input || null;
         this.nextNode = null;
     }
 }

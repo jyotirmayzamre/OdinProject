@@ -1,4 +1,4 @@
-import Node from "./node";
+import Node from "./node.js";
 
 export default class LinkedList {
     constructor() {
@@ -106,6 +106,24 @@ export default class LinkedList {
             temp = temp.nextNode;
         }
         return (string += 'null');
+    }
+
+    insertAt(value, index){
+        if(!this.headList){
+            this.prepend(value);
+        } else {
+            let temp = this.headList;
+            let prev = null;
+            for(let i = 0; i < index; i++){
+                prev = temp;
+                temp = temp.nextNode;
+                if(!temp) break;
+            }
+            const newNode = new Node(value);
+            prev.nextNode = newNode;
+            newNode.nextNode = temp;
+        }
+        
     }
 
 
