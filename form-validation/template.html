@@ -10,43 +10,40 @@
     <form action="" method="post" novalidate>
         <div class="item">
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email">
+            <input type="email" name="email" id="email" required minlength="8">
+            <span class="error email" aria-live="polite"></span>
         </div>
 
         <div class="item">
             <label for="country">Country:</label>
-            <input type="text" name="country" id="country">
+            <input type="text" name="country" id="country" required>
+            <span class="error country" aria-live="polite"></span>
         </div>
 
         <div class="item">
             <label for="postal-code">Postal Code:</label>
-            <input type='text' name="postal-code" id="postal-code">
+            <input type='text' name="postal-code" id="postal-code" required>
+            <span class="error code" aria-live="polite"></span>
         </div>
 
         <div class="item">
             <label for="password">Password:</label>
-            <input type="text" name="password" id="password">
+            <input type="text" name="password" id="password" required minlength="8" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+            <span class="error password" aria-live="polite"></span>
         </div>
 
         <div class="item">
             <label for="password-again">Enter your password again:</label>
-            <input type="text" name="password-again" id="password-again">
+            <input type="text" name="password-again" id="password-again" required>
+            <span class="error cpassword" aria-live="polite"></span>
         </div>
 
         <div class="item">
             <button type="submit">Submit</button>
         </div>
         
-
-        
-
-        
-
-        
-
-        
     </form>
-    
+    <script src="./index.js"></script>
 </body>
-<script src="./index.js"></script>
+
 </html>
