@@ -85,3 +85,13 @@ main {
     border: 1px solid black;
     height: 40px;
 }
+
+.enemy:hover {
+  background-color: lightgreen;
+  cursor: pointer;
+}
+
+.shot:hover {
+  background-color: rgba(255, 60, 60, 0.6);
+  cursor: not-allowed;
+}

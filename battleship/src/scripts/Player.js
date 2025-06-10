@@ -1,8 +1,9 @@
 const Gameboard = require('./Gameboard');
 
 class Player{
-    constructor(type){
-        this.type = type;
+    constructor(){
         this.board = Gameboard();
     }
 }
+
+module.exports = Player

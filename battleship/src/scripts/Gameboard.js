@@ -8,28 +8,56 @@ class Gameboard {
     }
 
     placeShip(x, y, name){
+
+        //checking valid x and y
+        if(x < 0 || x > 9 || y < 0 || y > 9){
+            throw new Error("Chosen coordinates are out of bounds")
+        }
+
+        if(this.grid.hasShip(x, y)){
+            throw new Error("This cell already has a ship")
+        }
+
         this.grid[y][x].name = name;
     }
 
-    receiveAttack(x, y){
-        let cell = this.grid[y][x];
-        if(!cell.isShot){
-            let shotShip = this.ships[cell.name];
-            shotShip.hit();
+    hasShip(x, y){
+        return (this.grid[y][x] != '')
+    }
 
-            if(shotShip.isSunk()){
-                this.remaining--;
-                //call dom method for sunk ship
-            }
-            return true;
+    receiveAttack(x, y){
+
+        //checking valid x and y
+        if(x < 0 || x > 9 || y < 0 || y > 9){
+            throw new Error("Chosen coordinates are out of bounds")
         }
-        //dom method for handling missed attack
-        return false;
+
+        let cell = this.grid[y][x];
+
+        /*
+        Logic: if a cell is already shot, throw an error. 
+        If a cell is not shot and a ship is hit, return { true, ship.name }. 
+        If a cell is not shot and no ship is hit, return { false, '' }
+        */
+
+        if(cell.isShot){
+            throw new Error("You have already attacked this cell. Try a different one.");
+        } else{
+            let shotShip = this.ships[cell.name]
+            if (shotShip == '') return { result: false, ship: ''}
+            else {
+                shotShip.hit();
+                if(shotShip.isSunk()){
+                    this.remaining--;
+                }
+                return { result: true, ship: cell.name };
+
+            }
+        }
     }
 
     allSunk(){
         if(this.remaining == 0){
-            //dom method to handle game over
             return true;
         }
         return false;
