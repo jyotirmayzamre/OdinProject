@@ -2,7 +2,14 @@ const Ship = require('./Ship')
 
 class Gameboard {
     constructor(){
-        this.grid = Array.from({length: 10}, () => Array(10).fill({isShot: false, name: ''}));
+        this.grid = [];
+        for(let i=0; i < 10; i++){
+            let arr = [];
+            for(let j=0; j < 10; j++){
+                arr.push({isShot: false, name: ''})
+            }
+            this.grid.push(arr);
+        }
         this.ships = {'Destroyer': new Ship(2), 'Submarine': new Ship(3), 'Cruiser': new Ship(3), 'Battleship': new Ship(4), 'Carrier': new Ship(5)};
         this.remaining = 5;
     }
@@ -14,7 +21,7 @@ class Gameboard {
             throw new Error("Chosen coordinates are out of bounds")
         }
 
-        if(this.grid.hasShip(x, y)){
+        if(this.hasShip(x, y)){
             throw new Error("This cell already has a ship")
         }
 
@@ -22,7 +29,7 @@ class Gameboard {
     }
 
     hasShip(x, y){
-        return (this.grid[y][x] != '')
+        return (this.grid[y][x].name != '')
     }
 
     receiveAttack(x, y){
@@ -44,9 +51,10 @@ class Gameboard {
             throw new Error("You have already attacked this cell. Try a different one.");
         } else{
             let shotShip = this.ships[cell.name]
-            if (shotShip == '') return { result: false, ship: ''}
+            if (cell.name == '') return { result: false, ship: ''}
             else {
                 shotShip.hit();
+                cell.isShot = true;
                 if(shotShip.isSunk()){
                     this.remaining--;
                 }
