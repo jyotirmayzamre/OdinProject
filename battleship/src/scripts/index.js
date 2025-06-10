@@ -1,5 +1,6 @@
 import "../style.css";
 
-import { domManager } from "./domManager";
+const gameController = require('./gameController');
 
-domManager.startGame();
+const Controller = new gameController();
+Controller.game();

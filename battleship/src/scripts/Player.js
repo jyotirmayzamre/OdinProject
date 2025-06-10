@@ -2,7 +2,7 @@ const Gameboard = require('./Gameboard');
 
 class Player{
     constructor(){
-        this.board = Gameboard();
+        this.board = new Gameboard();
     }
 }
 

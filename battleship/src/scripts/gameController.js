@@ -2,8 +2,8 @@ const Player = require('./Player');
 
 class gameController {
     constructor(){
-        this.players = {'Human': Player(), 'AI': Player()}
-        this.currPlayer = this.p1;
+        this.players = {'Human': new Player(), 'AI': new Player()}
+        this.currPlayer = 'Human';
     }
 
     /*
@@ -34,11 +34,11 @@ class gameController {
     Temporary Method to allow board setting via input. Will be changed once I start making the DOM
     */
     promptInput(ship){
-        const length = this.players['Human'].board.ships[shipName]
+        const length = this.players['Human'].board.ships[ship]
         let placed = false;
         while(!placed){
-            const x = parseInt(prompt(`Enter X coordinate for ${ship} which has length ${length}`));
-            const y = parseInt(prompt(`Enter Y coordinate for ${ship} which has length ${length}`));
+            const x = parseInt(prompt(`Enter X coordinate to place ${ship} which has length ${length}`));
+            const y = parseInt(prompt(`Enter Y coordinate to place ${ship} which has length ${length}`));
             const dir = prompt(`Enter direction: Horizontal or Verticalfor ${ship} which has length ${length}`);
             this.placeWholeShip(x, y, ship, dir, 'Human');
             placed = true;
@@ -66,7 +66,7 @@ class gameController {
     */
     setBoard(player){
         //if Player is human, then use prompting
-        for(const name in board.ships){
+        for(const name in this.players[player].board.ships){
             if(player == 'Human'){
                 this.promptInput(name);
             } else{
@@ -79,7 +79,7 @@ class gameController {
     /*
     Method for running the game loop
     Setup the game boards, make Human the current player and attack based on input
-    After each attack, check if the other player's ships are all sunk
+    After each turn, check if the other player's ships are all sunk
     */
 
     humanMove(){
@@ -143,7 +143,7 @@ class gameController {
         let currPlayer = 'Human';
 
         run = true;
-        let x, y, val;
+        let val;
 
         while(run){
             if(currPlayer == 'Human'){
@@ -169,3 +169,5 @@ class gameController {
     }
 
 }
+
+module.exports = gameController;
