@@ -52,10 +52,10 @@ describe("Gameboard", ()=>{
             expect(() => board.placeWholeShip(11, 0, 'Destroyer', 'Horizontal')).toThrow('Chosen coordinates are out of bounds');
             expect(() => board.placeWholeShip(0, -1, 'Destroyer', 'Vertical')).toThrow('Chosen coordinates are out of bounds');
             expect(() => board.placeWholeShip(0, 11, 'Destroyer', 'Vertical')).toThrow('Chosen coordinates are out of bounds');
-            expect(() => board.placeWholeShip(9, 0, 'Destroyer', 'Horizontal')).toThrow('Chosen coordinates are out of bounds');
-            expect(() => board.placeWholeShip(0, 9, 'Destroyer', 'Vertical')).toThrow('Chosen coordinates are out of bounds');
-            expect(() => board.placeWholeShip(6, 0, 'Carrier', 'Horizontal')).toThrow('Chosen coordinates are out of bounds');
-            expect(() => board.placeWholeShip(0, 6, 'Destroyer', 'Vertical')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(9, 1, 'Destroyer', 'Horizontal')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(1, 9, 'Destroyer', 'Vertical')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(6, 2, 'Carrier', 'Horizontal')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(2, 6, 'Carrier', 'Vertical')).toThrow('Chosen coordinates are out of bounds');
         })
 
         test('Placing a ship in a taken cell', ()=>{
@@ -121,7 +121,6 @@ describe("Gameboard", ()=>{
         test("All ships are sunk", ()=>{
             board.placeShip(0, 0, 'Destroyer');
             board.placeShip(0, 1, 'Destroyer');
-            console.log(board.grid);
             board.placeShip(1, 0, 'Submarine');
             board.placeShip(1, 1, 'Submarine');
             board.placeShip(1, 2, 'Submarine');

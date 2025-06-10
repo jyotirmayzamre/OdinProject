@@ -38,15 +38,14 @@ class Gameboard {
         try{
             for(let i = 0; i < length; i++){
                 if(dir == 'Horizontal'){
-                    this.grid.placeShip(x+i, y, shipName);
+                    this.placeShip(x+i, y, shipName);
                 }
                 else if(dir == 'Vertical'){
-                    this.grid.placeShip(x, y+i, shipName);
+                    this.placeShip(x, y+i, shipName);
                 } 
             }
         } catch(error){
-            console.log(error.message);
-            alert(`${error.message}. Please try again`);
+            throw error;
         }
     }
 
