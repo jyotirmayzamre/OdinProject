@@ -24,26 +24,50 @@ describe("Gameboard", ()=>{
         });
     })
 
+    describe("placeWholeShip method", ()=>{
 
-    describe("placeShip method", ()=>{
-        test("Correct placement", ()=>{
-            board.placeShip(1, 0, 'Destroyer');
-            expect(board.grid[0][1].name).toStrictEqual('Destroyer');
-        });
+        test.each([
+            ['Destroyer'], ['Submarine'], ['Cruiser'], ['Battleship'], ['Carrier']
+        ])('Placing each ship horizontally (correctly)', (ship)=>{
+            board.placeWholeShip(0, 0, ship, 'Horizontal');
+            const shipInstance = board.ships[ship];
+            for(let i = 0; i < shipInstance.length; i++){
+                expect(board.grid[0][0+i].name).toStrictEqual(ship);
+            }
+        })
+
+        test.each([
+            ['Destroyer'], ['Submarine'], ['Cruiser'], ['Battleship'], ['Carrier']
+        ])('Placing each ship vertically (correctly)', (ship)=>{
+            board.placeWholeShip(0, 0, ship, 'Vertical');
+            const shipInstance = board.ships[ship];
+            for(let i = 0; i < shipInstance.length; i++){
+                expect(board.grid[0+i][0].name).toStrictEqual(ship);
+            }
+        })
+
 
         test("Out of bounds coordinates", ()=>{
-            expect(() => board.placeShip(-1, 0, 'Destroyer')).toThrow('Chosen coordinates are out of bounds');
-            expect(() => board.placeShip(11, 0, 'Destroyer')).toThrow('Chosen coordinates are out of bounds');
-            expect(() => board.placeShip(0, -1, 'Destroyer')).toThrow('Chosen coordinates are out of bounds');
-            expect(() => board.placeShip(0, 11, 'Destroyer')).toThrow('Chosen coordinates are out of bounds');
-        });
+            expect(() => board.placeWholeShip(-1, 0, 'Destroyer', 'Horizontal')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(11, 0, 'Destroyer', 'Horizontal')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(0, -1, 'Destroyer', 'Vertical')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(0, 11, 'Destroyer', 'Vertical')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(9, 0, 'Destroyer', 'Horizontal')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(0, 9, 'Destroyer', 'Vertical')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(6, 0, 'Carrier', 'Horizontal')).toThrow('Chosen coordinates are out of bounds');
+            expect(() => board.placeWholeShip(0, 6, 'Destroyer', 'Vertical')).toThrow('Chosen coordinates are out of bounds');
+        })
 
-
-        test("Placing a ship in a taken cell", ()=>{
+        test('Placing a ship in a taken cell', ()=>{
             expect(()=>{
-                board.placeShip(0, 0, 'Destroyer');
-                board.placeShip(0, 0, 'Carrier');
-            }).toThrow('This cell already has a ship');
+                board.placeWholeShip(0, 0, 'Destroyer', 'Horizontal');
+                board.placeWholeShip(0, 0, 'Carrier', 'Horizontal');
+            }).toThrow('This cell already has a ship')
+
+            expect(()=>{
+                board.placeWholeShip(0, 0, 'Destroyer', 'Vertical');
+                board.placeWholeShip(0, 0, 'Carrier', 'vertical');
+            }).toThrow('This cell already has a ship')
         })
     })
 
@@ -133,4 +157,6 @@ describe("Gameboard", ()=>{
             expect(board.allSunk()).toBe(true);
         })
     })
+
+    
 })

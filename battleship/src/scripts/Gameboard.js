@@ -28,6 +28,28 @@ class Gameboard {
         this.grid[y][x].name = name;
     }
 
+    /*
+    Method that will take the start spot of the ship and place it on the current player's gameBoard
+    */
+    placeWholeShip(x, y, shipName, dir){
+        const length = this.ships[shipName].length;
+
+        //place the ship moving rightwards and downwards
+        try{
+            for(let i = 0; i < length; i++){
+                if(dir == 'Horizontal'){
+                    this.grid.placeShip(x+i, y, shipName);
+                }
+                else if(dir == 'Vertical'){
+                    this.grid.placeShip(x, y+i, shipName);
+                } 
+            }
+        } catch(error){
+            console.log(error.message);
+            alert(`${error.message}. Please try again`);
+        }
+    }
+
     hasShip(x, y){
         return (this.grid[y][x].name != '')
     }

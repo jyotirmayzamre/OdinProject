@@ -7,30 +7,6 @@ class gameController {
     }
 
     /*
-    Method that will take the start spot of the ship and place it on the current player's gameBoard
-    */
-    placeWholeShip(x, y, shipName, dir, player){
-        const board = this.players[player].board;
-        const length = board.ships[shipName];
-        
-        //place the ship moving rightwards and downwards
-        try{
-            for(let i = 0; i < length; i++){
-                if(dir == 'Horizontal'){
-                    board.grid.placeShip(x+i, y, shipName);
-                }
-                else if(dir == 'Vertical'){
-                    board.grid.placeShip(x, y+i, shipName);
-                } 
-            }
-        } catch(error){
-            console.log(error.message);
-            alert(`${error.message}. Please try again`);
-        }
-        
-    }
-
-    /*
     Temporary Method to allow board setting via input. Will be changed once I start making the DOM
     */
     promptInput(ship){
@@ -40,7 +16,7 @@ class gameController {
             const x = parseInt(prompt(`Enter X coordinate to place ${ship} which has length ${length}`));
             const y = parseInt(prompt(`Enter Y coordinate to place ${ship} which has length ${length}`));
             const dir = prompt(`Enter direction: Horizontal or Verticalfor ${ship} which has length ${length}`);
-            this.placeWholeShip(x, y, ship, dir, 'Human');
+            this.players['Human'].board.placeWholeShip(x, y, ship, dir);
             placed = true;
         }
 
@@ -56,7 +32,7 @@ class gameController {
             let x = Math.floor(Math.random() * 10);
             let y = Math.floor(Math.random() * 10);
             let dir = Math.floor(Math.random()) == 0 ? 'Horizontal' : 'Vertical';
-            this.placeWholeShip(x, y, ship, dir, 'AI');
+            this.players['AI'].board.placeWholeShip(x, y, ship, dir);
             placed = true;
         }
     }
