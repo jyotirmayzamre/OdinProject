@@ -7,6 +7,12 @@ class gameController {
         this.currIndex = 0;
     }
 
+    reset(){
+        this.players = {'Human': new Player(), 'AI': new Player()}
+        this.ships = [['Destroyer', 2], ['Submarine', 3], ['Cruiser', 3], ['Battleship', 4], ['Carrier', 5]]
+        this.currIndex = 0; 
+    }
+
     /*
     Method to place the ship in an incremental fashion via event listeners
     */

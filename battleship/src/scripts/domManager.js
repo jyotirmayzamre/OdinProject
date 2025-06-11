@@ -158,7 +158,7 @@ export const domManager = (function() {
                 clicked.classList.add('shot');
 
                 if(Controller.checkSunk('AI')){
-                    //open dialog with reset button
+                    modalDetails('You have won the game! Press the button to restart')
                     return;
                 }
             } catch(error){
@@ -180,7 +180,8 @@ export const domManager = (function() {
             cell.style.backgroundColor = '#ff3c3c99'
 
             if(Controller.checkSunk('Human')){
-                //open dialog with reset button
+                modalDetails('The AI has won the game! Press the button to restart');
+
                 return;
             }
 
@@ -188,6 +189,25 @@ export const domManager = (function() {
 
         }
     }
+
+    const reset = () => {
+        const dialog = document.getElementById('gameOver');
+        dialog.close();
+        Controller.reset();
+        renderBoards();    
+     }
+
+     const modalDetails = (content) => {
+        const dialog = document.getElementById('gameOver');
+        dialog.textContent = content;
+        const button = document.createElement('button');
+        button.addEventListener('click', reset);
+        button.textContent = 'Restart Game';
+        button.classList.add('btn');
+        dialog.appendChild(button);
+        dialog.showModal();
+     }
+        
 
     return { renderBoards };
 

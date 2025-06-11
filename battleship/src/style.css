@@ -197,3 +197,23 @@ main {
 .pressed {
   background-color: grey;
 }
+
+dialog {
+  width: 300px;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+dialog > button {
+  background-color: grey;
+  color: white;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(10px);
+}
