@@ -46,15 +46,23 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+body {
+  background-color: #2640B2;
+}
+
 header {
-    margin: 1em;
-    margin-bottom: 2em;
+    margin: 0.5em;
+    color: #FDE047;
+    font-size: x-large;
+    
 
 }
 
 header > h1 {
     display: flex;
     justify-content: center;
+    padding: none;
+    margin: none;
 }
 
 main {
@@ -62,7 +70,11 @@ main {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 20%;
+    border-radius: 6px;
+    gap: 15%;
+    margin: 1em;
+    background-color: #1F2836;
+
 }
 
 .container {
@@ -70,28 +82,118 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 0.75em;
+    margin: 1.5em;
+    
+}
+
+.own {
+  border: 2px solid #6FE7B6;
+  border-radius: 5px;
+  color: #6FE7B6
+}
+
+.ai {
+  border: 2px solid #F97170;
+  border-radius: 5px;
+  color: #F97170;
 }
 
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 3px;
-
+    grid-gap: 2px;
+    margin: 1em;
+    
 }
 
 .cell {
     aspect-ratio: 1;
     border: 1px solid black;
     height: 40px;
+    background-color:#F9FEFE;
+    border-radius: 2px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
 }
+
+
+.friendly.wait:hover {
+  background-color: lightgreen;
+  cursor: pointer;
+}
+
+.placed:hover {
+  cursor: not-allowed;
+}
+
+.result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #364150;
+  color: #F9FEFE;
+  width: 60%;
+  margin: auto;
+}
+
 
 .enemy:hover {
   background-color: lightgreen;
   cursor: pointer;
 }
 
+
+.shot {
+  background-color: rgba(255, 60, 60, 0.6);
+}
+
 .shot:hover {
   background-color: rgba(255, 60, 60, 0.6);
   cursor: not-allowed;
+}
+
+
+.dir {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin: 1em;
+}
+
+.btn{
+  background-color: white;
+  border-radius: 8px;
+  border-width: 0;
+  color: #333333;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn:hover {
+  background-color: grey;
+  cursor: pointer;
+}
+
+.pressed {
+  background-color: grey;
 }

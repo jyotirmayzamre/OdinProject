@@ -34,14 +34,25 @@ class Gameboard {
     placeWholeShip(x, y, shipName, dir){
         const length = this.ships[shipName].length;
 
+        //pre-check boundary conditions
+        for(let i = 0; i < length; i++){
+            if(dir == 'Horizontal'){
+                if(x+i > 9) throw new Error('Chosen coordinates are out of bounds')
+                if(this.grid[y][x+i].name != '') throw new Error ('This cell already has a ship')
+            } else{
+                if(y+i > 9) throw new Error('Chosen coordinates are out of bounds')
+                if(this.grid[y+i][x].name != '') throw new Error ('This cell already has a ship')
+        }
+        }
+
         //place the ship moving rightwards and downwards
         try{
             for(let i = 0; i < length; i++){
                 if(dir == 'Horizontal'){
-                    this.placeShip(x+i, y, shipName);
+                    this.placeShip(x + i, y, shipName);
                 }
                 else if(dir == 'Vertical'){
-                    this.placeShip(x, y+i, shipName);
+                    this.placeShip(x, y + i, shipName);
                 } 
             }
         } catch(error){
@@ -57,10 +68,11 @@ class Gameboard {
 
         //checking valid x and y
         if(x < 0 || x > 9 || y < 0 || y > 9){
-            throw new Error("Chosen coordinates are out of bounds")
+            throw new Error("Chosen coordinates are out of bounds.")
         }
 
         let cell = this.grid[y][x];
+        let sunk = false;
 
         /*
         Logic: if a cell is already shot, throw an error. 
@@ -72,14 +84,15 @@ class Gameboard {
             throw new Error("You have already attacked this cell. Try a different one.");
         } else{
             let shotShip = this.ships[cell.name]
-            if (cell.name == '') return { result: false, ship: ''}
+            cell.isShot = true;
+            if (cell.name == '') return { result: false, ship: '', sunk: sunk }
             else {
                 shotShip.hit();
-                cell.isShot = true;
                 if(shotShip.isSunk()){
                     this.remaining--;
+                    sunk = true;
                 }
-                return { result: true, ship: cell.name };
+                return { result: true, ship: cell.name, sunk: sunk };
 
             }
         }

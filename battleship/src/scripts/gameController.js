@@ -3,52 +3,46 @@ const Player = require('./Player');
 class gameController {
     constructor(){
         this.players = {'Human': new Player(), 'AI': new Player()}
-        this.currPlayer = 'Human';
+        this.ships = [['Destroyer', 2], ['Submarine', 3], ['Cruiser', 3], ['Battleship', 4], ['Carrier', 5]]
+        this.currIndex = 0;
     }
 
     /*
-    Temporary Method to allow board setting via input. Will be changed once I start making the DOM
+    Method to place the ship in an incremental fashion via event listeners
     */
-    promptInput(ship){
-        const length = this.players['Human'].board.ships[ship]
-        let placed = false;
-        while(!placed){
-            const x = parseInt(prompt(`Enter X coordinate to place ${ship} which has length ${length}`));
-            const y = parseInt(prompt(`Enter Y coordinate to place ${ship} which has length ${length}`));
-            const dir = prompt(`Enter direction: Horizontal or Verticalfor ${ship} which has length ${length}`);
-            this.players['Human'].board.placeWholeShip(x, y, ship, dir);
-            placed = true;
-        }
 
+    placeShip(x, y, ship, dir){
+        try{
+            this.players['Human'].board.placeWholeShip(x, y, ship, dir);
+        } catch(err){
+            throw err;
+            
+        }
+        
     }
 
+    
     /*
     Method for randomly placing ships on the board for the enemy grid
     */
-    randomPlacing(ship){
-        let placed = false;
-
-        while(!placed){
-            let x = Math.floor(Math.random() * 10);
-            let y = Math.floor(Math.random() * 10);
-            let dir = Math.floor(Math.random()) == 0 ? 'Horizontal' : 'Vertical';
-            this.players['AI'].board.placeWholeShip(x, y, ship, dir);
-            placed = true;
-        }
-    }
-
-    /*
-    Method that will loop through the ships, take input from the user and then place the ships
-    */
-    setBoard(player){
-        //if Player is human, then use prompting
-        for(const name in this.players[player].board.ships){
-            if(player == 'Human'){
-                this.promptInput(name);
-            } else{
-                this.randomPlacing(name);
+    randomPlacing(){
+        for(let i = 0; i < 5; i++){
+            let placed = false;
+            while(!placed){
+                let x = Math.floor(Math.random() * 10);
+                let y = Math.floor(Math.random() * 10);
+                let dir = Math.random() <= 0.5 ? 'Horizontal' : 'Vertical';
+                try{
+                    this.players['AI'].board.placeWholeShip(x, y, this.ships[i][0], dir);
+                    placed = true;
+                } catch(error){  
+                }
+                
             }
-        }
+            
+            
+        } 
+        console.log(this.players['AI'].board)       
     }
 
 
@@ -58,92 +52,38 @@ class gameController {
     After each turn, check if the other player's ships are all sunk
     */
 
-    humanMove(){
+    humanMove(x, y){
         try{
-            x = parseInt(prompt('Enter an x coordinate for attack: '));
-            y = parseInt(prompt('Enter a y coordinate for attack: '));
-            val = this.players['AI'].board.receiveAttack(x, y);
+            const val = this.players['AI'].board.receiveAttack(x, y);
             return val;
         } catch(error){
-            console.log(error.message);
-            alert(error.message);
+            throw error;
         } 
     }
 
 
     aiMove(){
-        try{
+        let attacked = false;
+        let x, y, val;
+        while(!attacked){
             x = Math.floor(Math.random() * 10);
             y = Math.floor(Math.random() * 10);
             val = this.players['Human'].board.receiveAttack(x, y);
-            return val;
-        } catch(error){
-            console.log(`AI error: ${error.message}`)
+            attacked = true;
         }
+        return { val: val, x: x, y: y };
     }
 
-    logResult(player, val){
-        switch(player){
-            case 'Human':
-                if(val.result){
-                    console.log(`Your attack was a hit. You have hit the opponent's ${val.ship}`);
-                } else{
-                    console.log(`Your attack was a miss...`);
-                }
-                break;
-            case 'AI':
-                 //check result of attack
-                if(val.result){
-                    console.log(`The opponent's attack was a hit. Your ${val.ship} has been hit`);
-                } else{
-                    console.log(`The opponent's attack was a miss...`);
-                }
-                break;
-            default:
-                break;
-        }
-    }
+    
 
     checkSunk(player){
         if(this.players[player].board.allSunk()){
-            alert(`The game is over. ${player}'s ships have been sunk`)
             return true;
         }
         return false;
     }
 
-    game(){
-        this.setBoard('Human');
-        this.setBoard('AI');
-
-        let currPlayer = 'Human';
-
-        run = true;
-        let val;
-
-        while(run){
-            if(currPlayer == 'Human'){
-                let human = false;
-                while(!human){
-                    val = humanMove();
-                    human = true;
-                }
-
-            } else {
-                let AI = false;
-                while(!AI){
-                    val = aiMove();
-                    AI = true;
-                }
-            }
-
-            this.logResult(currPlayer, val);
-            currPlayer = currPlayer == 'Human' ? 'AI' : 'Human';
-            run = this.checkSunk(currPlayer)
-        }
-        
-    }
-
+    
 }
 
 module.exports = gameController;
