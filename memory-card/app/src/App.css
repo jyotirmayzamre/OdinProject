@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+
+
+.score{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  margin: 0.25em;
+  font-family: 'Times New Roman', Times, serif;
+}
