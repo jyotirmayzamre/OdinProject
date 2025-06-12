@@ -1,0 +1,64 @@
+.cv-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: none;
+    gap: none;
+}
+
+.info {
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+#personal-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#personal-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: x-small;
+}
+
+
+h2 {
+    border-bottom: 2px solid black;
+    margin-block: 0;
+}
+
+#name {
+    margin-bottom: 3px;
+    border: none;
+}
+
+#educational-details, #professional-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.small {
+    display: flex;
+    justify-content: flex-start;
+    margin: none;
+    gap: 5px;
+    font-size: small;
+}
+
+.small > p {
+    margin: 0;
+}

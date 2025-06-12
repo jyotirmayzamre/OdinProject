@@ -2,4 +2,14 @@ form {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    justify-content: center;
+}
+
+.btn {
+    background-color: pink;
+    color: white;
+}
+
+form > button {
+    align-items: center;
 }

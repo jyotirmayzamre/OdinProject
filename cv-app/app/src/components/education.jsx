@@ -7,9 +7,8 @@ import "../styles/section.css";
 import grad from "../assets/graduation.png";
 
 
-function Education(){
+function Education({ info, setEducational, submitEducational }){
     const [ editing, setEditing ] = useState(true);
-    const [ info, setInfo ] = useState({Degree: '', University: '', City: '', Country: '', StartDate: '', EndDate: ''});
 
     function handleSubmit(e){
         e.preventDefault();
@@ -19,16 +18,18 @@ function Education(){
         const country  = document.getElementById('Country').value;
         const startDate = document.getElementById('StartDate').value;
         const endDate = document.getElementById('EndDate').value;
-        
-        setInfo({
+
+        const newObj = {
             Degree: degree,
             University: university,
             City: city,
             Country: country,
             StartDate: startDate,
             EndDate: endDate
-        });
-
+        }
+        
+        setEducational(newObj);
+        submitEducational(true);
         setEditing(false);
     }
 

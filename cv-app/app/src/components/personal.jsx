@@ -4,10 +4,9 @@ import Summary from './summary';
 import '../styles/section.css'
 import user from '../assets/user.png';
 
-function Personal(){
+function Personal({ info, setPersonal, submitPersonal }){
     //need states for if editing or not and the info details
     const [ editing, setEditing ] = useState(true);
-    const [ info, setInfo ] = useState({Name: '', Email: '', Phone: '', Address: ''});
 
     function handleSubmit(e){
         e.preventDefault();
@@ -16,12 +15,15 @@ function Personal(){
         const phone = document.getElementById('Phone').value;
         const location = document.getElementById('Address').value;
 
-        setInfo({
+        const newObj = {
             Name: name,
             Email: email,
             Phone: phone,
             Address: location
-        });
+        }
+
+        setPersonal(newObj);
+        submitPersonal(true);
 
         setEditing(false);
     }

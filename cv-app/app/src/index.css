@@ -5,12 +5,12 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(238, 240, 244);
 }
 
 a {
@@ -67,4 +67,15 @@ button:focus-visible {
   }
 }
 
+
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 

@@ -9,7 +9,7 @@ function Input({ id='', label='', type='', placeholder='', text=''}){
     return (
         <div className="input">
             <label htmlFor={id}>{label}</label>
-            <input id={id} type={type} value={value} placeholder={placeholder} onChange={(e) => setValue(e.target.value)} />
+            <input id={id} type={type} value={value} placeholder={placeholder} onChange={(e) => setValue(e.target.value)} required/>
 
         </div>
     )

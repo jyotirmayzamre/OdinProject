@@ -5,9 +5,8 @@ import '../styles/section.css';
 import job from '../assets/suitcase.png';
 
 
-function Professional(){
+function Professional({ info, setProfessional, submitProfessional }){
     const [ editing, setEditing ] = useState(true);
-    const [ info, setInfo ] = useState({JobTitle: '', Company: '', StartDate: '', EndDate: '', Description: ''});
 
     function handleSubmit(e){
         e.preventDefault();
@@ -17,13 +16,15 @@ function Professional(){
         const endDate = document.getElementById('EndDate').value;
         const desc = document.getElementById('Description').value;
 
-        setInfo({
+        const newObj = {
             JobTitle: title,
             Company: company,
             StartDate: startDate,
             EndDate: endDate,
             Description: desc
-        })
+        }
+        setProfessional(newObj);
+        submitProfessional(true);
 
         setEditing(false);
     }
