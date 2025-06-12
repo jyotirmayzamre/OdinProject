@@ -1,12 +1,19 @@
-# React + Vite
+# Memory Card Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the memory card game. Basically, click on a card from a selection and if it hasn't been clicked before, points increase. Cards get shuffled every time.
 
-Currently, two official plugins are available:
+## Components
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### App Component
+State: pokemonIDs (array), clickedIDs (set), points, best
 
-## Expanding the ESLint configuration
+handleClick: If the argument id is in the clickedIDs, then it is an invalid click and the game restarts. Otherwise it is a valid click and points increments by 1.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+shuffle: Function to shuffle an array. Generated IDs are shuffled after every valid click.
+
+### AllCards
+Takes in pokemonIDs and handleClick and passes to each Card component. Uses key to keep track of components so that shuffling the ids array renders the Cards in different order.
+
+
+### Card
+Takes in id and handleClick. Fetches the pokemon from the server using the id (via useEffect) and renders.
