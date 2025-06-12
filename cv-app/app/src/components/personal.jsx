@@ -4,7 +4,7 @@ import Summary from './summary';
 import '../styles/section.css'
 import user from '../assets/user.png';
 
-function PersonalInfo(){
+function Personal(){
     //need states for if editing or not and the info details
     const [ editing, setEditing ] = useState(true);
     const [ info, setInfo ] = useState({Name: '', Email: '', Phone: '', Address: ''});
@@ -32,8 +32,8 @@ function PersonalInfo(){
     return (
         <div className='container'>
             <div className='header'>
-                        <img src={user}></img>
-                        <h2>General Information</h2>
+                <img src={user}></img>
+                <h2>General Information</h2>
             </div>
             {editing ?  <Form info={info} handleSubmit={handleSubmit}/>: <Summary info={info} handleEdit={handleEdit} />}
 
@@ -42,4 +42,4 @@ function PersonalInfo(){
     
 }
 
-export default PersonalInfo;
+export default Personal;
