@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import cart from "../../assets/shopping-cart.png"
 import './Navbar.css';
 
-function Navbar(){
+function Navbar({ quantity }){
     
     return (
         <header className="nav">
@@ -11,11 +11,14 @@ function Navbar(){
                 <Link to='/' className='link'>Home</Link>
                 <Link to='/shop' className='link'>Shop</Link>
             </div>
-            <div className='cart-container'>
-                <img src={cart} alt='Shopping Cart'></img>
-                <p>0</p>
-                <p>Items</p>
-            </div>
+            <Link to='/cart'>
+                <div className='cart-container' >
+                    <img src={cart} alt='Shopping Cart'></img>
+                    <p>{quantity}</p>
+                    <p>Items</p>
+                </div>
+            </Link>
+            
         </header>
     )
 }

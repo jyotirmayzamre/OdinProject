@@ -1,8 +1,8 @@
 import ProductCard from "../../components/product-card/ProductCard";
-import Navbar from "../../components/navbar/Navbar";
 import { useState, useEffect } from "react";
 
 import './Shop.css';
+import { useOutletContext } from "react-router-dom";
 
 
 
@@ -12,6 +12,7 @@ function Shop(){
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('All');
     const [active, setActive] = useState('All');
+    const { addToCart } = useOutletContext();
     
     const CategoryMap = {
         "beauty": "Women's Fashion",
@@ -49,7 +50,7 @@ function Shop(){
                 const mappedProducts = data.products.map(prod => {
                     const newCategory = CategoryMap[prod["category"]];
                     return {
-                        ID: prod['id'],
+                        ID: Number(prod['id']),
                         Name: prod["title"],
                         Url: prod['images'][0],
                         Price: prod['price'],
@@ -70,7 +71,6 @@ function Shop(){
 
     return (
         <>
-            <Navbar />
             <div className="shop">
                 <div className="heading-container">
                     <h1>Our Products</h1>
@@ -88,8 +88,8 @@ function Shop(){
                     
                     : <div className="grid">
                         {filteredProducts.map((prod) => {
-                            const obj = {Name: prod.Name, Url: prod.Url, Price: prod.Price};
-                            return <ProductCard key={prod.ID} product={obj}/>
+                            const obj = {Name: prod.Name, Url: prod.Url, Price: prod.Price, ID: prod.ID};
+                            return <ProductCard key={prod.ID} product={obj} addToCart={addToCart}/>
                         })}
                     </div>}
                 </div>

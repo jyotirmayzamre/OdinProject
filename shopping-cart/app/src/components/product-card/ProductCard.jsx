@@ -32,7 +32,7 @@ function ProductCard({ product, addToCart }){
                     <input type="number" value={quantity} min="1" aria-label="product-quantity" onChange={set}></input>
                     <button className="btn" onClick={increment}>+</button>
                 </div>
-                <button className="btn cart" onClick={addToCart}>Add to Cart</button>
+                <button className="btn cart" onClick={() => addToCart({product: product, quantity: quantity})}>Add to Cart</button>
             </div>
 
         </div>

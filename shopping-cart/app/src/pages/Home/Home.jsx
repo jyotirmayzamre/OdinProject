@@ -1,4 +1,3 @@
-import Navbar from "../../components/navbar/Navbar";
 import { Link } from "react-router-dom";
 import './Home.css'
 import fire from '../../assets/fire.png';
@@ -8,7 +7,6 @@ import lock from '../../assets/lock.png';
 function Home(){
     return (
         <div className="home">
-            <Navbar />
             <div className="main-card">
                 <h1>Welcome to our store</h1>
                 <h3>Discover amazing products at unbeatable prices</h3>

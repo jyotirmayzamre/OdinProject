@@ -4,15 +4,27 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Shop from './pages/Shop/Shop';
 import Home from './pages/Home/Home';
+import Cart from './components/cart/Cart';
+import App from './App';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
-  },
-  {
-    path: 'shop',
-    element: <Shop />,
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <Home />
+      },
+      {
+        path: '/shop',
+        element: <Shop />
+      },
+      {
+        path: '/cart',
+        element: <Cart />
+      }
+    ]
   }
 ])
 

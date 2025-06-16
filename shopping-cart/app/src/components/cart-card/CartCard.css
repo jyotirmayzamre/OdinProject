@@ -1,0 +1,70 @@
+.cart-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    color: black;
+    background-color: white;
+    width: 70%;
+    padding: 10px;
+
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.options > img {
+    height: 100px;
+}
+
+.quantityControls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.quantityControls > input {
+    text-align: center;
+    width: 30%;
+    height: 100%;
+    background-color: rgb(30, 40, 51);
+    border: 1px solid  white;
+    border-radius: 5px;
+}
+
+.quantityControls > button {
+    width: 30%;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+.desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.desc > h3 {
+    margin: 0;
+}
+
+.remove {
+    background-color: red;
+}
+
+.remove:hover {
+    transform: translateY(-5px);
+}
