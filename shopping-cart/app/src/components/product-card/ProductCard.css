@@ -1,0 +1,100 @@
+.productCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    background-color: rgb(30, 40, 51);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 5px;
+    border: 1px solid rgb(51, 65, 85);
+    margin: 1.5em;
+    gap: 1em;
+}
+
+.productCard:hover {
+    transform: translateY(-5px);
+}
+
+.img-container {
+    width: 79%;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    position: relative;
+    margin: 0;
+
+}
+
+.img-container > img{
+    width: auto;
+    height: 150px;
+    object-fit: contain;
+    mix-blend-mode: normal;
+    overflow-clip-margin: content-box;
+    display: block;
+
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 1em;
+}
+
+.info-container > p {
+    color: #2eb7cc;
+}
+
+.info-container > h3 {
+    font-weight: 600;
+    font-size: .9em;
+}
+
+
+
+.quantityControls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.quantityControls > input {
+    text-align: center;
+    width: 20%;
+    height: 100%;
+    background-color: rgb(30, 40, 51);
+    border: 1px solid  white;
+    border-radius: 5px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+.btn {
+    background: #334155;
+
+}
+
+.btn:hover {
+    opacity: 0.5;
+    border: none;
+    cursor: pointer;
+}
+
+.cart {
+    padding: .8rem;
+    width: 100%;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+}

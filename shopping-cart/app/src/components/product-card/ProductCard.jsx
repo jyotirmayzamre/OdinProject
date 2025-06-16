@@ -10,16 +10,12 @@ function ProductCard({ product, addToCart }){
     }
 
     function decrement(){
-        setQuantity(prev => Math.min(prev - 1, 1));
+        setQuantity(prev => Math.max(prev - 1, 1));
     }
 
     function set(e){
         const val = e.target.value;
-        if(val < quantity){
-            setQuantity(Math.min(val, 1));
-        } else{
-            setQuantity(val);
-        }
+        setQuantity(Math.max(1, val));
     }
     
 
@@ -30,13 +26,13 @@ function ProductCard({ product, addToCart }){
             </div>
             <div className="info-container">
                 <h3>{product.Name}</h3>
-                <p>{product.Price}</p>
+                <p>${product.Price}</p>
                 <div className="quantityControls">
                     <button className='btn' onClick={decrement}>-</button>
                     <input type="number" value={quantity} min="1" aria-label="product-quantity" onChange={set}></input>
                     <button className="btn" onClick={increment}>+</button>
                 </div>
-                <button className="btn" onClick={addToCart}>Add to Cart</button>
+                <button className="btn cart" onClick={addToCart}>Add to Cart</button>
             </div>
 
         </div>
