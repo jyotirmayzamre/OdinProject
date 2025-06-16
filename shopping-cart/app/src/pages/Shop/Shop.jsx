@@ -1,7 +1,9 @@
 import ProductCard from "../../components/product-card/ProductCard";
+import Navbar from "../../components/navbar/Navbar";
 import { useState, useEffect } from "react";
 
 import './Shop.css';
+
 
 
 
@@ -67,26 +69,32 @@ function Shop(){
 
 
     return (
-        <div className="shop">
-            <div className="categories">
-                <button id='All' value='All' className="btn clicked" onClick={updateCategory}>All</button>
-                <button id='Electronics' value='Electronics' className="btn" onClick={updateCategory}>Electronics</button>
-                <button id="Men's Fashion" value="Men's Fashion" className="btn" onClick={updateCategory}>Men's Fashion</button>
-                <button id="Women's Fashion" value="Women's Fashion" className="btn" onClick={updateCategory}>Women's Fashion</button>
-                <button id="Groceries" value='Groceries' className="btn" onClick={updateCategory}>Groceries</button>
-                <button id="Furniture" value='Furniture' className="btn" onClick={updateCategory}>Furniture</button> 
+        <>
+            <Navbar />
+            <div className="shop">
+                <div className="heading-container">
+                    <h1>Our Products</h1>
+                </div>
+                <div className="categories">
+                    <button id='All' value='All' className="btn clicked" onClick={updateCategory}>All</button>
+                    <button id='Electronics' value='Electronics' className="btn" onClick={updateCategory}>Electronics</button>
+                    <button id="Men's Fashion" value="Men's Fashion" className="btn" onClick={updateCategory}>Men's Fashion</button>
+                    <button id="Women's Fashion" value="Women's Fashion" className="btn" onClick={updateCategory}>Women's Fashion</button>
+                    <button id="Groceries" value='Groceries' className="btn" onClick={updateCategory}>Groceries</button>
+                    <button id="Furniture" value='Furniture' className="btn" onClick={updateCategory}>Furniture</button> 
+                </div>
+                <div className="products">
+                    {loading ? <h1>Loading</h1>
+                    
+                    : <div className="grid">
+                        {filteredProducts.map((prod) => {
+                            const obj = {Name: prod.Name, Url: prod.Url, Price: prod.Price};
+                            return <ProductCard key={prod.ID} product={obj}/>
+                        })}
+                    </div>}
+                </div>
             </div>
-            <div className="products">
-            {loading ? <h1>Loading</h1>
-            
-            : <div className="grid">
-                {filteredProducts.map((prod) => {
-                    const obj = {Name: prod.Name, Url: prod.Url, Price: prod.Price};
-                    return <ProductCard key={prod.ID} product={obj}/>
-                })}
-            </div>}
-        </div>
-        </div>
+        </>
         
     )
 }

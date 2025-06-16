@@ -24,6 +24,16 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+.heading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading-container > h1 {
+    border-bottom: 5px solid white;
+}
+
 .clicked {
     background: linear-gradient(90deg, #3498db, #9b59b6);
 }

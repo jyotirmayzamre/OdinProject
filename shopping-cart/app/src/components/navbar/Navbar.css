@@ -1,0 +1,31 @@
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25%;
+    color: white;
+}
+
+.pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    font-size: x-large;
+}
+
+img {
+    height: 50px;
+}
+
+.cart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: black;
+    background-color: white;
+    border-radius: 12px;
+    width: 150px;
+}
