@@ -8,10 +8,8 @@ function Navbar(){
         <header className="nav">
             <h1>JyotirmayMart</h1>
             <div className="pages">
-                <a>Home</a>
-                <a>Shop</a>
-                {/* <Link to='home'>Home</Link>
-                <Link to='shop'>Shop</Link> */}
+                <Link to='/' className='link'>Home</Link>
+                <Link to='/shop' className='link'>Shop</Link>
             </div>
             <div className='cart-container'>
                 <img src={cart} alt='Shopping Cart'></img>

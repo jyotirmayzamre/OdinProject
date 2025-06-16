@@ -3,8 +3,9 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 25%;
+    gap: 15%;
     color: white;
+    width: 100%;
 }
 
 .pages {
@@ -16,7 +17,7 @@
 }
 
 img {
-    height: 50px;
+    height: 35px;
 }
 
 .cart-container {
@@ -27,5 +28,6 @@ img {
     color: black;
     background-color: white;
     border-radius: 12px;
-    width: 150px;
+    width: 200px;
+    padding: 10px;
 }
