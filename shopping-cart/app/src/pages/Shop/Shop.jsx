@@ -8,40 +8,86 @@ import './Shop.css';
 function Shop(){
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [filter, setFilter] = useState('All');
+    const [active, setActive] = useState('All');
+    
+    const CategoryMap = {
+        "beauty": "Women's Fashion",
+        "fragrances": "Women's Fashion",
+        "furniture": "Furniture",
+        "groceries": "Groceries",
+        "home-decoration": "Furniture",
+        "kitchen-accessories": "Furniture",
+        "laptops": "Electronics",
+        "mens-shirts": "Men's Fashion",
+        "mens-shoes": "Men's Fashion",
+        "mens-watches": "Men's Fashion",
+        "mobile-accessories": "Electronics"
+    }
+    
 
-    async function getProducts(){
-        try {   
-            const response = await fetch('https://dummyjson.com/products?limit=100');
-            if(!response.ok){
-                throw new Error('Server Error');
-            }
-            const data = await response.json();
-            setProducts(data.products);
-        } catch(error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-
-        }   
+    const filteredProducts = filter === 'All' ? products : products.filter(prod => prod.Category == filter);
+    
+    function updateCategory(e){
+        const elem = document.getElementById(active);
+        elem.classList.remove('clicked');
+        e.target.classList.add('clicked');
+        setFilter(e.target.value);
+        setActive(e.target.id);
     }
 
     useEffect(() => {
+        async function getProducts(){
+            try {   
+                const response = await fetch('https://dummyjson.com/products?limit=100');
+                if(!response.ok){
+                    throw new Error('Server Error');
+                }
+                const data = await response.json();
+                const mappedProducts = data.products.map(prod => {
+                    const newCategory = CategoryMap[prod["category"]];
+                    return {
+                        ID: prod['id'],
+                        Name: prod["title"],
+                        Url: prod['images'][0],
+                        Price: prod['price'],
+                        Category: newCategory
+                    };
+                });
+                setProducts(mappedProducts);
+            } catch(error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+
+            }   
+    }
         getProducts();
     }, []);
 
 
     return (
-        <div className="products">
+        <div className="shop">
+            <div className="categories">
+                <button id='All' value='All' className="btn clicked" onClick={updateCategory}>All</button>
+                <button id='Electronics' value='Electronics' className="btn" onClick={updateCategory}>Electronics</button>
+                <button id="Men's Fashion" value="Men's Fashion" className="btn" onClick={updateCategory}>Men's Fashion</button>
+                <button id="Women's Fashion" value="Women's Fashion" className="btn" onClick={updateCategory}>Women's Fashion</button>
+                <button id="Groceries" value='Groceries' className="btn" onClick={updateCategory}>Groceries</button>
+                <button id="Furniture" value='Furniture' className="btn" onClick={updateCategory}>Furniture</button> 
+            </div>
+            <div className="products">
             {loading ? <h1>Loading</h1>
             
             : <div className="grid">
-                {products.map((prod) => {
-                    console.log(prod);
-                    const obj = {Name: prod['title'], Url: prod['images'][0], Price: prod['price']};
-                    return <ProductCard key={prod['id']} product={obj}/>
+                {filteredProducts.map((prod) => {
+                    const obj = {Name: prod.Name, Url: prod.Url, Price: prod.Price};
+                    return <ProductCard key={prod.ID} product={obj}/>
                 })}
             </div>}
         </div>
+        </div>
+        
     )
 }
 

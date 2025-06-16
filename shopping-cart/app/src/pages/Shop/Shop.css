@@ -1,3 +1,16 @@
+.shop {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
 .products {
     display: flex;
     flex-direction: row;
@@ -9,4 +22,8 @@
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.clicked {
+    background: linear-gradient(90deg, #3498db, #9b59b6);
 }
