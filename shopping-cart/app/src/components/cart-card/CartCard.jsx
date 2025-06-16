@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './CartCard.css';
 
-function CartCard({ prod, removeItem }){
+function CartCard({ prod, removeItem, updateQuantity }){
     const [quantity, setQuantity] = useState(prod.quantity);
 
     function clickHandler(id){
@@ -9,19 +9,25 @@ function CartCard({ prod, removeItem }){
         setQuantity(0);
     }
 
+    function clickHandlerUpdate(id, type){
+        updateQuantity(id, type);
+        if(type === 'increment') setQuantity(prev => prev + 1)
+        else setQuantity(prev => Math.max(1, prev));
+    }
+
     return (
         <div className="cart-card">
             <div className="options">
                 <img src={prod.product.Url}></img>
                 <div className="quantityControls">
-                    <button className='btn'>-</button>
-                    <input type="number" value={quantity} min="1" aria-label="product-quantity"></input>
-                    <button className="btn">+</button>
+                    <button className='btn' onClick={() => {clickHandlerUpdate(prod.product.ID, 'decrement')}}>-</button>
+                    <input type="number" value={quantity} min="1" aria-label="product-quantity" readOnly='true'></input>
+                    <button className="btn" onClick={() => {clickHandlerUpdate(prod.product.ID, 'increment')}}>+</button>
                 </div>
             </div>
             <div className="desc">
                 <h3>{prod.product.Name}</h3>
-                <p>${prod.product.Price}</p>
+                <p>${prod.product.Price.toFixed(2)}</p>
                 <button className="remove" onClick={()=>{clickHandler(prod.product.ID)}}>Remove</button>
             </div>
         </div>

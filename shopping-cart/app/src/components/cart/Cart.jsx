@@ -4,7 +4,7 @@ import CartCard from "../cart-card/CartCard";
 import './Cart.css';
 
 function Cart(){
-    const { cart, removeItem, quantity, total } = useOutletContext();
+    const { cart, removeItem, updateQuantity, quantity, total } = useOutletContext();
 
 
     return(
@@ -15,7 +15,7 @@ function Cart(){
             ) : (
                 <div className="items">
                     {Object.values(cart).map(item => {
-                        return <CartCard key={item.product.ID} prod={item} removeItem={removeItem}/>
+                        return <CartCard key={item.product.ID} prod={item} removeItem={removeItem} updateQuantity={updateQuantity}/>
                     })}
                 </div>
             )
