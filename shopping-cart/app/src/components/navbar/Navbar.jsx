@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import cart from "../../assets/shopping-cart.png"
 import './Navbar.css';
 
+
+//navbar component used for navigating between home, cart, shop
 function Navbar({ quantity }){
     
     return (

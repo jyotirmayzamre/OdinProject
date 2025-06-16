@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import CartCard from "../cart-card/CartCard";
 import './Cart.css';
 
+
+//component for the card. renders all products in the cart (accessed via context)
 function Cart(){
     const { cart, removeItem, updateQuantity, quantity, total } = useOutletContext();
 

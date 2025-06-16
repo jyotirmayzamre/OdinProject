@@ -1,6 +1,9 @@
 import { useState } from "react";
 import './CartCard.css';
 
+
+//component for showing product cards in the cart
+//calls methods to update card based on button clicks
 function CartCard({ prod, removeItem, updateQuantity }){
     const [quantity, setQuantity] = useState(prod.quantity);
 

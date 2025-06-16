@@ -5,7 +5,9 @@ import './Shop.css';
 import { useOutletContext } from "react-router-dom";
 
 
-
+//component for the shop page
+//filters products based on category and renders relevant product cards
+//fetches product data on first render and stores as state
 
 function Shop(){
     const [products, setProducts] = useState([]);

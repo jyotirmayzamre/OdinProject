@@ -7,6 +7,7 @@ import Home from './pages/Home/Home';
 import Cart from './components/cart/Cart';
 import App from './App';
 
+//router for the shopping cart. Having children allows for context passing
 const router = createBrowserRouter([
   {
     path: '/',

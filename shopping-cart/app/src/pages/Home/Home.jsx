@@ -4,6 +4,8 @@ import fire from '../../assets/fire.png';
 import deliv from '../../assets/delivery-man.png';
 import lock from '../../assets/lock.png';
 
+
+//component for the home page
 function Home(){
     return (
         <div className="home">

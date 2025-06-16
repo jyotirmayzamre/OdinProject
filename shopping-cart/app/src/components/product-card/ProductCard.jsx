@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./ProductCard.css";
 
+
+//component for product card in the shopping menu
+//include a add to cart method + settign quantities
 function ProductCard({ product, addToCart }){
     const [quantity, setQuantity] = useState(1);
 

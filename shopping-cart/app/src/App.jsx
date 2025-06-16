@@ -2,11 +2,13 @@ import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 
+//parent component for home, shop, cart for context passing
 function App(){
     const [cart, setCart] = useState({});
     const [quantity, setQuantity] = useState(0);
     const [total, setTotal] = useState(0);
 
+    //function for adding an item to the cart
     function addToCart(item){
         let copy = {...cart};
         if(!copy[item.product.ID]){
@@ -19,6 +21,7 @@ function App(){
         setTotal(prev => prev + (item.quantity * item.product.Price));
     }
 
+    //function for completely removing a product from the cart
     function removeItem(id){
         let copy = {...cart};
         const quantity = copy[id].quantity;
@@ -29,6 +32,7 @@ function App(){
         setCart(copy);
     }
 
+    //function for updating the quantity of a given product in cart
     function updateQuantity(id, type){
         let copy = {...cart};
         const quantity = copy[id].quantity;
