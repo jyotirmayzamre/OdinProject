@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Messageboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button onclick="window.location.href='/new'">Write new message</button>
+    <div class="grid">
+        <% messages.forEach((item) => { %>
+            <div class="card">
+                <div class="content">
+                    <p><%= item.text %></p>
+                </div>
+                <div class="rest">
+                    <p><%= item.user %></p>
+                    <%
+                        const date = item.added
+                        const hours = date.getHours().toString().padStart(2, '0');
+                        const minutes = date.getMinutes().toString().padStart(2, '0');
+                        const day = date.getDate().toString().padStart(2, '0');
+                        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                        const year = date.getFullYear();
+                        const formatted = `${hours}:${minutes}, ${day}/${month}/${year}`;
+                    %>
+                    <p><%= formatted %></p>
+                </div>
+            </div>
+            
+        <% }); %>
+    </div>
+    
+   
+</body>
+</html>
