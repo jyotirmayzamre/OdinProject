@@ -2,13 +2,17 @@ const db = require("../db/queries");
 
 async function getAllGames(req, res){
     const games = await db.getAllGames();
-    return games
+    res.render("games", {
+        title: "Games",
+        games: games,
+    })
 }
 
 async function getGame(req, res){
     const { id } = req.body;
     const game = await db.getGame(id);
-    return game
+    console.log(game);
+    
 }
 
 module.exports = {
