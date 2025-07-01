@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Inventory App</title>
+    </head>
+    <body>
+        <% if (locals.genre) { %>
+            <h1><%= genre.title %></h1>
+            <p><%= genre.description %></p>
+            <img src="/<%= genre.image  %>" />
+        <% } %>
+    </body>
+</html>
