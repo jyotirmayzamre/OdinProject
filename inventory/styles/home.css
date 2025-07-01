@@ -44,6 +44,12 @@ main {
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .card > img {
