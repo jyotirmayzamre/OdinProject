@@ -1,5 +1,7 @@
 const db = require("../db/queries");
 
+
+
 async function getAllGames(req, res){
     const games = await db.getAllGames();
     res.render("games", {
