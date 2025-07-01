@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="/game.css">
     </head>
     <body>
+        <%- include("nav.ejs") %>
         <% if (locals.game) { %>
             <main>
                 <section class="image-section">
@@ -12,6 +13,11 @@
                 <section class="info-section">
                     <img src="/<%= game.title_image  %>" />
                     <p><%= game.description  %></p>
+                    <div class="genres">
+                        <% game.genres.forEach(genre => { %>
+                            <a href="/genres/<%= genre.id %>"><%= genre.title  %></a>
+                        <% }) %>
+                    </div>
                     <h2>$ <%= game.price  %></h2>
                     <p><b>Rating: </b><%= game.rating  %></p>
                     <p><b>Published: </b><%= game.publisher  %></p>

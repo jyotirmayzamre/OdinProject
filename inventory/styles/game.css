@@ -21,3 +21,18 @@ main {
     justify-content: center;
     align-items: flex-start;
 }
+
+.genres {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.genres > a {
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: large;
+    color: rgb(68, 147, 248);
+    background-color: rgba(56, 139, 253, 0.1);
+}

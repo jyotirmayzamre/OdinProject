@@ -16,7 +16,9 @@ CREATE TABLE IF NOT EXISTS games (
 );
 
 INSERT INTO games (title, description, price, rating, publisher, release_date, units_available, full_image, title_image)
-VALUES ('Grand Theft Auto III', 'Welcome to Liberty City. Where it all began. The critically acclaimed blockbuster Grand Theft Auto III brings to life the dark and seedy underworld of Liberty City. With a massive and diverse open world, a wild cast of characters from every walk of life, and the freedom to explore at will, Grand Theft Auto III puts the dark, intriguing, and ruthless world of crime at your fingertips.', 299, 4.3, 'Rockstar Games', '2001-10-22', 1000, 'gta3hero.jpg', 'gta3title.svg');
+VALUES ('Grand Theft Auto III', 'Welcome to Liberty City. Where it all began. The critically acclaimed blockbuster Grand Theft Auto III brings to life the dark and seedy underworld of Liberty City. With a massive and diverse open world, a wild cast of characters from every walk of life, and the freedom to explore at will, Grand Theft Auto III puts the dark, intriguing, and ruthless world of crime at your fingertips.', 299, 4.3, 'Rockstar Games', '2001-10-22', 1000, 'gta3hero.jpg', 'gta3title.svg'),
+('L.A. Noire', 'Amid the post-war boom of Hollywood's Golden Age, Cole Phelps — an LAPD detective — is thrown headfirst into a city drowning in its own success. Corruption is rampant, the drug trade is exploding, and murder rates are at an all-time high. In his fight to climb the ranks and do what's right, Phelps must unravel the truth behind a string of arson attacks, racketeering conspiracies, and brutal murders, battling the L.A. underworld and even members of his own department.', 1499, 3.9, 'Rockstar Games', '2011-05-17', 100026, 'noirehero.jpg', 'noiretitle.svg');
+
 `
 
 const q2 = `CREATE TABLE IF NOT EXISTS genres (

@@ -11,8 +11,9 @@ async function getAllGames(){
 /*
 Function to retrieve a singular game based on id
 */
+
 async function getGame(id){
-    const { rows } = await pool.query(`SELECT * FROM games WHERE id=$1`, [id]);
+    const { rows } = await pool.query(`SELECT g.*, json_agg(json_build_object('id', genres.id, 'title', genres.title)) AS genres FROM games g JOIN game_genre gg ON g.id = gg.game_id JOIN genres ON gg.genre_id = genres.id WHERE g.id = $1 GROUP BY g.id`, [id]);
     return rows[0];
 }
 

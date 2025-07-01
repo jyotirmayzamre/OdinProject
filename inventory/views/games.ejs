@@ -4,8 +4,9 @@
         <link rel="stylesheet" href="/games.css">
     </head>
     <body>
+        <%- include("nav.ejs") %>
         <% if (locals.games) { %>
-            <div class="game-grid">
+            <main>
                 <% games.forEach(game => { %>
                     <a href="/games/<%= game.id %>">
                         <div class="game-container">
@@ -13,7 +14,7 @@
                         </div>
                     </a>
                 <% }) %>
-            </div>
+                </main>
         <% } %>
     </body>
 </html>
