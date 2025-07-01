@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>Inventory App</title>
+        <link rel="stylesheet" href="/home.css">
+    </head>
+    <body>
+        <%- include("nav.ejs") %>
+        <main>
+            <section class="landing-card">
+                <h1>Video Game Inventory</h1>
+            </section>
+            <h1>Featured Genres</h1>
+            <section class="featured">
+                <div class="image-container">
+                    <img src="/home1.png">
+                </div>
+                <div class="card-container">
+                    <a href="/genres/1">
+                        <div class="card">
+                            <img src="/action.jpg">
+                            <h3>Action</h3>
+                        </div>
+                    </a>
+                    <a href="/genres/2">
+                        <div class="card">
+                            <img src="/adventure.jpg">
+                            <h3>Adventure</h3>
+                        </div>
+                    </a>
+                    <a href="/genres/4">
+                        <div class="card">
+                            <img src="/simulation.jpg">
+                            <h3>Simulation</h3>
+                        </div>
+                    </a>
+                    <a href="/genres/3">
+                        <div class="card">
+                            <img src="/shooter.jpg">
+                            <h3>Shooter</h3>
+                        </div>
+                    </a>
+
+                </div>
+            </section>
+            <h1>Featured Games</h1>
+            <section class="featured">
+                <div class="card-container">
+                    <a href="/games/1">
+                        <div class="card">
+                            <img src="/gta3title.svg">
+                            
+                        </div>
+                    </a>
+                    <a href="/games/2">
+                        <div class="card">
+                            <img src="/noiretitle.svg">
+                        </div>
+                    </a>
+                </div>
+                <div class="image-container">
+                    <img src="/home2.png">
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

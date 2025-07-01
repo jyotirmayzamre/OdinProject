@@ -11,6 +11,10 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.static('images'));
 app.use(express.static('styles'));
 
+
+app.get("/", (req, res) => {
+    res.render("home");
+})
 app.use("/games", gameRouter);
 app.use("/genres", genreRouter);
 
