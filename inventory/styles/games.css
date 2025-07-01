@@ -1,0 +1,21 @@
+.game-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+}
+
+.game-container {
+    border-radius: 12px;
+    display: flex;
+    padding: 20px;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+    background-image: linear-gradient(to right, rgb(44, 83, 100), rgb(32, 58, 67), rgb(15, 32, 39));
+}
+
+.game-container:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}

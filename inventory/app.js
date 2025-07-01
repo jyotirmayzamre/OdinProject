@@ -8,7 +8,8 @@ const genreRouter = require("./routes/genreRouter")
 
 app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true}));
-app.use(express.static('images'))
+app.use(express.static('images'));
+app.use(express.static('styles'));
 
 app.use("/games", gameRouter);
 app.use("/genres", genreRouter);

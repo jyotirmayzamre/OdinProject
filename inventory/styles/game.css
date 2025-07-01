@@ -1,0 +1,23 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.image-section > img {
+    width: 500px;
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}

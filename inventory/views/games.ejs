@@ -1,16 +1,19 @@
 <html>
     <head>
         <title>Inventory App</title>
+        <link rel="stylesheet" href="/games.css">
     </head>
     <body>
         <% if (locals.games) { %>
-            <% games.forEach(game => { %>
-                <a href="/games/<%= game.id %>">
-                    <div class="game-container">
-                        <img src="/<%= game.title_image  %>" />
-                    </div>
-                </a>
-            <% }) %>
+            <div class="game-grid">
+                <% games.forEach(game => { %>
+                    <a href="/games/<%= game.id %>">
+                        <div class="game-container">
+                            <img src="/<%= game.title_image  %>" />
+                        </div>
+                    </a>
+                <% }) %>
+            </div>
         <% } %>
     </body>
 </html>
