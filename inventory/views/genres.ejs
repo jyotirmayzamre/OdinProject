@@ -1,19 +1,23 @@
 <html>
     <head>
         <title>Inventory App</title>
+        <link rel="stylesheet" href="/genres.css">
     </head>
     <body>
-        <% if (locals.genres) { %>
-            <% genres.forEach(genre => { %>
-                <a href="/genres/<%= genre.id %>">
-                    <div class="genre-container">
-                        <h1><%= genre.title %></h1>
-                        <img src="/<%= genre.image  %>" />
-                    </div>
-                </a>
-                
-            <% }) %>
-         
-        <% } %>
+        <%- include("nav.ejs") %>
+        <main>
+            <% if (locals.genres) { %>
+                <% genres.forEach(genre => { %>
+                    <a href="/genres/<%= genre.id %>">
+                        <div class="card">
+                            <img src="/<%= genre.image  %>" />
+                            <h1><%= genre.title %></h1>
+                        </div>
+                    </a>
+                    
+                <% }) %>
+            <% } %>
+        </main>
+        
     </body>
 </html>

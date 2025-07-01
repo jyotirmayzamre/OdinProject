@@ -1,0 +1,60 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: larger;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
+    border-radius: 12px;
+}
+
+.image-container > img {
+    width: 100%;
+}
+
+.info-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.games-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 95%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.grid > a {
+    transition: transform 0.3s ease;
+    background-image: linear-gradient(to right, rgb(44, 83, 100), rgb(32, 58, 67), rgb(15, 32, 39));
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.grid > a:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    
+}

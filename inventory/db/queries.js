@@ -30,8 +30,9 @@ async function getAllGenres(){
 Function to retreive genre by id
 */
 
+
 async function getGenre(id){
-    const { rows } = await pool.query('SELECT * FROM genres WHERE id=$1', [id]);
+    const { rows } = await pool.query(`SELECT g.*, json_agg(json_build_object('id', games.id, 'image', games.title_image)) AS games FROM genres g JOIN game_genre gg ON g.id = gg.genre_id JOIN games ON gg.game_id = games.id WHERE g.id = $1 GROUP BY g.id`, [id]);
     return rows[0];
 }
 
