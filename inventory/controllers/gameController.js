@@ -9,9 +9,11 @@ async function getAllGames(req, res){
 }
 
 async function getGame(req, res){
-    const { id } = req.body;
-    const game = await db.getGame(id);
-    console.log(game);
+    const game = await db.getGame(req.params.id);
+    res.render("game", {
+        title: "Game",
+        game: game
+    })
     
 }
 

@@ -1,14 +1,19 @@
-const db = require("../db/pool");
+const db = require("../db/queries");
 
 async function getAllGenres(req, res){
     const genres = await db.getAllGenres();
-    return genres;
+    res.render("genres", {
+        title: "Genres",
+        genres: genres
+    })
 }
 
 async function getGenre(req, res){
-    const { id } = req.body;
-    const genre = await db.getGenre(id);
-    return genre;
+    const genre = await db.getGenre(req.params.id);
+    res.render("genre", {
+        title: "Genre",
+        genre: genre
+    })
 }
 
 module.exports = {

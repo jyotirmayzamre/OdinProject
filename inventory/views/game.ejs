@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <% if (locals.game) { %>
+            <h1><%= game.title  %></h1>
+            <p><%= game.description  %></p>
+            <p><%= game.price  %></p>
+            <p><%= game.rating  %></p>
+            <p><%= game.publisher  %></p>
+            <p><%= game.release_date  %></p>
+            <p><%= game.units_available %></p>
+            <img src="/<%= game.full_image %>" />
+         
+        <% } %>
+    </body>
+</html>
