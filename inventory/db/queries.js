@@ -62,10 +62,25 @@ async function newGame(game){
 
 }
 
+/*
+Function to create a new genre
+*/
+
+async function newGenre(genre){
+    const q = `
+    INSERT INTO genres (title, description, image)
+    VALUES ($1, $2, $3)
+    `
+
+    const values = [genre.title, genre.desc, genre.image]
+    await pool.query(q, values);
+}
+
 module.exports = {
     getAllGames,
     getGame,
     getAllGenres,
     getGenre,
-    newGame
+    newGame,
+    newGenre
 }

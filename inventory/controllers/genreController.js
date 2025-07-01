@@ -14,7 +14,19 @@ async function getGenre(req, res){
     })
 }
 
+async function createForm(req, res){
+    res.render("createGenre");
+}
+
+async function createGenre(req, res){
+    const titleImage = req.files["image"][0].filename;
+    await db.newGenre({...req.body, image: titleImage});
+    res.redirect("/genres");
+}
+
 module.exports = {
     getAllGenres,
-    getGenre
+    getGenre,
+    createForm,
+    createGenre
 }

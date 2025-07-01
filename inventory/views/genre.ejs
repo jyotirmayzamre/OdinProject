@@ -17,11 +17,14 @@
                 <div class="games-container">
                     <h2>Games</h2>
                     <div class="grid">
-                        <% genre.games.forEach(game => { %>
-                            <a href="/games/<%= game.id  %>">
-                                <img src="/<%= game.image  %>" />
-                            </a>
-                        <% }) %>
+                        <% if (genre.games) { %>
+                            <% genre.games.forEach(game => { %>
+                                <a href="/games/<%= game.id  %>">
+                                    <img src="/<%= game.image  %>" />
+                                </a>
+                            <% }) %>
+                        <% } %>
+                        
                     </div>
                 </div>
             </main>
