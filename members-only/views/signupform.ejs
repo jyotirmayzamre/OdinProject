@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members Only</title>
+</head>
+<body>
+    <%- include('errors.ejs') %>
+    <form method="post" action="/users/register">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" id="first_name" minlength="1" maxlength="20" placeholder="For eg. Bob" required>
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" id="last_name" minlength="1" maxlength="20" placeholder="For eg. Smith" required>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="For eg. bobsmith@gmail.com" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+        <label for="re-password">Enter password again:</label>
+        <input type="password" name="re-password" id="re-password" required>
+        <button type="submit">Submit</button>
+    </form>
+    
+</body>
+</html>

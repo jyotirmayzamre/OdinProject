@@ -7,10 +7,9 @@ CREATE TABLE IF NOT EXISTS Users (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     first_name VARCHAR ( 20 ) NOT NULL,
     last_name VARCHAR ( 20 ) NOT NULL,
-    username VARCHAR ( 20 ) NOT NULL,
+    email VARCHAR ( 30 ) NOT NULL,
     hash TEXT NOT NULL,
-    salt INTEGER NOT NULL,
-    membership_status BOOLEAN NOT NULL,
+    membership_status BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 
@@ -18,14 +17,15 @@ CREATE TABLE IF NOT EXISTS Posts (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     title VARCHAR ( 50 ) NOT NULL,
     timestamp TIME NOT NULL,
-    content TEXT NOT NULL
-    author INTEGER REFERENCES Users (id),
+    content TEXT NOT NULL,
+    author INTEGER REFERENCES Users (id)
 );
 
 `
 
 
-const cString = `postgresql://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:${process.env.PORT}/${process.env.DATABASE}`
+const cString = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`
+console.log(cString);
 
 async function main(){
     console.log("Seeding...");
@@ -34,6 +34,7 @@ async function main(){
     });
     await client.connect();
     await client.query(q1);
+    await client.end();
     console.log("Done");
 }
 
