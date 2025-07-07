@@ -1,6 +1,6 @@
 const pool = require('./pool')
 const bcrypt = require('bcryptjs');
-const { format } = require('daye-fns');
+const { format } = require('date-fns');
 
 //query for validating username
 async function validateEmail(email){

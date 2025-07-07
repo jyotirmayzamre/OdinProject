@@ -7,7 +7,14 @@
 </head>
 <body>
     <h1>Home</h1>
-    <a href="/users/register">Sign up form</a>
-    <a href="/users/login">Log In</a>
+    <% if (user) { %>
+        <p>Welcome <%= user.first_name %></p>
+        <a href="/updateMembership">Update membership status</a>
+        <a href="/posts/create">Create a post</a>
+        <a href="/logout">Logout</a>
+    <% } else { %>
+        <a href="/register">Sign up form</a>
+        <a href="/login">Log In</a>
+    <% } %>
 </body>
 </html>

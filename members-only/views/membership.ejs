@@ -7,7 +7,8 @@
 </head>
 <body>
     <%- include('errors.ejs') %>
-    <form method="post" action="/users/<%= id %>/update">
+    <h1>Update membership</h1>
+    <form method="post" action="/updateMembership">
         <label for="secret">Enter secret:</label>
         <input name="secret" id="secret" type="text" required>
         <button type="submit">Submit</button>

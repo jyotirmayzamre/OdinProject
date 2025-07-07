@@ -41,18 +41,18 @@ exports.getLogin = (req, res) => {
 }
 
 exports.home = (req, res) => {
-    res.render('userHome', { id: req.params.id });
+    res.render('home', { user: req.user });
 }
 
 exports.updateForm = (req, res) => {
-    res.render('membership', { id: req.params.id });
+    res.render('membership', { user: req.user });
 }
 
 exports.update = async (req, res) => {
     const { secret } = req.body;
     if(secret === memberSecret){
-       await queries.updateMembership(req.params.id);
-       res.redirect(`/users/${req.params.id}`);
+       await queries.updateMembership(req.user.id);
+       res.redirect(`/`, { user: req.user });
     }
 }
 
@@ -69,7 +69,7 @@ exports.createUser = [
         const { first_name, last_name, email, password } = req.body;
         const data = { first_name, last_name, email, password };
         await queries.createUser(data);
-        res.redirect('/users/login');
+        res.redirect('/login');
     }
 ]
 

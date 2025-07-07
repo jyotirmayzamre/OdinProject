@@ -12,7 +12,7 @@ const validatePost = [
 ]
 
 exports.createForm = (req, res) => {
-    res.render('postform', {id: req.query.userid});
+    res.render('postform');
 }
 
 exports.createPost = [
@@ -21,14 +21,14 @@ exports.createPost = [
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).render('postform', {
-                errors: errors.array(), id: req.query.userid
+                errors: errors.array()
             })
         }
 
         const { title, content } = req.body;
-        const id = req.query.userid
+        const id = req.user.id
         const data = {title, content, id};
         await queries.createPost(data);
-        res.redirect(`/users/${req.query.userid}`)
+        res.redirect(`/`);
     }
 ]

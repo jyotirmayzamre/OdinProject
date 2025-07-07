@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 require('./config/passport')
-const userRouter = require('./routes/userRouter');
+const indexRouter = require('./routes/indexRouter');
 const postRouter = require('./routes/postRouter');
 const { Pool } = require('./db/pool');
 const pgSession  = require('connect-pg-simple')(session);
@@ -33,11 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get("/", (req, res) => {
-    res.render('home')
-});
-
-app.use('/users', userRouter);
+app.use('/', indexRouter);
 app.use('/posts', postRouter);
 
 
