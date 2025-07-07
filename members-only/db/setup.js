@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS Users (
     last_name VARCHAR ( 20 ) NOT NULL,
     email VARCHAR ( 30 ) NOT NULL,
     hash TEXT NOT NULL,
-    membership_status BOOLEAN NOT NULL DEFAULT FALSE
+    membership_status BOOLEAN NOT NULL DEFAULT FALSE,
+    admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 

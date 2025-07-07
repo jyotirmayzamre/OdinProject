@@ -12,7 +12,12 @@ const validatePost = [
 ]
 
 exports.createForm = (req, res) => {
-    res.render('postform');
+    res.render('postform', {user: req.user });
+}
+
+exports.deletePost = async (req, res) => {
+    await queries.deletePost(req.params.id);
+    res.redirect('/');
 }
 
 exports.createPost = [
@@ -21,13 +26,13 @@ exports.createPost = [
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).render('postform', {
-                errors: errors.array()
+                errors: errors.array(), user: req.user
             })
         }
 
         const { title, content } = req.body;
-        const id = req.user.id
-        const data = {title, content, id};
+        const id = req.user.id;
+        const data = { title: title, content: content, id: id};
         await queries.createPost(data);
         res.redirect(`/`);
     }

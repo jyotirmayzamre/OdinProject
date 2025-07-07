@@ -11,6 +11,7 @@ indexRouter.get('/', indexController.home);
 indexRouter.get('/register', indexController.getRegister);
 indexRouter.post('/register', indexController.createUser);
 indexRouter.get('/login', indexController.getLogin);
+indexRouter.get('/logout', indexController.logout);
 
 indexRouter.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {

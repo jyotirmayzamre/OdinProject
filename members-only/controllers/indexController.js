@@ -40,8 +40,16 @@ exports.getLogin = (req, res) => {
     res.render('login', { error });
 }
 
-exports.home = (req, res) => {
-    res.render('home', { user: req.user });
+exports.logout = (req, res) => {
+    req.logout(err => {
+        if(err) return next(err);
+        req.redirect('/');
+    })
+}
+
+exports.home = async (req, res) => {
+    const posts = await queries.getPosts();
+    res.render('home', { user: req.user, posts: posts });
 }
 
 exports.updateForm = (req, res) => {
@@ -52,7 +60,7 @@ exports.update = async (req, res) => {
     const { secret } = req.body;
     if(secret === memberSecret){
        await queries.updateMembership(req.user.id);
-       res.redirect(`/`, { user: req.user });
+       res.redirect(`/`);
     }
 }
 
@@ -66,8 +74,8 @@ exports.createUser = [
             })
         }
 
-        const { first_name, last_name, email, password } = req.body;
-        const data = { first_name, last_name, email, password };
+        const { first_name, last_name, email, password, admin } = req.body;
+        const data = { first_name, last_name, email, password, admin };
         await queries.createUser(data);
         res.redirect('/login');
     }

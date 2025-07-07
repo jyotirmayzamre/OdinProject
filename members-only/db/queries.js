@@ -10,12 +10,18 @@ async function validateEmail(email){
 
 async function createUser(info){
     const hashedPassword = await bcrypt.hash(info.password, 10);
-    await pool.query(`INSERT INTO Users (first_name, last_name, email, hash) VALUES ($1, $2, $3, $4)`, [info.first_name, info.last_name, info.email, hashedPassword]);
+    const val = info.admin === 'on' ? true : false;
+    await pool.query(`INSERT INTO Users (first_name, last_name, email, hash, admin) VALUES ($1, $2, $3, $4, $5)`, [info.first_name, info.last_name, info.email, hashedPassword, val]);
 }
 
 async function createPost(info){
     const timestamp = format(new Date(), 'yyy-MM-dd HH:mm:ss');
-    await pool.query(`INSERT INTO Posts (title, timestamp, content, author) VALUES ($1, $2, $3, $4)`, [info.title, timestamp, info.content, info.user_id])
+    await pool.query(`INSERT INTO Posts (title, timestamp, content, author) VALUES ($1, $2, $3, $4)`, [info.title, timestamp, info.content, info.id])
+}
+
+async function deletePost(id) {
+    await pool.query('DELETE FROM Posts WHERE id = $1', [id]);
+    
 }
 
 async function updateMembership(id){
@@ -27,9 +33,21 @@ async function updateMembership(id){
     await pool.query(q, [id]);
 }
 
+async function getPosts(){
+    const q = `
+        SELECT Posts.id, Posts.title, Posts.content, Posts.timestamp, Users.email
+        FROM Posts
+        JOIN Users ON Posts.author = Users.id
+        `
+    const posts = await pool.query(q);
+    return posts.rows;
+}
+
 module.exports = {
     validateEmail,
     createUser,
     updateMembership,
-    createPost
+    createPost,
+    getPosts,
+    deletePost
 }
