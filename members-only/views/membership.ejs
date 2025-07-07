@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members only</title>
+</head>
+<body>
+    <%- include('errors.ejs') %>
+    <form method="post" action="/users/<%= id %>/update">
+        <label for="secret">Enter secret:</label>
+        <input name="secret" id="secret" type="text" required>
+        <button type="submit">Submit</button>
+    </form>
+    
+</body>
+</html>

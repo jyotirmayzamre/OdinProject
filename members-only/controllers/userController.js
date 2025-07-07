@@ -1,6 +1,8 @@
 const { body, validationResult } = require('express-validator');
 const queries = require('../db/queries');
 
+const memberSecret = 'xyz';
+
 
 const validateUser = [
     body('first_name').trim()
@@ -34,11 +36,24 @@ exports.getRegister = (req, res) => {
 }
 
 exports.getLogin = (req, res) => {
-    res.render('login');
+    const error = req.query.error
+    res.render('login', { error });
 }
 
 exports.home = (req, res) => {
-    res.render('userHome');
+    res.render('userHome', { id: req.params.id });
+}
+
+exports.updateForm = (req, res) => {
+    res.render('membership', { id: req.params.id });
+}
+
+exports.update = async (req, res) => {
+    const { secret } = req.body;
+    if(secret === memberSecret){
+       await queries.updateMembership(req.params.id);
+       res.redirect(`/users/${req.params.id}`);
+    }
 }
 
 exports.createUser = [

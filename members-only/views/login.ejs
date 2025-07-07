@@ -6,6 +6,9 @@
     <title>Members Only</title>
 </head>
 <body>
+    <% if (error) { %>
+        <p><%= error %></p>
+    <% } %>
     <form method="POST" action="/users/login">
         <label for="email">Enter email:</label>
         <input type="email" name="email" id="email" required>

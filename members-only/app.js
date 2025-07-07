@@ -3,6 +3,7 @@ const session = require('express-session');
 const passport = require('passport');
 require('./config/passport')
 const userRouter = require('./routes/userRouter');
+const postRouter = require('./routes/postRouter');
 const { Pool } = require('./db/pool');
 const pgSession  = require('connect-pg-simple')(session);
 
@@ -37,6 +38,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/users', userRouter);
+app.use('/posts', postRouter);
 
 
 
