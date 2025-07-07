@@ -27,12 +27,18 @@ const validateUser = [
 ]
 
 
+
+
 exports.getRegister = (req, res) => {
-    res.render('signupform.ejs');
+    res.render('signupform');
 }
 
 exports.getLogin = (req, res) => {
     res.render('login');
+}
+
+exports.home = (req, res) => {
+    res.render('userHome');
 }
 
 exports.createUser = [
