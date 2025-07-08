@@ -6,7 +6,8 @@
     <title>File Uploader</title>
 </head>
 <body>
-    <a href="/login">Log In</a>
-    <a href="/register">Register</a>
+    <% if (user) { %>
+        <h1>You are logged in!</h1>
+    <% } %>
 </body>
 </html>

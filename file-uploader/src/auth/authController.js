@@ -7,7 +7,10 @@ Home Method
 */
 
 exports.getHome = (req, res) => {
-    res.render("home", { user: req.user })
+    if(req.isAuthenticated()){
+        return res.redirect('/folder')
+    }
+    res.render("home")
 }
 
 /*
@@ -66,7 +69,7 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/folder',
         failureRedirect: '/login?error=Invalid+credentials'
     })(req, res, next);
 }
