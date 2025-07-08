@@ -9,5 +9,10 @@
     <% if (user) { %>
         <h1>You are logged in!</h1>
     <% } %>
+    <form method="post" action="/folder/create">
+        <label for="name">Folder Name:</label>
+        <input type="text" name="name" id="name" maxlength="20" required>
+        <button type="submit">Create new folder</button>
+    </form>
 </body>
 </html>

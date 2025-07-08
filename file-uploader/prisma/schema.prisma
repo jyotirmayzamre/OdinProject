@@ -50,5 +50,6 @@ model Entity {
 
   @@index([parentId])
   @@index([userId])
+  @@unique([userId, name, parentId])
   @@map("entities")
 }
