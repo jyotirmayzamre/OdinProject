@@ -6,14 +6,20 @@
     <title>File Uploader</title>
 </head>
 <body>
-    <% if (children) { %>
-        <% children.forEach(child => { %>
-            <div>
-                <a href="/folder/<%= child.id %>"><%= child.name  %></a>
-                <p><%= child.timestamp %></p>
-            </div>
-        <% }) %>
-    <% } %>
+    <div id="container">
+        <% if (children) { %>
+            <% children.forEach(child => { %>
+                <div>
+                    <a href="/folder/<%= child.id %>"><%= child.name  %></a>
+                    <p><%= child.timestamp %></p>
+                    <form method="post" action="/folder/<%= child.id %>/delete">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+    
 
     <form method="post" action="/folder/create?parent=<%= id %>">
         <label for="name">Folder Name:</label>

@@ -19,7 +19,7 @@ exports.createFolder = async (req, res) => {
 }
 
 exports.deleteFolder = async (req, res) => {
-    const folderId = req.params.id;
+    const folderId = Number(req.params.id);
     await queries.deleteFolder(folderId);
     res.redirect('/folder');
 }
