@@ -14,11 +14,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String   
+  expiresAt   DateTime
+
+  @@map("sessions")
+}
+
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String
   documents Entity[]
+
   @@map("users")
 }
 
@@ -28,26 +38,17 @@ enum EntityType {
 }
 
 model Entity {
-  id           Int        @id @default(autoincrement())
-  type         EntityType
-  name         String
-  upload_time  DateTime   @default(now())
-  userId       Int
-  user         User       @relation(fields: [userId], references: [id])
-  parentId     Int?
-  parentFolder Entity?    @relation("EntityParent", fields: [parentId], references: [id], onDelete: Cascade)
-  children     Entity[]   @relation("EntityParent")
+  id Int @id @default(autoincrement())
+  name String
+  type EntityType
+  timestamp DateTime @default(now())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  parentId Int?
+  parent Entity? @relation(name: "EntityParent", fields: [parentId], references: [id], onDelete: Cascade)
+  children Entity[] @relation(name: "EntityParent")
 
   @@index([parentId])
   @@index([userId])
   @@map("entities")
-}
-
-model Session {
-  id        String   @id
-  sid       String   @unique
-  data      String
-  expiresAt DateTime
-  
-  @@map("sessions")
 }
