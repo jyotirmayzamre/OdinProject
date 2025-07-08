@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const sessionConfig = require('./config/sessionStore');
 const authRouter = require('./auth/authRouter');
+require('./config/passport');
 
 const app = express();
 

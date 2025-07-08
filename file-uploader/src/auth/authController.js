@@ -1,5 +1,14 @@
 const { body, validationResult } = require('express-validator');
 const queries = require('./authQueries');
+const passport = require('passport');
+
+/*
+Home Method
+*/
+
+exports.getHome = (req, res) => {
+    res.render("home", { user: req.user })
+}
 
 /*
 Register Methods
@@ -51,5 +60,24 @@ Login Methods
 */
 
 exports.getLogin = (req, res) => {
-    res.render('loginForm');
+    const error = req.query.params;
+    res.render('loginForm', { error });
+}
+
+exports.postLogin = (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login?error=Invalid+credentials'
+    })
+}
+
+/*
+Logout Method
+*/
+
+exports.postLogout = (req, res, next) => {
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+    });
 }
