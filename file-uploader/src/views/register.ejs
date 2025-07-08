@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members Only</title>
+</head>
+<body>
+    <%- include('errors.ejs') %>
+    <h1>Sign up</h1>
+    <form method="post" action="/register">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="For eg. bobsmith@gmail.com" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+        <label for="re-password">Enter password again:</label>
+        <input type="password" name="re-password" id="re-password" required>
+        <button type="submit">Register</button>
+    </form>
+    
+</body>
+</html>
