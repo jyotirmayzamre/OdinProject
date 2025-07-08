@@ -11,17 +11,31 @@ async function createFolder(userId, name, parentId){
             name: name,
             type: 'FOLDER',
             user: {
-                connect: { id: userId }
+                connect: { id: Number(userId) }
             },
             parent: {
-                connect: { id: parentId }
+                connect: { id: Number(parentId) }
             }
         }
     })
 }
 
+async function deleteFolder(folderId){
+    await prisma.entity.delete({ where: { id: folderId }});
+}
+
+async function getFolder(folderId){
+    const children = await prisma.entity.findMany({
+        where: { parentId: folderId },
+        select: { id: true, name: true, timestamp: true }
+    })
+    return children;
+}
+
 
 module.exports = {
     getRootFolderId,
-    createFolder
+    createFolder,
+    deleteFolder,
+    getFolder
 }
