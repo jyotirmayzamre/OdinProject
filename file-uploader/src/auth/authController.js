@@ -10,7 +10,7 @@ exports.getHome = (req, res) => {
     if(req.isAuthenticated()){
         return res.redirect('/folder')
     }
-    res.render("home")
+    res.redirect('/login');
 }
 
 /*
@@ -63,8 +63,10 @@ Login Methods
 */
 
 exports.getLogin = (req, res) => {
-    //const error = req.query.params;
-    res.render('home');
+    if(req.isAuthenticated()){
+        return res.redirect('/folder')
+    }
+    res.render("home")
 }
 
 exports.postLogin = (req, res, next) => {
