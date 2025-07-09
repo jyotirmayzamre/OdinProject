@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Uploader</title>
+    <link rel="stylesheet" href="/styles/home.css">
 </head>
 <body>
-    <a href="/login">Log In</a>
-    <a href="/register">Register</a>
+    <%- include('navbar.ejs') %>
+    <main>
+        <div class="content-wrapper">
+            <h2>Log In</h2>
+            <p>Don't have an account yet? <a href="/register">Sign up</a></p>
+            <form method="post" action="/login">
+                <div class="input-container">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="input-container">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" minlength="2" required>
+                </div>
+                <div class="input-container">
+                    <button type="submit">Log In</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
 </body>
 </html>

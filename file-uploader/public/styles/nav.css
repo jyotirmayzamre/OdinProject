@@ -1,0 +1,37 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color-scheme: dark;
+    font-family: sans-serif;
+    padding-left: 10px;
+    padding-right: 10px;
+    
+}
+
+h1 {
+    color: white;
+}
+
+.logo:hover {
+    cursor: pointer;
+}
+
+a {
+    color: white
+}
+
+img {
+    height: 20px;
+    filter: invert(100%);
+}
+
+button {
+    background-color: black;
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+}

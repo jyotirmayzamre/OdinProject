@@ -63,8 +63,8 @@ Login Methods
 */
 
 exports.getLogin = (req, res) => {
-    const error = req.query.params;
-    res.render('loginForm', { error });
+    //const error = req.query.params;
+    res.render('home');
 }
 
 exports.postLogin = (req, res, next) => {
