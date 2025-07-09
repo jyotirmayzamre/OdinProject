@@ -1,0 +1,9 @@
+body, html {
+    margin: 0;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    height: 100vh;
+}

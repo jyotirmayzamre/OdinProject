@@ -27,7 +27,7 @@ async function deleteFolder(folderId){
 async function getFolder(folderId){
     const children = await prisma.entity.findMany({
         where: { parentId: folderId },
-        select: { id: true, name: true, timestamp: true }
+        select: { id: true, name: true, type: true, timestamp: true }
     })
     return children;
 }

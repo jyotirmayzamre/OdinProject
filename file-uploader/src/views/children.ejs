@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/styles/children.css">
+<main>
+    <div class="children-container">
+        <div class="child">
+            <p>Name</p>
+            <p>Created</p>
+        </div>
+        <% if (locals.children) { %>
+            <% children.forEach(elem => { %>
+                <a href="/folder/<%= elem.id %>">
+                    <div class="child">
+                        <% if (elem.type === 'FOLDER') { %>
+                            <img src="/images/folder.png" alt="Folder">
+                        <% } else { %>
+                            <img src="/images/document.png" alt="File">
+                        <% } %>
+                        <p><%= elem.name %></p>
+                        <p><%= elem.timestamp %></p>
+                    </div>
+                </a>
+            <% }) %>
+         
+        <% } %>
+    </div>
+</main>

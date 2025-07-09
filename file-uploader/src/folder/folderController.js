@@ -3,7 +3,7 @@ const queries = require('./folderQueries');
 exports.getRoot = async (req, res) => {
     const rootId = await queries.getRootFolderId(req.user.id);
     const children = await queries.getFolder(rootId);
-    res.render('folders', { user: req.user, children: children })
+    res.render('folderPage', { children: children, id: null })
 }
 
 exports.createFolder = async (req, res) => {

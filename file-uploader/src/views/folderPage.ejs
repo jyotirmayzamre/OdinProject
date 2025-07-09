@@ -4,28 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Uploader</title>
+    <link rel="stylesheet" href="/styles/body.css">
+    <link rel="stylesheet" href="/styles/folder.css">
 </head>
 <body>
-    <div id="container">
-        <% if (children) { %>
-            <% children.forEach(child => { %>
-                <div>
-                    <a href="/folder/<%= child.id %>"><%= child.name  %></a>
-                    <p><%= child.timestamp %></p>
-                    <form method="post" action="/folder/<%= child.id %>/delete">
-                        <button type="submit">Delete</button>
-                    </form>
-                </div>
-            <% }) %>
-        <% } %>
+    <%- include('navbar.ejs') %>
+    <div class="layout">
+        <%- include('sidebar.ejs', typeof id !== 'undefined' ? { id: id } : {}) %>
+        <%- include('children.ejs', { children: children }) %>
     </div>
-    
 
-    <form method="post" action="/folder/create?parent=<%= id %>">
-        <label for="name">Folder Name:</label>
-        <input type="text" name="name" id="name" maxlength="20" required>
-        <button type="submit">Create new folder</button>
-    </form>
+    <script src="/utilities/methods.js"></script>
+    
+    
     
 </body>
 </html>

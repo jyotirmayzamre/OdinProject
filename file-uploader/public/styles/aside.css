@@ -1,0 +1,49 @@
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn {
+    color: white;
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding: 5px;
+    width: 100px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: lightblue;
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(1px);
+}
+
+dialog[open] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(36, 36, 40);
+    color: white;
+    padding: 10px;
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.dialog-header > img {
+    height: 15px;
+}
+
+.dialog-header > img:hover {
+    cursor: pointer;
+}

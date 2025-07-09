@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="/styles/aside.css">
+<aside>
+    <div class="btn-container">
+        <button class="btn" id="createFolderbtn">New Folder</button>
+        <button class="btn" id="createFilebtn">New File</button>
+    </div>
+
+    <dialog id="createFolderDialog">
+        <div class="dialog-header">
+            <h1>New Folder</h1>
+            <img src="/images/close.png" onclick="createFolderDialog.close()" alt="Close">
+        </div>
+        <form id="createFolderForm" method="post" action="<%= id ? `/folder/create?parent=${ id }` : '/folder/create' %>">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" maxlength="20" required>
+            <button type="submit" class="btn">Create folder</button>
+        </form>
+        
+    </dialog> 
+</aside>
+
