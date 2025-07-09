@@ -3,6 +3,7 @@ const passport = require('passport');
 const sessionConfig = require('./config/sessionStore');
 const authRouter = require('./auth/authRouter');
 const folderRouter = require('./folder/folderRouter');
+const fileRouter = require('./file/fileRouter');
 require('./config/passport');
 const path = require('path');
 
@@ -20,5 +21,6 @@ app.use(passport.session());
 
 app.use('/', authRouter);
 app.use('/folder', folderRouter);
+app.use('/file', fileRouter);
 
 app.listen(3000, () => console.log("Express app listening on port 3000"));

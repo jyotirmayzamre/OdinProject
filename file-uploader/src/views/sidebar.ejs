@@ -2,7 +2,7 @@
 <aside>
     <div class="btn-container">
         <button class="btn" id="createFolderbtn">New Folder</button>
-        <button class="btn" id="createFilebtn">New File</button>
+        <button class="btn" id="uploadFilebtn">New File</button>
         <% if (id) { %>
             <button class="btn" id="deleteFolderbtn">Delete Folder</button>
         <% } %>
@@ -20,6 +20,17 @@
         </form>   
     </dialog> 
 
+    <dialog id="uploadFileDialog">
+        <div class="dialog-header">
+            <h1>New File</h1>
+            <img src="/images/close.png" onclick="uploadFileDialog.close()" alt="Close">
+        </div>
+        <form id="uploadFileForm" method="post" action="<%= id ? `/file/create?parent=${ id }` : '/file/create' %>" enctype="multipart/form-data">
+            <input type="file" name="file" id="file" required>
+            <button type="submit" class="btn">Upload file</button>
+        </form>
+    </dialog>
+
     <% if (id) { %>
         <dialog id="deleteFolderDialog">
             <div class="dialog-header">
@@ -32,6 +43,18 @@
             </form>
         </dialog>
     <% } %>
+
+    <dialog id="fileDetailsDialog">
+        <div class="dialog-header">
+            <h1>File information</h1>
+            <img src="/images/close.png" onclick="fileDetailsDialog.close()" alt="Close">
+        </div>
+        <div class="details">
+            <p>Filename: <span id="fileName"></span></p>
+            <p>Size: <span id="fileSize"></span></p>
+            <p>Uploaded At: <span id="fileDate"></span></p>
+        </div>
+    </dialog>
     
 </aside>
 

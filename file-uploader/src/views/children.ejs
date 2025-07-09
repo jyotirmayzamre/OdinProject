@@ -8,17 +8,24 @@
     <div class="children-container">
         <% if (locals.children) { %>
             <% children.forEach(elem => { %>
-                <a href="/folder/<%= elem.id %>">
-                    <div class="child">
-                        <% if (elem.type === 'FOLDER') { %>
+                <% if (elem.type === 'FOLDER') { %>
+                    <a href="/folder/<%= elem.id %>">
+                        <div class="child">
                             <img src="/images/folder.png" alt="Folder">
-                        <% } else { %>
+                            <p><%= elem.name  %></p>
+                            <p><%= new Date(elem.timestamp).toLocaleDateString('en-GB') %></p>
+                        </div>
+                    </a>
+                 
+                <% } else { %>
+                    <a href="#" class="file-link" data-id="<%= elem.id %>">
+                        <div class="child">
                             <img src="/images/document.png" alt="File">
-                        <% } %>
-                        <p><%= elem.name %></p>
-                        <p><%= new Date(elem.timestamp).toLocaleDateString('en-GB') %></p>
-                    </div>
-                </a>
+                            <p><%= elem.name  %></p>
+                            <p><%= new Date(elem.timestamp).toLocaleDateString('en-GB') %></p>
+                        </div>  
+                    </a>
+                <% } %>
             <% }) %>
          
         <% } %>
