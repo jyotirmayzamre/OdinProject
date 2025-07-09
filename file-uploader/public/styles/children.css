@@ -3,15 +3,38 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 }
 
 .child {
+    width: 90%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.child.title-cont {
+    border: none;
 }
 
 .child > img {
     height: 20px;
     filter: invert(100%);
 }
+
+.child:hover {
+    background-color: lightblue;
+}
+
+.child.title-cont:hover{
+    background-color: black;
+}
+
+a {
+    text-decoration: none;
+    width: 100%;
+}
+

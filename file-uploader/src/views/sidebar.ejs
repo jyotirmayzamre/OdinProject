@@ -3,6 +3,9 @@
     <div class="btn-container">
         <button class="btn" id="createFolderbtn">New Folder</button>
         <button class="btn" id="createFilebtn">New File</button>
+        <% if (id) { %>
+            <button class="btn" id="deleteFolderbtn">Delete Folder</button>
+        <% } %>
     </div>
 
     <dialog id="createFolderDialog">
@@ -14,8 +17,21 @@
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" maxlength="20" required>
             <button type="submit" class="btn">Create folder</button>
-        </form>
-        
+        </form>   
     </dialog> 
+
+    <% if (id) { %>
+        <dialog id="deleteFolderDialog">
+            <div class="dialog-header">
+                <h1>Delete folder</h1>
+                <img src="/images/close.png" onclick="deleteFolderDialog.close()" alt="Close">
+            </div>
+            <form id="deleteFolderForm" method="post" action="/folder/<%= id %>/delete">
+                <p>Are you sure?</p>
+                <button type="submit" class="btn">Delete</button>
+            </form>
+        </dialog>
+    <% } %>
+    
 </aside>
 

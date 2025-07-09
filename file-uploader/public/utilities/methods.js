@@ -7,6 +7,18 @@ createFolderForm.addEventListener('submit', (e) => {
 })
 
 createFolderButton.addEventListener('click', (e) => {
-    console.log('Clicked');
     createFolderDialog.showModal();
+})
+
+
+const deleteFolderForm = document.getElementById('deleteFolderForm')
+const deleteFolderDialog = document.getElementById('deleteFolderDialog')
+const deleteFolderButton = document.getElementById('deleteFolderbtn')
+
+deleteFolderForm.addEventListener('submit', (e) => {
+    deleteFolderDialog.close();
+})
+
+deleteFolderButton.addEventListener('click', (e) => {
+    deleteFolderDialog.showModal();
 })

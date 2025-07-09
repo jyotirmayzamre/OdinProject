@@ -1,3 +1,8 @@
+aside {
+    border-right: 1px solid grey;
+    padding: 15px;
+}
+
 .btn-container {
     display: flex;
     flex-direction: column;
@@ -46,4 +51,11 @@ dialog[open] {
 
 .dialog-header > img:hover {
     cursor: pointer;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }

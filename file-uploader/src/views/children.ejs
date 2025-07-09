@@ -1,10 +1,11 @@
 <link rel="stylesheet" href="/styles/children.css">
 <main>
+    <div class="child title-cont">
+        <p>Type</p>
+        <p>Name</p>
+        <p>Created At</p>
+    </div>
     <div class="children-container">
-        <div class="child">
-            <p>Name</p>
-            <p>Created</p>
-        </div>
         <% if (locals.children) { %>
             <% children.forEach(elem => { %>
                 <a href="/folder/<%= elem.id %>">
@@ -15,7 +16,7 @@
                             <img src="/images/document.png" alt="File">
                         <% } %>
                         <p><%= elem.name %></p>
-                        <p><%= elem.timestamp %></p>
+                        <p><%= new Date(elem.timestamp).toLocaleDateString('en-GB') %></p>
                     </div>
                 </a>
             <% }) %>
