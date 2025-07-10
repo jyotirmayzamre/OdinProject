@@ -1,4 +1,5 @@
 const queries = require('./folderQueries');
+const deleteFiles = require('../../public/utilities/deleteFiles')
 
 exports.getRoot = async (req, res) => {
     const rootId = await queries.getRootFolderId(req.user.id);
@@ -20,7 +21,8 @@ exports.createFolder = async (req, res) => {
 
 exports.deleteFolder = async (req, res) => {
     const folderId = Number(req.params.id);
-    await queries.deleteFolder(folderId);
+    const locs = await queries.deleteFolder(folderId);
+    deleteFiles(locs);
     res.redirect('/folder');
 }
 

@@ -19,7 +19,6 @@ uploadFileForm.addEventListener('submit', (e)=>{
 })
 
 uploadFileButton.addEventListener('click', (e) => {
-    console.log('clicked');
     uploadFileDialog.showModal();
 })
 
@@ -38,26 +37,43 @@ if(deleteFolderButton && deleteFolderDialog && deleteFolderForm){
     })
 }
 
-const fileDetaislDialog = document.getElementById('fileDetailsDialog')
+const fileDetaislDialog = document.getElementById('fileDetailsDialog');
+const deleteFileForm = document.getElementById('deleteFileForm');
+const container = document.querySelector('.children-container');
 
-document.querySelectorAll('.file-link').forEach((link) => {
-    link.addEventListener('click', async (e) => {
-        const id = Number(link.dataset.id);
+container.addEventListener('click', async (e) => {
+    const link = e.target.closest('a');
+    if(!link.classList.contains('file-link')) return;
 
-        try {
-            const response = await fetch(`/file/${id}`);
-            const data = await response.json();
-            document.getElementById('fileName').textContent = data.name;
-            document.getElementById('fileSize').textContent = data.size;
-            document.getElementById('fileDate').textContent = new Date(data.timestamp).toLocaleDateString('en-GB');
-            fileDetaislDialog.showModal();
-        } catch(e){
-            console.error(e);
+    e.preventDefault();
+    const id = Number(link.dataset.id);
+    try {
+        const response = await fetch(`/file/${id}`);
+        const data = await response.json();
+        document.getElementById('fileName').textContent = data.name;
+        document.getElementById('fileSize').textContent = data.size;
+        document.getElementById('fileDate').textContent = new Date(data.timestamp).toLocaleDateString('en-GB');
+        const downloadButton = document.getElementById('download');
+        downloadButton.href = '/' + data.location.split('/')[1];
+        downloadButton.download = data.name;
+        fileDetaislDialog.showModal();
+        deleteFileForm.action = `/file/${id}/delete`;
+        if(deleteFileForm.dataset.parent !== ''){
+            deleteFileForm.action += `?parent=${deleteFileForm.dataset.parent}`;
         }
-        
-    })
-    
+
+    } catch(e){
+        console.error(e);
+    }
 })
+
+const deleteFileBtn = document.getElementById('deleteFileBtn');
+
+deleteFileBtn.addEventListener('click', (e)=>{
+    fileDetaislDialog.close();
+})
+
+
 
 
 

@@ -20,6 +20,7 @@ const upload = multer({ storage });
 
 fileRouter.post('/create', isAuth, upload.single('file'), fileController.createFile);
 fileRouter.get('/:id', isAuth, fileController.getFile);
+fileRouter.post('/:id/delete', isAuth, fileController.deleteFile);
 
 
 module.exports = fileRouter;

@@ -13,16 +13,29 @@ async function createFile(fileData, userId, parentId){
     })
 }
 
-async function getFile(id, userId){
+//removed userId
+async function getFile(id){
     const file = await prisma.entity.findUnique({
-        where: { id: id, userId: userId },
-        select: { name: true, size: true, timestamp: true},
+        where: { id: id, type: 'FILE' },
+        select: { name: true, size: true, timestamp: true, location: true },
     })
     return file;
+}
+
+//removed userId
+async function deleteFile(id){
+    const file = await prisma.entity.delete({
+        where: {
+            id: id,
+            type: 'FILE'
+        }
+    })
+    return file.location;
 }
 
 
 module.exports = {
     createFile,
-    getFile
+    getFile,
+    deleteFile
 }

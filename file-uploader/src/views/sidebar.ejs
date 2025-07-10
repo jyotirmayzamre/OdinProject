@@ -54,7 +54,12 @@
             <p>Size: <span id="fileSize"></span></p>
             <p>Uploaded At: <span id="fileDate"></span></p>
         </div>
+        <form id='deleteFileForm' method="post" action="/file/" data-parent="<%= id  %>">
+            <button class="btn" type="submit" id="deleteFileBtn">Delete</button>
+            <a href="" download="" id="download">Download</a>
+        </form>
     </dialog>
+    
     
 </aside>
 
