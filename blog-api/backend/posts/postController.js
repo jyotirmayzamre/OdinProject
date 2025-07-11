@@ -6,7 +6,7 @@ async function getPosts(req, res){
         if(!posts) return res.status(500).json({error:'posts not found'});
         return res.status(200).json(posts);
     } catch(e){
-        return res.status(500).json({error: 'Something went wrong'})
+        return res.status(500).json({error: 'something went wrong'})
     }
     
 }
@@ -14,7 +14,7 @@ async function getPosts(req, res){
 async function createPost(req, res){
     try {
         if(req.user.role != 'ADMIN'){
-            return res.status(403).json({ error: 'You are not authorized to access this endpoint' });
+            return res.status(403).json({ error: 'you are not authorized to access this endpoint' });
         }
         const { title, content } = req.body;
         const userId = req.user.id;
@@ -26,7 +26,7 @@ async function createPost(req, res){
         return res.status(201).json({ message: 'post created successfully', post});
 
     } catch(e){
-        return res.status(500).json({error: 'Something went wrong'});
+        return res.status(500).json({error: 'something went wrong'});
     }
 
     
@@ -39,21 +39,21 @@ async function getPost(req, res){
         if(!post) return res.status(404).json({ error: 'post not found' });
         return res.status(200).json({ message: 'post found', post });
     } catch(e){
-        return res.status(500).json({error: 'Something went wrong'})
+        return res.status(500).json({error: 'something went wrong'})
     } 
 }
 
 async function deletePost(req, res){
     try{
         if(req.user.role != 'ADMIN'){
-            return res.status(403).json({ error: 'You are not authorized to access this endpoint' });
+            return res.status(403).json({ error: 'you are not authorized to access this endpoint' });
         }
         const id = req.params.postId;
         const post = await queries.deletePost(id);
         if(!post) return res.status(500).json({error:'cannot delete a non-existent post'});
         return res.status(200).json({ message: 'post deleted successfully', post});
     } catch(e){
-        return res.status(500).json({error: 'Something went wrong'})
+        return res.status(500).json({error: 'something went wrong'})
     }
 }
 
@@ -67,7 +67,7 @@ async function getComments(req, res){
         if(!comments) return res.status(404).json({ error: 'comments not found' });
         return res.status(200).json({ message: 'comments found', comments })
     } catch(e){
-        return res.status(500).json({error: 'Something went wrong'});
+        return res.status(500).json({error: 'something went wrong'});
     }
     
 }
@@ -76,7 +76,7 @@ async function createComment(req, res){
     try{
         const { content } = req.body;
 
-        if(!content) return res.status(400).json({error: 'Content is required'});
+        if(!content) return res.status(400).json({error: 'content is required'});
 
         const postId = req.params.postId;
         const post = await queries.getPost(id);
@@ -87,7 +87,7 @@ async function createComment(req, res){
         if(!comment) return res.status(500).json({ error: 'comment creation unsuccessful' });
         return res.status(201).json({ message: 'comment creation successful', comment});
     } catch(e){
-        return res.status(500).json({error: 'Something went wrong'});
+        return res.status(500).json({error: 'something went wrong'});
     }
 
     
@@ -100,14 +100,11 @@ async function getComment(req, res){
         if(!comment) return res.status(404).json({ message: 'comment not found'});
         return res.status(200).json({ message: 'comment found', comment });
     } catch(e){
-        return res.status(500).json({error: 'Something went wrong'});
+        return res.status(500).json({error: 'something went wrong'});
     } 
 }
 
-/*
-if user is admin, can delete any comment
-is user is not admin, can only delete their own comment
-*/
+
 async function deleteComment(req, res){
     try {
         const role = req.user.role;
@@ -120,14 +117,14 @@ async function deleteComment(req, res){
 
         if (role === 'USER'){
             const userId = await queries.checkUserOfComment(commentId);
-            if(userId != req.user.id) return res.status(403).json({ error: 'You cannot delete comments written by others' });
+            if(userId != req.user.id) return res.status(403).json({ error: 'you cannot delete comments written by others' });
         }
         const comment = await queries.deleteComment(commentId);
         if(!comment) return res.status(404).json({ error: 'comment deletion unsuccessful'});
         return res.status(200).json({ message: 'comment deletion successful', comment });
 
     } catch(e){
-        res.status(500).json({error: 'Something went wrong'});
+        res.status(500).json({error: 'something went wrong'});
     }
 
 }

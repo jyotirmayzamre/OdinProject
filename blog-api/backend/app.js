@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path');
-const authRouter = require('./auth/authRouter')
+const authRouter = require('./auth/authRouter');
+const postRouter = require('./posts/postRouter');
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/auth', authRouter);
+app.use('/posts', postRouter);
 
 app.listen(3000, () => console.log("Server listening on port 3000"));
