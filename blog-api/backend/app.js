@@ -8,6 +8,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 require('./config/passport');
+require('dotenv').config();
 
 app.get('/', (req, res) => {
     res.json({

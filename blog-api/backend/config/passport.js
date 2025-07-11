@@ -4,7 +4,6 @@ const jwtStrategy = require('passport-jwt').Strategy
 const bcrypt = require('bcryptjs')
 const prisma = require('../prisma/client')
 const { ExtractJwt } = require('passport-jwt');
-require('dotenv').config();
 
 
 async function verifyCallback(username, password, done){

@@ -1,7 +1,6 @@
 const { body, validationResult } = require('express-validator');
 const queries = require('./authQueries');
 const jwt  = require('jsonwebtoken');
-require('dotenv').config();
 
 const validateRegistration = [
     body('email').trim()
@@ -51,7 +50,7 @@ exports.login = (req, res, next) => {
         if(err) return next(err)
         if(!user) return res.status(401).json({ message: 'Invalid Credentials' });
 
-        const token = jwt.sign({ id: user.id, username: user.email }, process.env.JWT_SECRET, { expiresIn: "24h"});
+        const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "24h"});
 
         return res.status(200).json({
             message: 'successful',
