@@ -1,61 +1,144 @@
-const prisma = require('../prisma/client');
 const queries = require('./postQueries');
 
 async function getPosts(req, res){
-    const posts = await queries.getPosts();
-    return res.status(200).json({
-        posts
-    })
+    try {
+        const posts = await queries.getPosts();
+        if(!posts) return res.status(500).json({error:'posts not found'});
+        return res.status(200).json(posts);
+    } catch(e){
+        return res.status(500).json({error: 'Something went wrong'})
+    }
+    
 }
 
 async function createPost(req, res){
-    if(req.user.role != 'ADMIN'){
-        return res.status(403).json({ message: 'You are not authorized to access this endpoint' });
-    }
-    const { title, content } = req.body;
-    const userId = req.user.id;
+    try {
+        if(req.user.role != 'ADMIN'){
+            return res.status(403).json({ error: 'You are not authorized to access this endpoint' });
+        }
+        const { title, content } = req.body;
+        const userId = req.user.id;
 
-    const post = await queries.createPost(title, content, userId);
-    if(!post) return res.status(401).json({ message: 'unsuccessful' })
-    else return res.status(200).json({ message: 'successful', post});
+        if(!title || !content) return res.status(400).json({error: 'title and content are required'})
+
+        const post = await queries.createPost(title, content, userId);
+        if(!post) return res.status(401).json({ error: 'post creation failed' })
+        return res.status(201).json({ message: 'post created successfully', post});
+
+    } catch(e){
+        return res.status(500).json({error: 'Something went wrong'});
+    }
+
+    
 }
 
 async function getPost(req, res){
-    const id = req.params.postId;
-    const post = await queries.getPost(id);
-    if(!post) return res.status(404).json({ message: 'resource not found' });
-    else return res.status(200).json({ message: 'resource found', post });
+    try{
+        const id = req.params.postId;
+        const post = await queries.getPost(id);
+        if(!post) return res.status(404).json({ error: 'post not found' });
+        return res.status(200).json({ message: 'post found', post });
+    } catch(e){
+        return res.status(500).json({error: 'Something went wrong'})
+    } 
+}
+
+async function deletePost(req, res){
+    try{
+        if(req.user.role != 'ADMIN'){
+            return res.status(403).json({ error: 'You are not authorized to access this endpoint' });
+        }
+        const id = req.params.postId;
+        const post = await queries.deletePost(id);
+        if(!post) return res.status(500).json({error:'cannot delete a non-existent post'});
+        return res.status(200).json({ message: 'post deleted successfully', post});
+    } catch(e){
+        return res.status(500).json({error: 'Something went wrong'})
+    }
 }
 
 async function getComments(req, res){
-    const postId = req.params.postId;
-    const comments = await queries.getComments(postId);
-    if(!comments) return res.status(404).json({ message: 'resource not found' });
-    else return res.status(200).json({ message: 'resource found', comments })
+    try {
+        const postId = req.params.postId;
+        const post = await queries.getPost(id);
+        if(!post) return res.status(404).json({ error: 'cannot get comments of a non-existent post' });
+
+        const comments = await queries.getComments(postId);
+        if(!comments) return res.status(404).json({ error: 'comments not found' });
+        return res.status(200).json({ message: 'comments found', comments })
+    } catch(e){
+        return res.status(500).json({error: 'Something went wrong'});
+    }
+    
 }
 
 async function createComment(req, res){
-    const { content } = req.body;
-    const postId = req.params.postId;
-    const userId = req.user.id
+    try{
+        const { content } = req.body;
 
-    const comment = await queries.createComment(content, postId, userId);
-    if(!comment) return res.status(401).json({ message: 'unsuccessful' });
-    else return res.status(200).json({ message: 'successful', comment});
+        if(!content) return res.status(400).json({error: 'Content is required'});
+
+        const postId = req.params.postId;
+        const post = await queries.getPost(id);
+        if(!post) return res.status(404).json({ error: 'cannot create comment for a non-existent post' });
+
+        const userId = req.user.id
+        const comment = await queries.createComment(content, postId, userId);
+        if(!comment) return res.status(500).json({ error: 'comment creation unsuccessful' });
+        return res.status(201).json({ message: 'comment creation successful', comment});
+    } catch(e){
+        return res.status(500).json({error: 'Something went wrong'});
+    }
+
+    
 }
 
 async function getComment(req, res){
-    const commentId = req.params.commentId;
-    const comment = await queries.getComment(commentId);
-    if(!comment) return res.status(404).json({ message: 'resource not found'});
-    else return res.status(200).json({ message: 'resource found', comment });
+    try{
+        const commentId = req.params.commentId;
+        const comment = await queries.getComment(commentId);
+        if(!comment) return res.status(404).json({ message: 'comment not found'});
+        return res.status(200).json({ message: 'comment found', comment });
+    } catch(e){
+        return res.status(500).json({error: 'Something went wrong'});
+    } 
+}
+
+/*
+if user is admin, can delete any comment
+is user is not admin, can only delete their own comment
+*/
+async function deleteComment(req, res){
+    try {
+        const role = req.user.role;
+        const postId = req.params.postId;
+        const commentId = req.params.commentId;
+
+        const post = await queries.getPost(postId);
+        if(!post) return res.status(404).json({ error: 'cannot delete comment for a non-existent post' });
+        
+
+        if (role === 'USER'){
+            const userId = await queries.checkUserOfComment(commentId);
+            if(userId != req.user.id) return res.status(403).json({ error: 'You cannot delete comments written by others' });
+        }
+        const comment = await queries.deleteComment(commentId);
+        if(!comment) return res.status(404).json({ error: 'comment deletion unsuccessful'});
+        return res.status(200).json({ message: 'comment deletion successful', comment });
+
+    } catch(e){
+        res.status(500).json({error: 'Something went wrong'});
+    }
+
 }
 
 module.exports = {
     getPosts,
     createPost,
     getPost,
+    deletePost,
     getComments,
     createComment,
-    getComment
+    getComment,
+    deleteComment
 }

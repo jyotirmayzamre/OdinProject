@@ -43,11 +43,23 @@ async function getComment(commentId){
     return comment;
 }
 
+async function deleteComment(commentId){
+    return await prisma.comment.delete({ where: { id: commentId }});
+}
+
+async function checkUserOfComment(commentId){
+    const comment  = await prisma.comment.findUnique({ where: { id: commentId}});
+    return comment.userId;
+}
+
 module.exports = {
     getPosts,
     createPost,
     getPost,
     getComments,
     createComment,
-    getComment
+    getComment,
+    deleteComment,
+    checkUserOfComment
+
 }
