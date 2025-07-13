@@ -1,36 +1,45 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useFormStatus } from 'react-dom';
 
 function Register(){
 
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        confirm_password: ''
-    });
+    const emailRef = useRef(null);
+    const passwordRef= useRef(null);
+    const confPasswordRef = useRef(null)
+    
+    const { pending } = useFormStatus();
 
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value
-        }))
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+            confirm_password: confPasswordRef.current.value
+        }
 
-    const handleSubmit = async () => {
-        const response = await fetch('http://localhost:3000/auth/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify(formData)
-        })
+        try {
+            const response = await fetch('http://localhost:3000/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            })
 
-        if(!response.ok){
-            const errorData = await response.json();
-            setErrors(errorData.errors);
-        } else {
-            setErrors([]);
-            setFormData({ email: '', password: '', confirm_password: ''})
+            const data = await response.json();
+
+            if(!response.ok){
+                console.log(data.errors);
+                setErrors(data.errors);
+            } else {
+                setErrors([]);
+                console.log(data.user);
+                emailRef.current.value = '';
+                passwordRef.current.value = '';
+                confPasswordRef.current.value = '';
+            }
+        } catch(err){
+            console.error(err);
         }
     }
 
@@ -48,12 +57,14 @@ function Register(){
             )}
             <div>
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" required value={formData.email} onChange={handleChange}/>
+                <input type="email" id="email" name="email" required ref={emailRef}/>
                 <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" minLength={3} required value={formData.password} onChange={handleChange}/>
+                <input type="password" id="password" name="password" minLength={3} ref={passwordRef} />
                 <label htmlFor="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" minLength={3} required value={formData.confirm_password} onChange={handleChange}/>
-                <button type="submit">Register</button>
+                <input type="password" id="confirm_password" name="confirm_password" minLength={3} required ref={confPasswordRef} />
+                <button type="submit" disabled={pending}>
+                    {pending ? "Submitting..." : "Submit"}
+                </button>
             </div>
         </form>
     
