@@ -1,22 +1,24 @@
 const { body, validationResult } = require('express-validator');
 const queries = require('./authQueries');
 const jwt  = require('jsonwebtoken');
+const passport = require('passport');
 
 const validateRegistration = [
     body('email').trim()
-        .isEmpty().withMessage('Email should not be empty')
+        .notEmpty().withMessage('Email should not be empty')
         .isEmail().withMessage('Email should be in valid format')
         .custom(async (value) => {
-            const result = queries.emailCheck(value);
+            const result = await queries.emailCheck(value);
             if(result) throw new Error('User with this email already exists')
         }),
     body('password').trim()
-        .isEmpty().withMessage('Password should not be empty')
+        .notEmpty().withMessage('Password should not be empty')
         .isLength({min: 3}).withMessage('Password should be atleast 3 characters long'),
-    body('confirm-password').trim()
-        .isEmpty().withMessage('Confirmation should not be empty')
+    body('confirm_password').trim()
+        .notEmpty().withMessage('Confirmation should not be empty')
         .custom((value, { req }) => {
             if(value !== req.body.password) throw new Error('Password do not match')
+            return true;
         })
 ]
 
@@ -48,7 +50,7 @@ exports.register = [
 exports.login = (req, res, next) => {
     passport.authenticate('local', { session: false}, (err, user, info) => {
         if(err) return next(err)
-        if(!user) return res.status(401).json({ message: 'Invalid Credentials' });
+        if(!user) return res.status(401).json({ error: 'invalid credentials' });
 
         const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "24h"});
 
@@ -60,7 +62,7 @@ exports.login = (req, res, next) => {
                 username: user.email
             }
         })
-    })
+    })(req, res, next);
 }
 
 exports.logout = (req, res) => {
