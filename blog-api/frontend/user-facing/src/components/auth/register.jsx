@@ -33,7 +33,6 @@ function Register(){
                 setErrors(data.errors);
             } else {
                 setErrors([]);
-                console.log(data.user);
                 emailRef.current.value = '';
                 passwordRef.current.value = '';
                 confPasswordRef.current.value = '';
