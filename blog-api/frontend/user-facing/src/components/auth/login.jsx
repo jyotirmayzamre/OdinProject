@@ -1,11 +1,12 @@
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login(){
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
 
     const [message, setMessage] = useState(null);
+    const navigate = useNavigate();
 
 
 
@@ -32,6 +33,7 @@ function Login(){
                 emailRef.current.value = '';
                 passwordRef.current.value = '';
                 localStorage.setItem('token', data.token);
+                navigate('/posts');
             }
         } catch(err){
             console.error(err);

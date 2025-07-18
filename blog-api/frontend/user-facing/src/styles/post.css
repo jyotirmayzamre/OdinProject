@@ -1,0 +1,135 @@
+main {
+    margin-top: 1em;
+}
+
+.post-content-area {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.post-title {
+    font-size: 2.8em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.post-meta {
+    font-size: 0.95em;
+    color: #7f8c8d; 
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.post-author {
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.post-date {
+    font-style: italic;
+}
+
+.post-body {
+    font-size: 1.1em;
+    color: #444;
+}
+
+.post-body p {
+    margin-bottom: 1em;
+    text-align: justify; 
+}
+
+.post-body h3 {
+    font-size: 1.8em;
+    color: #34495e;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+
+.comments-section {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.comments-section h2 {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* New Comment Form */
+.new-comment-form {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ddd; 
+}
+
+.new-comment-form h3 {
+    font-size: 1.5em;
+    color: #34495e;
+    margin-bottom: 15px;
+}
+
+.new-comment-form textarea {
+    width: calc(100% - 20px); 
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    resize: vertical; 
+    min-height: 100px;
+}
+
+.new-comment-form button {
+    background-color: #1abc9c; 
+    color: #ffffff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.new-comment-form button:hover {
+    background-color: #16a085; 
+}
+
+
+.comment-list {
+    margin-top: 20px;
+}
+
+.comment-item {
+    background-color: #fcfcfc; 
+    border: 1px solid #e9e9e9;
+    border-radius: 6px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.comment-author {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.comment-author strong {
+    color: #2c3e50;
+}
+
+.comment-content {
+    font-size: 1em;
+    color: #444;
+}

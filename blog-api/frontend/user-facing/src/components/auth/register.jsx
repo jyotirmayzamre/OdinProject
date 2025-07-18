@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Register(){
 
@@ -7,6 +7,7 @@ function Register(){
     const passwordRef= useRef(null);
     const confPasswordRef = useRef(null)
     const [errors, setErrors] = useState([]);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,6 +34,7 @@ function Register(){
                 emailRef.current.value = '';
                 passwordRef.current.value = '';
                 confPasswordRef.current.value = '';
+                navigate('/auth/login');
             }
         } catch(err){
             console.error(err);

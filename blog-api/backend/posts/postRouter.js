@@ -3,15 +3,15 @@ const postController = require('./postController');
 const passport = require('passport');
 
 
-postRouter.get('/posts', passport.authenticate('jwt', { session: false }), postController.getPosts);
-postRouter.post('/posts', passport.authenticate('jwt', { session: false }), postController.createPost);
-postRouter.get('/posts/:postId', passport.authenticate('jwt', { session: false }), postController.getPost);
-postRouter.delete('/posts/:postId', passport.authenticate('jwt', { session: false }), postController.deletePost);
+postRouter.get('/', passport.authenticate('jwt', { session: false }), postController.getPosts);
+postRouter.post('/', passport.authenticate('jwt', { session: false }), postController.createPost);
+postRouter.get('/:postId', passport.authenticate('jwt', { session: false }), postController.getPost);
+postRouter.delete('/:postId', passport.authenticate('jwt', { session: false }), postController.deletePost);
 
-postRouter.get('/posts/:postId/comments', passport.authenticate('jwt', { session: false }), postController.getComments);
-postRouter.post('/posts/:postId/comments', passport.authenticate('jwt', { session: false }), postController.createComment);
-postRouter.get('/posts/:postId/comments/:commentId', passport.authenticate('jwt', { session: false }), postController.getComment);
-postRouter.delete('/posts/:postId/comments/:commentId', passport.authenticate('jwt', { session: false }), postController.deleteComment);
+postRouter.get('/:postId/comments', passport.authenticate('jwt', { session: false }), postController.getComments);
+postRouter.post('/:postId/comments', passport.authenticate('jwt', { session: false }), postController.createComment);
+postRouter.get('/:postId/comments/:commentId', passport.authenticate('jwt', { session: false }), postController.getComment);
+postRouter.delete('/:postId/comments/:commentId', passport.authenticate('jwt', { session: false }), postController.deleteComment);
 
 
 module.exports = postRouter;

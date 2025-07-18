@@ -13,6 +13,7 @@ function Navbar(){
             <Link className='link' to='/about'>About Me</Link>
             <Link className='link' to='/auth/login'>Login</Link>
             <Link className='link btn' to='/auth/register'>Register</Link>
+            <Link className="link" to='/posts'>Posts</Link>
             </nav>
         </header>
     )
