@@ -1,14 +1,11 @@
 import { useState, useRef } from "react";
-import { useFormStatus } from 'react-dom';
+import { Link } from "react-router-dom";
 
 function Register(){
 
     const emailRef = useRef(null);
     const passwordRef= useRef(null);
     const confPasswordRef = useRef(null)
-    
-    const { pending } = useFormStatus();
-
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -29,8 +26,8 @@ function Register(){
             const data = await response.json();
 
             if(!response.ok){
-                console.log(data.errors);
-                setErrors(data.errors);
+                const errorsList = data.errors.map((err) => {return err.msg});
+                setErrors(errorsList);
             } else {
                 setErrors([]);
                 emailRef.current.value = '';
@@ -42,32 +39,43 @@ function Register(){
         }
     }
 
-    return <>
-        <form onSubmit={handleSubmit}>
-            <h2>Sign Up</h2>
-            {errors.length > 0 && (
-                <div>
-                    <ul>
-                        {errors.map((err, idx) => {
-                            <li key={idx}>{err}</li>
-                        })}
-                    </ul>
-                </div>
-            )}
-            <div>
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" required ref={emailRef}/>
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" minLength={3} ref={passwordRef} />
-                <label htmlFor="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" minLength={3} required ref={confPasswordRef} />
-                <button type="submit" disabled={pending}>
-                    {pending ? "Submitting..." : "Submit"}
-                </button>
+    return (
+        <main>
+            <div className="info">
+                <h2>Sign Up</h2>
+                <p>and participate in the journey with the community!</p>
             </div>
-        </form>
-    
-    </>
+            {errors.length > 0 && (
+                    <div className="error">
+                        <ul>
+                            {errors.map((err, idx) => (
+                                <li key={idx}>{err}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            <form onSubmit={handleSubmit}>
+                <div className="container">
+                    <div className="field">
+                        <label htmlFor="email">Email</label>
+                        <input type="email" id="email" name="email" required ref={emailRef}/>
+                    </div>
+                    <div className="field">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" name="password" minLength={3} ref={passwordRef} />
+                    </div>
+                    <div className="field">
+                        <label htmlFor="confirm_password">Confirm Password</label>
+                        <input type="password" id="confirm_password" name="confirm_password" minLength={3} required ref={confPasswordRef} />
+                    </div>
+                    <div className="btn-container">
+                        <button type="submit" className="btn">Sign Up</button>
+                    </div>   
+                    <p>Already have an account? <Link to='/auth/login'>Sign In</Link></p>
+                </div>
+            </form>
+        </main>
+    )
 }
 
 export default Register;

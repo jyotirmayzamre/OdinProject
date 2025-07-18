@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 
 function Login(){
     const emailRef = useRef(null);
@@ -40,19 +41,36 @@ function Login(){
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            {message && (
-                <p>{message}</p>
-            )}
-            <div>
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" required ref={emailRef} />
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" required ref={passwordRef} />
-                <button type="submit">Login</button>
-            </div>
-        </form>
+            <main>
+                <div className="info">
+                    <h2>Login</h2>
+                    <p>Access your account and engage in discussions!</p>
+                </div>
+                {message && (
+                    <div className="errors">
+                        <ul>
+                            <li>{message}</li>
+                        </ul>
+                    </div>
+                )}
+                <form onSubmit={handleSubmit}>
+                    <div className="container">
+                        <div className="field">
+                            <label htmlFor="email">Email*</label>
+                            <input type="email" name="email" id="email" required ref={emailRef} />
+                        </div>
+                        <div className="field">
+                            <label htmlFor="password">Password*</label>
+                            <input type="password" name="password" id="password" required ref={passwordRef} />
+                        </div>
+                        <div className="btn-container">
+                            <button className="btn" type="submit">Login</button>
+                        </div>
+                        <p>Don't have an account yet? <Link to='/auth/register'>Sign Up</Link></p>
+                    </div>
+                </form>
+            </main>
+        
     )
 }
 
