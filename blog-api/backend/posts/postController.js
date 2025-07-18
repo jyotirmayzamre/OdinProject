@@ -79,7 +79,7 @@ async function createComment(req, res){
         if(!content) return res.status(400).json({error: 'content is required'});
 
         const postId = req.params.postId;
-        const post = await queries.getPost(id);
+        const post = await queries.getPost(postId);
         if(!post) return res.status(404).json({ error: 'cannot create comment for a non-existent post' });
 
         const userId = req.user.id
