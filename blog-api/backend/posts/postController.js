@@ -17,12 +17,12 @@ async function createPost(req, res){
         if(req.user.role != 'ADMIN'){
             return res.status(403).json({ error: 'you are not authorized to access this endpoint' });
         }
-        const { title, content } = req.body;
+        const { title, content, published } = req.body;
         const userId = req.user.id;
 
         if(!title || !content) return res.status(400).json({error: 'title and content are required'})
 
-        const post = await queries.createPost(title, content, userId);
+        const post = await queries.createPost(title, content, userId, published);
         if(!post) return res.status(401).json({ error: 'post creation failed' })
         return res.status(201).json({ message: 'post created successfully', post});
 

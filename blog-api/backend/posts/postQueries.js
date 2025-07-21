@@ -26,15 +26,20 @@ async function getPosts(userId = null){
     return posts;
 }
 
-async function createPost(title, content, userId){
+async function createPost(title, content, userId, published=false){
     const post = await prisma.post.create({
         data: {
             title,
             content: Buffer.from(content, 'utf-8'),
-            userId
+            userId,
+            published
         }
     })
-    console.log(post.content);
+    return post;
+}
+
+async function deletePost(postId){
+    const post = await prisma.post.delete({ where: { id: postId }})
     return post;
 }
 
@@ -120,6 +125,7 @@ async function updatePost(data, postId){
 module.exports = {
     getPosts,
     createPost,
+    deletePost,
     getPost,
     updatePost,
     getComments,

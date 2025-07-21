@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
 import '../../styles/post.css';
 
-function Post(){
+function EditPost(){
     const post = useLoaderData();
     const titleRef = useRef(null);
     const contentRef = useRef(null);
@@ -17,24 +17,32 @@ function Post(){
             published: document.querySelector('input[name="published"]:checked').value === 'true' ? true : false
         }
 
-        try {
-            const response = await fetch(`http://localhost:3000/posts/${postId}/`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-                body: JSON.stringify(updatedPost),
-            })
-            const data = await response.json();
+        const response = await fetch(`http://localhost:3000/posts/${postId}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(updatedPost),
+        })
 
-            if(!response.ok){
-                console.error(data.error);
-            }
-            navigate('/posts');
-        } catch(err){
-            console.error(err);
+        if(!response.ok){
+            const errorData = await response.json();
+            throw new Response(
+                JSON.stringify({
+                    message: errorData.error || 'Could not fetch post.',
+                    status: response.status 
+                }),
+                {
+                    status: response.status, 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
         }
+        navigate('/posts');
+    
     }
 
     return (
@@ -46,11 +54,11 @@ function Post(){
                         <form onSubmit={handleSubmit}>
                             <div className="field-container">
                                 <label htmlFor="title">Title</label>
-                                <textarea ref={titleRef} name='title' id='title' value={post.title} rows="2"></textarea>
+                                <textarea ref={titleRef} name='title' id='title' defaultValue={post.title} rows="2"></textarea>
                             </div>
                             <div className="field-container">
                                 <label htmlFor="content">Content</label>
-                                <textarea ref={contentRef} name='content' id='content' value={post.content} rows="10"></textarea>
+                                <textarea ref={contentRef} name='content' id='content' defaultValue={post.content} rows="10"></textarea>
                             </div>
                             <div className="field-container">
                                 <label htmlFor="published">Published</label>
@@ -72,5 +80,5 @@ function Post(){
     )
 }
 
-export default Post;
+export default EditPost;
 
