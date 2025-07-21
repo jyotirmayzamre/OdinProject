@@ -18,7 +18,7 @@ function Login(){
         }
 
         try {
-            const response = await fetch('http://localhost:3000/auth/login?role=USER', {
+            const response = await fetch('http://localhost:3000/auth/login?role=ADMIN', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(formData)
@@ -66,7 +66,6 @@ function Login(){
                         <div className="btn-container">
                             <button className="btn" type="submit">Login</button>
                         </div>
-                        <p>Don't have an account yet? <Link to='/auth/register'>Sign Up</Link></p>
                     </div>
                 </form>
             </main>

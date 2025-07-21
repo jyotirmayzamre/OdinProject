@@ -2,14 +2,14 @@ const queries = require('./postQueries');
 
 async function getPosts(req, res){
     try {
-        const posts = await queries.getPosts();
+        const userId = req.query.userId;
+        const posts = await queries.getPosts(userId);
         if(!posts) return res.status(500).json({error:'posts not found'});
         return res.status(200).json(posts);
     } catch(e){
         console.error(e);
         return res.status(500).json({error: 'something went wrong'})
-    }
-    
+    } 
 }
 
 async function createPost(req, res){
@@ -30,8 +30,6 @@ async function createPost(req, res){
         console.error(e);
         return res.status(500).json({error: 'something went wrong'});
     }
-
-    
 }
 
 async function getPost(req, res){
@@ -61,6 +59,22 @@ async function deletePost(req, res){
     }
 }
 
+async function updatePost(req, res){
+    try{
+        if(req.user.role != 'ADMIN'){
+            return res.status(403).json({ error: 'you are not authorized to access this endpoint' });
+        }
+        const id = req.params.postId;
+        const newData = req.body;
+        const post = await queries.updatePost(newData, id);
+        if(!post) return res.status(500).json({ error: 'cannot update a non-existent post'});
+        return res.status(200).json({ message: 'post updated successfully', post});
+    } catch(e){
+        console.error(e);
+        return res.status(500).json({ error: 'something went wrong' });
+    }
+}
+
 async function getComments(req, res){
     try {
         const postId = req.params.postId;
@@ -73,8 +87,7 @@ async function getComments(req, res){
     } catch(e){
         console.error(e);
         return res.status(500).json({error: 'something went wrong'});
-    }
-    
+    }  
 }
 
 async function createComment(req, res){
@@ -94,9 +107,7 @@ async function createComment(req, res){
     } catch(e){
         console.error(e);
         return res.status(500).json({error: 'something went wrong'});
-    }
-
-    
+    }    
 }
 
 async function getComment(req, res){
@@ -134,7 +145,6 @@ async function deleteComment(req, res){
         console.error(e);
         res.status(500).json({error: 'something went wrong'});
     }
-
 }
 
 module.exports = {
@@ -142,6 +152,7 @@ module.exports = {
     createPost,
     getPost,
     deletePost,
+    updatePost,
     getComments,
     createComment,
     getComment,

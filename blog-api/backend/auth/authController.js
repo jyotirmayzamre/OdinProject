@@ -52,6 +52,12 @@ exports.login = (req, res, next) => {
         if(err) return next(err)
         if(!user) return res.status(401).json({ error: 'invalid credentials' });
 
+        const role = req.query.role;
+
+        if(user.role !== role){
+            return res.status(401).json({ error: `this user is not an ${role}`});
+        }
+
         const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "24h"});
 
         return res.status(200).json({

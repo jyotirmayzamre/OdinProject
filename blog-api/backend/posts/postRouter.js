@@ -7,6 +7,7 @@ postRouter.get('/', passport.authenticate('jwt', { session: false }), postContro
 postRouter.post('/', passport.authenticate('jwt', { session: false }), postController.createPost);
 postRouter.get('/:postId', passport.authenticate('jwt', { session: false }), postController.getPost);
 postRouter.delete('/:postId', passport.authenticate('jwt', { session: false }), postController.deletePost);
+postRouter.put('/:postId', passport.authenticate('jwt', { session: false }), postController.updatePost);
 
 postRouter.get('/:postId/comments', passport.authenticate('jwt', { session: false }), postController.getComments);
 postRouter.post('/:postId/comments', passport.authenticate('jwt', { session: false }), postController.createComment);
