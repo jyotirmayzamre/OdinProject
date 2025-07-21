@@ -49,10 +49,8 @@ function Login(){
                     <p>Access your account and engage in discussions!</p>
                 </div>
                 {message && (
-                    <div className="errors">
-                        <ul>
-                            <li>{message}</li>
-                        </ul>
+                    <div className="errors-container">
+                        <p className="error-message">{message}</p>
                     </div>
                 )}
                 <form onSubmit={handleSubmit}>

@@ -17,7 +17,7 @@ const validateRegistration = [
     body('confirm_password').trim()
         .notEmpty().withMessage('Confirmation should not be empty')
         .custom((value, { req }) => {
-            if(value !== req.body.password) throw new Error('Password do not match')
+            if(value !== req.body.password) throw new Error('Passwords do not match')
             return true;
         })
 ]

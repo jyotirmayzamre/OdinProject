@@ -60,3 +60,14 @@ form input {
 .info  p {
     margin: 0;
 }
+
+.errors-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message {
+    color: red;
+}

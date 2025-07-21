@@ -48,12 +48,10 @@ function Register(){
                 <p>and participate in the journey with the community!</p>
             </div>
             {errors.length > 0 && (
-                    <div className="error">
-                        <ul>
+                    <div className="errors-container">
                             {errors.map((err, idx) => (
-                                <li key={idx}>{err}</li>
+                                <p className="error-message" key={idx}>{err}</p>
                             ))}
-                        </ul>
                     </div>
                 )}
             <form onSubmit={handleSubmit}>

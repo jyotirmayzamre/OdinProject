@@ -51,8 +51,10 @@ async function getPost(postId){
         },
         
     });
-    const content = Buffer.from(post.content).toString('utf-8');
-    post.content = content;
+    if(post){
+        const content = Buffer.from(post.content).toString('utf-8');
+        post.content = content;
+    }
     return post;
 }
 

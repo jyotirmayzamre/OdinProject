@@ -6,6 +6,7 @@ async function getPosts(req, res){
         if(!posts) return res.status(500).json({error:'posts not found'});
         return res.status(200).json(posts);
     } catch(e){
+        console.error(e);
         return res.status(500).json({error: 'something went wrong'})
     }
     
@@ -26,6 +27,7 @@ async function createPost(req, res){
         return res.status(201).json({ message: 'post created successfully', post});
 
     } catch(e){
+        console.error(e);
         return res.status(500).json({error: 'something went wrong'});
     }
 
@@ -39,6 +41,7 @@ async function getPost(req, res){
         if(!post) return res.status(404).json({ error: 'post not found' });
         return res.status(200).json({ message: 'post found', post });
     } catch(e){
+        console.error(e);
         return res.status(500).json({error: 'something went wrong'})
     } 
 }
@@ -53,6 +56,7 @@ async function deletePost(req, res){
         if(!post) return res.status(500).json({error:'cannot delete a non-existent post'});
         return res.status(200).json({ message: 'post deleted successfully', post});
     } catch(e){
+        console.error(e);
         return res.status(500).json({error: 'something went wrong'})
     }
 }
@@ -67,6 +71,7 @@ async function getComments(req, res){
         if(!comments) return res.status(404).json({ error: 'comments not found' });
         return res.status(200).json({ message: 'comments found', comments })
     } catch(e){
+        console.error(e);
         return res.status(500).json({error: 'something went wrong'});
     }
     
@@ -87,6 +92,7 @@ async function createComment(req, res){
         if(!comment) return res.status(500).json({ error: 'comment creation unsuccessful' });
         return res.status(201).json({ message: 'comment creation successful', comment});
     } catch(e){
+        console.error(e);
         return res.status(500).json({error: 'something went wrong'});
     }
 
@@ -100,6 +106,7 @@ async function getComment(req, res){
         if(!comment) return res.status(404).json({ message: 'comment not found'});
         return res.status(200).json({ message: 'comment found', comment });
     } catch(e){
+        console.error(e);
         return res.status(500).json({error: 'something went wrong'});
     } 
 }
@@ -124,6 +131,7 @@ async function deleteComment(req, res){
         return res.status(200).json({ message: 'comment deletion successful', comment });
 
     } catch(e){
+        console.error(e);
         res.status(500).json({error: 'something went wrong'});
     }
 
