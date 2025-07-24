@@ -1,0 +1,110 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.games-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    background-color: inherit;
+    color: inherit;
+}
+
+.game-link {
+    border-radius: 5px;
+    padding: 10px;
+    background-color: aquamarine;
+    margin-bottom: 1em;
+    transition: transform ease-in-out .3s;
+    color: black;
+}
+
+.game-link:hover {
+    color: black;
+    transform: translateY(-3px);
+}
+
+#image-container {
+    max-height: 200px;
+    max-width: 350px;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+#image-container img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+}
+
+#image-container img:hover {
+    cursor: pointer;
+}
+
+.clicked {
+  box-shadow: 0 0 40px 5px rgba(0, 153, 255, 0.6); 
+  transition: box-shadow 0.3s ease;
+}
+
+.leaderboard-container {
+  background-color: inherit;
+  border-radius: 12px;
+  padding: 1rem;
+  width: fit-content;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: inherit
+}
+
+
+.leaderboard-table thead tr {
+  background-color: inherit;
+  color: inherit;
+  font-weight: 600;
+  text-align: left;
+}
+
+
+.leaderboard-table thead th {
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}
+
+
+.leaderboard-table tbody tr {
+  border-top: 1px solid #2a324a;
+}
+
+
+.leaderboard-table tbody td {
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}
+
+
+.leaderboard-table thead tr:first-child th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.leaderboard-table thead tr:first-child th:last-child {
+  border-top-right-radius: 8px;
+}
